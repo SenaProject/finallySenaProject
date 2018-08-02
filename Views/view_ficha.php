@@ -2,6 +2,7 @@
 <html>
 <head>
 <title>Administración Fichas</title>
+    <link rel="stylesheet" href="Views/css/resetstyle.css">
     <link rel="stylesheet" href="Views/css/styleFC.css">
 </head>
 <body>
@@ -41,7 +42,7 @@
 							</tbody>
 						</table>
 					</div>
-					
+
 				</div>
 			</div>
 <h1>This is a Heading</h1>
