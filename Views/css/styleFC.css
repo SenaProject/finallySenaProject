@@ -1,13 +1,22 @@
 .table_consult{
-    background-color: gray;
+    background-color:#c6e9f4;
     width: 70%;
+    margin: auto;
 }
 
 table.table {
   margin: auto;
-width: 50%;
+width: 80%;
 }
 
 tr {
     border-bottom: #f9f8f8 1px solid;
+}
+
+td{
+      text-align: center;
+}
+
+thead{
+  margin-bottom: 2%;
 }
