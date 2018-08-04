@@ -1,0 +1,64 @@
+body {
+	font-family: arial;
+	color: black;
+}
+/* estilos menu principal */
+nav ul{
+	list-style: none;
+	padding: 0;
+}
+nav li{
+	line-height: 3rem;
+	position: relative;
+}
+nav li ul{
+	position: absolute;
+}
+nav a{
+	color: #ddd;
+	display: block;
+	padding: 0 2.5em;
+	text-decoration: none;
+	transition: .4s;
+}
+nav a:hover {
+	/* background: rgba(0,0,0,.5); */
+		background: grey;
+		color: black;
+		border-width: 2px;
+		border-style: solid;
+		border-color: green;
+}
+
+nav li ul{
+	display: none;
+}
+
+nav li:hover >ul{
+	display: block;
+}
+
+/* primer nivel */
+nav > ul {
+	background: #333;
+	display: table;
+}
+nav > ul > li {
+	float: left;
+}
+
+/* segundo nivel */
+nav li li {
+	background: #222;
+	width: 200px;
+}
+
+nav >ul >li >ul {
+	top:100%
+}
+
+/* tercer nivel */
+nav ul ul ul {
+	left: 100%;
+	top: 0;
+}

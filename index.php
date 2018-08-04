@@ -2,10 +2,11 @@
 
 require_once "Controllers/controller.php";
 
-$ficha = new MvcController;
-$ficha  -> ConsultarFichaController();
+$inicio = new MvcController;
+$inicio  -> InicioAppController();
 
 //echo "string";
 
 
 
+?>
