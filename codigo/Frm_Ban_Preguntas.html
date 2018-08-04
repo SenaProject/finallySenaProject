@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+ <!Autor: Juan Sebastian Cruz Castillo>
+<!Fecha: 02/06/2018>
+<!Version:>
+
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<form name="form" method="POST">
+       <input type="hidden" id="form" name="formulario" value="<%=variable.Form(formulario)%>"/><br>
+           <label for="">Pregunta:</label>
+           <textarea type="text" id="new_ask" name="pregunta" onkeydown="valida_longitud()" onkeyup="valida_longitud()" required="">
+           </textarea>
+                <div>&nbsp;</div>
+               <label for="">Campo Obligatorio:</label>
+               <select name="obligatorio">
+                   <option>---Seleccione---</option>
+                   <option value="si" name="obligatorio">si</option>
+                   <option value="no" name="obligatorio">no</option>
+               </select>
+               <div>&nbsp;</div>
+                 <label for="">Pregunta:</label><select name="OS">
+                  <option value="1">Windows Vista</option>
+                  <option value="2">Windows 7</option>
+                  <option value="3">Windows XP</option>
+                  <option value="10">Fedora</option>
+                  <option value="11">Debian</option>
+                  <option value="12">Suse</option>
+               </select>
+               <div>&nbsp;</div>
+               <div>&nbsp;</div>
+               <button type="submit" class="btn btn-success btn-sm" onclick="this.form.action = 'New_Ask'">
+                   <span class="glyphicon glyphicon-ok"></span>
+                    Nueva Pregunta
+               </button>
+               <button type="submit" class="btn btn-success btn-sm" onclick="this.form.action = 'New_Ask'">
+                   <span class="glyphicon glyphicon-ok"></span>
+                    Modificar
+               </button>
+               <button type="submit" class="btn btn-success btn-sm" onclick="this.form.action = 'New_Ask'">
+                   <span class="glyphicon glyphicon-ok"></span>
+                   Eliminar
+               </button>
+               <button type="submit" class="btn btn-success btn-sm" onclick="this.form.action = 'New_Ask'">
+                   <span class="glyphicon glyphicon-ok"></span>
+                   Guardar
+               </button>
+               </form>
+               <form name="form" action="preguntas" method="Post">
+                   <input type="hidden" id="form" name="formulario" value="<%=variable.Form(formulario)%>"/>
+                   <br>
+</html>

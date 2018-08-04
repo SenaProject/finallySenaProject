@@ -1,0 +1,39 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+<html >
+ <link rel="stylesheet" href="CSS/programacss.css"> 
+<head>
+<title>Ingreso de Programas</title>
+<div id="DivTitFrm1Ing" >
+	<img id="LogoInst" src="sena.jpg">
+	<a id="aTitulo">Ingreso de programas manualmente</a>
+</div>
+</head>
+<body id="Byfrm1Ini" style="background-color:WHITE">
+
+<form id="frmpograma" action="" method="post">
+    <div id= "dId">
+        <label  for="lIdPro">Id del Programa:</label>
+		<input type="tPrograma" id="tIdPro" placeholder="Ingrese el Id del programa"/>
+	</div>
+    <div id= "dNomPro">
+        <label  for="lNomPro">Nombre del Programa:</label>
+		<input type="tPrograma" id="tNomPro" placeholder="Ingrese el nombre del programa"/>
+	</div>
+    <div id= "dEstPro">
+		<label  for="lEstPro">Estado del Programa:</label>
+				<select name="TContratoL">
+				  <option value="Nulo"></option>
+				  <option value="activo">Activo</option>
+				  <option value="inactivo">Inactivo</option>
+				</select>
+	</div>
+    <div id="BtnFrm1Ini" class="button">
+        <button Id="btnN" type="submit">Nuevo</button>
+		<button Id="btnM" type="submit">Modificar</button>
+        <button Id="btnE" type="submit">Eliminar</button>
+        <button Id="btnB" type="submit">Buscar</button>
+        <button Id="btnG" type="submit">Guardar</button>
+    </div>	
+</form>
+</body>
+</html>
