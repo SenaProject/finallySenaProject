@@ -43,14 +43,19 @@
         <li><a target="iframe_a">Ficha</a></li>
       </ul>
     </li>
-		<li><a>Encuesta</a></li>
+		<li><a>Encuesta</a>
+      <ul>
+        <li><a href="frm_crear_encuesta.php" target="iframe_a">Crear</a></li>
+        <li><a href="frm_listar_encuestas.php" target="iframe_a">Listar</a></li>
+        <li><a href="frm_aplicar_encuesta.php" target="iframe_a">Aplicar</a></li>
+      </ul>
+    </li>
 		<li><a>Administracion</a>
       <ul>
         <li><a target="iframe_a">Cambio de contraseña</li>
         <li><a target="iframe_a">Creacion de Usuarios</li>
         <li><a target="iframe_a">Creacion de roles</li>
       </ul>
-    </li>
     </li>
 	</ul>
 	</nav>

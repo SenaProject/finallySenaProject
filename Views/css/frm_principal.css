@@ -27,7 +27,7 @@ nav a:hover {
 		color: black;
 		border-width: 2px;
 		border-style: solid;
-		border-color: green;
+		border-color: WHITE;
 }
 
 nav li ul{
@@ -50,7 +50,7 @@ nav > ul > li {
 /* segundo nivel */
 nav li li {
 	background: #222;
-	width: 200px;
+	width: 250px;
 }
 
 nav >ul >li >ul {
