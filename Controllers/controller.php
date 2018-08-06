@@ -4,7 +4,7 @@ class MvcController{
 
 function ConsultarFichaController(){
 
-echo "Hola mundo1";
+echo "Hola pablito como esta";
 include "Views/view_ficha.php";
 
 }
