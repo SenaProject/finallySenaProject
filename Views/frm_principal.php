@@ -28,8 +28,8 @@
       <ul>
         <li><a href="#" target="iframe_a">Persona</a>
           <ul>
-            <li><a href="frm_persona.php" target="iframe_a">Uno a Uno</a></li>
-            <li><a target="iframe_a">Masivo</a></li>
+            <li><a href="frm_persona_individual.php" target="iframe_a">Uno a Uno</a></li>
+            <li><a href="frm_persona_masivo.php" target="iframe_a">Masivo</a></li>
           </ul>
         </li>
         <li><a target="iframe_a">Ficha</a></li>

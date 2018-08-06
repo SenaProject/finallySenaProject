@@ -7,7 +7,7 @@
 </div>
 <title>Evaluacion de Instructores</title>
 <div id="DivTitFrm1Ppl" >
-	<H1 id="aTitulo">Ingreso manual de personal </H1>
+	<H1 id="aTitulo">Ingreso manual de persona</H1>
 	<br>
 </div>
 </head>
