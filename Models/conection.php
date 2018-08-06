@@ -3,19 +3,19 @@
 /**
  *
  */
-class Conenexion
+class Conexion
 {
   /**
-  *Create function connect
+  *Create function connect for connect with data base
   **/
   function conection()
   {
 $servername = "localhost";
-$username = "username";
-$password = "password";
+$username = "root";
+$password = "";
 
 try {
-    $conn = new PDO("mysql:host=$servername;dbname=myDB", $username, $password);
+    $conn = new PDO("mysql:host=$servername;dbname=pruebasena", $username, $password);
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     echo "Connected successfully";
