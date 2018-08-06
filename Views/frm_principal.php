@@ -24,30 +24,39 @@
 				<li><a>Salida</a></li>
 			</ul>
 		</li>
-		<li><a>Cargar</a>
+		<li><a>Crear</a>
       <ul>
+        <li><a href="#" target="iframe_a">Persona</a>
+          <ul>
+            <li><a href="frm_persona.php" target="iframe_a">Uno a Uno</a></li>
+            <li><a target="iframe_a">Masivo</a></li>
+          </ul>
+        </li>
+        <li><a target="iframe_a">Ficha</a></li>
+        <li><a target="iframe_a">Instructor</a>
+          <ul>
+            <li><a href="" target="iframe_a">Asignar ficha</a></li>
+          </ul>
+        </li>
         <li><a>Banco de preguntas</a>
           <ul>
-    				<li><a href="Frm_Ban_Preguntas.html" target="iframe_a">Uno a Uno</li>
-            <li><a target="iframe_a">Masivo</li>
+    				<li><a href="Frm_Ban_Preguntas.html" target="iframe_a">Uno a Uno</a></li>
+            <li><a target="iframe_a">Masivo</a></li>
     			</ul>
         </li>
         <li><a>Banco de respuestas</a>
           <ul>
-    				<li><a href="Frm_Ban_Respuestas.html" target="iframe_a">Uno a Uno</li>
-            <li><a target="iframe_a">Masivo</li>
+    				<li><a href="Frm_Ban_Respuestas.html" target="iframe_a">Uno a Uno</a></li>
+            <li><a target="iframe_a">Masivo</a></li>
     			</ul>
         </li>
-        <li><a target="iframe_a">Instructores</a></li>
-        <li><a target="iframe_a">Aprendices</a></li>
-        <li><a target="iframe_a">Ficha</a></li>
       </ul>
     </li>
 		<li><a>Encuesta</a>
       <ul>
         <li><a href="frm_crear_encuesta.php" target="iframe_a">Crear</a></li>
         <li><a href="frm_listar_encuestas.php" target="iframe_a">Listar</a></li>
-        <li><a href="frm_aplicar_encuesta.php" target="iframe_a">Aplicar</a></li>
+        <li><a href="frm_aplicar_encuesta.php" target="iframe_a">Aplicar </a></li>
       </ul>
     </li>
 		<li><a>Administracion</a>
