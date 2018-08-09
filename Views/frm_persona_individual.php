@@ -16,23 +16,23 @@
 <Div id="DivGranDatosBusqueda">
     <div id="DivDatosBusq">
         <label for="NumDoc">Documento No.:</label>
-        <input type="Text" id="NumDoc" Value="79569257" />
+        <input type="Text" id="NumDoc" Value="79569257" required = "required"/>
     </div><br>
     <div id="DivDatosBusq">
         <label for="Apellido1">Primer Apellido</label>
-        <input type="Text" id="Apellido1" Value="Garcia" />
+        <input type="Text" id="Apellido1" Value="Garcia" required = "required"/>
         <label for="Apellido2">Segundo Apellido</label>
         <input type="Text" id="Apellido2" Value="Pulido" />
     </div><br>
     <div id="DivDatosBusq">
         <label for="Nombre1">Primer Nombre:</label>
-        <input type="Text" id="Nombres1" Value="Edwin"/>
+        <input type="Text" id="Nombres1" Value="Edwin" required = "required"/>
         <label for="Nombre2">Segundo Nombre:</label>
         <input type="Text" id="Nombres2" Value="Aaron"/>
     </div><br>
     <div id="DivDatosBusq">
         <label for="Estado">Estado:</label>
-				<select name="estado">
+				<select name="estado" required = "required">
 				  <option value="Nulo"></option>
 				  <option value="Activo">Activo</option>
 				  <option value="Inactivo">Inactivo</option>
