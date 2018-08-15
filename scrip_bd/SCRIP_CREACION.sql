@@ -6,7 +6,7 @@ Descripcion: scrip de la baase de datos  evaplus
 
 
 CREATE DATABASE evaplus
-    WITH 
+    WITH
     OWNER = evaplus
     ENCODING = 'UTF8'
     LC_COLLATE = 'Spanish_Spain.1252'
@@ -36,7 +36,7 @@ CREATE TABLE programa(
 	estado_programa BOOLEAN NOT NULL,
 CHECK (id_programa > 0),
 CONSTRAINT pk_programa PRIMARY KEY (id_programa)
-);	
+);
  CREATE TABLE rol(
 	aud_ffecha DATE NOT NULL,
 	aud_cestado CHARACTER VARYING NOT NULL,
@@ -45,7 +45,7 @@ CONSTRAINT pk_programa PRIMARY KEY (id_programa)
 	estado_rol BOOLEAN NOT NULL,
 	nombre_rol CHARACTER VARYING NOT NULL,
 	descripcion_rol CHARACTER VARYING NOT NULL,
-	CHECK (id_rol > 0),	 
+	CHECK (id_rol > 0),
 	CONSTRAINT pk_id_rol PRIMARY KEY (id_rol)
  );
 CREATE TABLE persona (
@@ -53,6 +53,7 @@ CREATE TABLE persona (
 	aud_cestado CHARACTER VARYING NOT NULL,
 	aud_nIdUsuario BIGINT,
 	id_persona BIGINT,
+	id_tipo_documento BIGINT,
 	estado_persona BOOLEAN NOT NULL,
 	nombre_uno CHARACTER VARYING NOT NULL,
 	nombre_dos CHARACTER VARYING,
@@ -63,7 +64,8 @@ CREATE TABLE persona (
 	correo_electronico CHARACTER VARYING,
 	direccion CHARACTER VARYING,
 	CHECK (id_persona > 0),
- CONSTRAINT pk_persona PRIMARY KEY (id_persona)
+ CONSTRAINT pk_persona PRIMARY KEY (id_persona),
+ CONSTRAINT fk_tipo_documento FOREIGN KEY (id_tipo_documento) REFERENCES parametro (id_parametro)
   );
 
 CREATE TABLE credencial(
@@ -122,11 +124,13 @@ CREATE TABLE item_respuesta(
 	aud_nIdUsuario BIGINT,
 	id_item_respuesta BIGINT,
 	id_respuesta BIGINT,
+	id_tipo_respuesta BIGINT,
 	descripcion CHARACTER VARYING NOT NULL,
 	estado BOOLEAN,
 	valor BIGINT,
 	CONSTRAINT pk_item_respuesta PRIMARY KEY (id_item_respuesta),
-	CONSTRAINT fk_banco_respuesta FOREIGN KEY (id_respuesta) REFERENCES banco_respuesta (id_respuesta)
+	CONSTRAINT fk_banco_respuesta FOREIGN KEY (id_respuesta) REFERENCES banco_respuesta (id_respuesta),
+	CONSTRAINT fk_tipo_respuesta FOREIGN KEY (id_tipo_respuesta) REFERENCES parametro (id_parametro)
 );
 CREATE TABLE formulario(
 	aud_ffecha DATE NOT NULL,
