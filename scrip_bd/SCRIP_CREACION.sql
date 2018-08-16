@@ -203,17 +203,28 @@ CREATE TABLE evaluacion(
 	aud_cestado CHARACTER VARYING NOT NULL,
 	aud_nIdUsuario BIGINT,
 	id_evaluacion BIGINT,
+	estado BOOLEAN,
+	fecha_inicio DATE,
+	fecha_final DATE,
+	CONSTRAINT pk_evaluacion PRIMARY KEY (id_evaluacion)
+);
+
+CREATE TABLE evaluacion_detalle(
+	aud_ffecha DATE NOT NULL,
+	aud_cestado CHARACTER VARYING NOT NULL,
+	aud_nIdUsuario BIGINT,
+	id_evaluacion_detalle BIGINT,
+	id_evaluacion BIGINT,
 	id_formulario BIGINT,
 	id_pregunta BIGINT,
 	id_instructor BIGINT,
 	id_aprendiz BIGINT,
 	estado BOOLEAN,
-	fecha_inicio DATE,
-	fecha_final DATE,
 	respuesta BIGINT,
-	CONSTRAINT pk_evaluacion PRIMARY KEY (id_evaluacion, id_formulario, id_pregunta, id_instructor, id_aprendiz),
+	CONSTRAINT pk_evaluacion_detalle PRIMARY KEY (id_evaluacion_detalle),
+	CONSTRAINT fk_evaluacion FOREIGN KEY (id_evaluacion) REFERENCES evaluacion(id_evaluacion),
 	CONSTRAINT fk_formulario_evalucion FOREIGN KEY (id_formulario) REFERENCES formulario (id_formulario),
-	CONSTRAINT fk_pregunta_evaluacion FOREIGN KEY (id_pregunta) REFERENCES banco_pregunta(id_pregunta),
+	CONSTRAINT fk_pregunta_evaluacion FOREIGN KEY (id_pregunta, id_formulario) REFERENCES detalle_formulario(id_formulario, id_pregunta),
 	CONSTRAINT fk_instructor FOREIGN KEY (id_instructor) REFERENCES persona (id_persona),
 	CONSTRAINT fk_aprendiz FOREIGN KEY (id_aprendiz) REFERENCES persona (id_persona),
 	CONSTRAINT fk_respuesta FOREIGN KEY (respuesta) REFERENCES item_respuesta (id_item_respuesta)

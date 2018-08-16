@@ -7,3 +7,29 @@ select bre.descripcion, ire.descripcion, ire.valor
  INNER JOIN grupo_pregunta gpr ON (bpr.id_grupo = gpr.id_grupo)
  INNER JOIN formulario frm ON (bpr.id_formulario = frm.id_formulario)
  INNER JOIN banco_respuesta bre ON (bpr.id_respuesta = bre.id_respuesta)
+ 
+ 
+ /*Aprendices e instructor activos */
+ 
+ select apr.aprendiz, ins.instructor from (select perapr.id_persona as aprendiz , cur1.id_ficha
+  from curso cur1 
+ inner join persona perapr on (cur1.id_persona = perapr.id_persona and cur1.id_rol =1 )) as apr, 
+ (select perins.id_persona as instructor , cur1.id_ficha	    
+  from curso cur1 
+ inner join persona perins on (cur1.id_persona = perins.id_persona and cur1.id_rol =2 )) as ins
+ where apr.id_ficha = ins.id_ficha
+ 
+ /*Aprendices activos */
+ 	select per.id_persona 
+	  from persona per 
+	 INNER JOIN curso cur ON (cur.id_persona = per.id_persona) 
+	 where per.aud_cestado = 'A' 
+	   and per.estado_persona = true 
+	   and cur.id_rol = 1;
+	/*Instructores activos */
+	select per.id_persona 
+	  from persona per 
+	 INNER JOIN curso cur ON (cur.id_persona = per.id_persona) 
+	 where per.aud_cestado = 'A' 
+	   and per.estado_persona = true 
+	   and cur.id_rol = 2;

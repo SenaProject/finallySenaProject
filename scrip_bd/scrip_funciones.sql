@@ -75,3 +75,26 @@ $BODY$;
 
 ALTER FUNCTION public.fn_persona_nom_com( bigint)
     OWNER TO evaplus;
+
+/*extrae las iniciales de las personas*/
+CREATE OR REPLACE FUNCTION public.fn_persona_iniciales(
+	id_documento bigint)
+    RETURNS text
+	
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+AS $BODY$
+
+declare nom_com text;
+declare nom_com2 text;
+begin
+	nom_com :='select concat(substring(nombre_uno,1,1),substring(nombre_dos,1,1) , substring(apellido_uno,1,1) , substring(apellido_dos,1,1)) as nombre_completo from persona where id_persona = '||id_documento;
+	execute nom_com into nom_com2;
+ return nom_com2;
+ end;
+$BODY$;
+
+ALTER FUNCTION public.fn_persona_iniciales( bigint)
+    OWNER TO evaplus;
