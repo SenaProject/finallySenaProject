@@ -98,3 +98,125 @@ $BODY$;
 
 ALTER FUNCTION public.fn_persona_iniciales( bigint)
     OWNER TO evaplus;
+CREATE OR REPLACE FUNCTION public.fn_fecha_credencial(
+	tipo_fecha text)
+    RETURNS date
+	
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+AS $BODY$
+
+declare vFcaducidad text ;
+declare vFaviso text ;
+declare vFcaducidad2 text ;
+declare vFaviso2 text ;
+declare vDiaCaduca character varying;
+declare vDiaAviso character varying;
+
+begin
+vDiaCaduca := '90 days';
+vDiaAviso := '80 days';
+
+ if tipo_fecha = 'A' then
+	vFaviso :='SELECT CAST(CAST(now() AS DATE) + CAST('||chr(39)||vDiaAviso||chr(39)||' AS INTERVAL) as date)';
+	execute vFaviso into vFaviso2;
+	return cast(vFaviso2 as date);
+ end if;
+ if tipo_fecha = 'C' then
+	vFcaducidad :='SELECT CAST(CAST(now() AS DATE) + CAST('||chr(39)||vDiaCaduca||chr(39)||' AS INTERVAL)as date)';
+	execute vFcaducidad into vFcaducidad2;
+	return cast(vFcaducidad2 as date); 
+ end if;
+
+ end;
+$BODY$;
+
+ALTER FUNCTION public.fn_fecha_credencial( text)
+    OWNER TO evaplus;
+/*encripta y desencripta contraseña version 1*/
+CREATE OR REPLACE FUNCTION public.fn_credencial(
+	credencial text, actividad text)
+    RETURNS text
+	
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+AS $BODY$
+
+declare vLongitud int;
+declare vCaracter text;
+declare vNumero text;
+declare vCaracterRec text;
+declare vContrasennia character varying;
+declare vCaracterN int;
+declare vCaracterT int;
+declare vNum int;
+declare i int;
+
+begin
+
+ if actividad = 'E' then
+	vLongitud := character_length(credencial);
+	for i in 1 .. vLongitud
+	loop
+	vCaracter := substr(credencial, i, 1);
+		vCaracterN := ascii(vCaracter);
+		vCaracterT := vCaracterN + 365;
+		if i = 1 then
+			vContrasennia := vCaracterT ;
+		end if;
+		if i > 1 then
+			vContrasennia := vContrasennia || '-' || vCaracterT ;
+		end if;
+		
+	end loop;
+	return vContrasennia;
+ end if;
+ 
+ if actividad = 'D' then
+	vNumero := '';  
+	vContrasennia := '';
+	credencial := credencial || '-'
+	vLongitud := character_length(credencial);
+	for i in 1 .. vLongitud
+	loop	
+	vCaracter := substr(credencial, i, 1);
+		if (vCaracter != '-') then
+			vNumero := vNumero || vCaracter ;
+		end if;	
+		if vCaracter = '-' then
+			vNum :=cast(vNumero as int);
+		vNum := vNum-365;
+			vCaracterRec := CHR(vNum);
+			vContrasennia := vContrasennia || vCaracterRec;
+			vNumero := '';
+		end if; 
+	end loop;
+	return vContrasennia;
+ end if;
+/*Cambia la contraseña*/
+CREATE OR REPLACE FUNCTION public.fn_insert_credencial(vId_persona bigint, vContrasennia text)
+    RETURNS boolean 
+	
+    LANGUAGE 'plpgsql'
+
+    COST 100
+    VOLATILE 
+AS $BODY$
+
+begin
+	update credencial
+	   set estado_credencial = false
+	 where id_persona = vId_persona;
+	   
+	INSERT INTO public.credencial(aud_ffecha, aud_cestado, aud_nidusuario, id_credencial, estado_credencial, credencial, fecha_aviso, fecha_caducidad, id_persona) 
+	                      VALUES (now(), 'A', vId_persona, fn_id_tabla('credencial','id_credencial'), true, fn_credencial( vContrasennia, 'E'), fn_fecha_credencial('A'), fn_fecha_credencial('C'), vId_persona);   
+	return true;
+ end;
+$BODY$;
+
+ALTER FUNCTION public.fn_insert_credencial( bigint, text)
+    OWNER TO evaplus;
