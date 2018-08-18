@@ -4,7 +4,11 @@ Fecha: 18/08/2018
 Descripcion: scrip de la baase de datos  evaplus
 */
 
-
+CREATE ROLE evaplus LOGIN ENCRYPTED PASSWORD 'md545c70d3c0bd3e272bbcbaffb0ce5b8e7'
+   VALID UNTIL 'infinity';
+CREATE TABLESPACE tb_evaplus
+  OWNER evaplus
+  LOCATION E'c:\\tb_evaplus';
 CREATE DATABASE evaplus
     WITH
     OWNER = evaplus
