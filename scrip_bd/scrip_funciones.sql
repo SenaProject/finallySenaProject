@@ -136,10 +136,14 @@ $BODY$;
 ALTER FUNCTION public.fn_fecha_credencial( text)
     OWNER TO evaplus;
 /*encripta y desencripta contraseña version 1*/
+-- FUNCTION: public.fn_credencial(text, text)
+
+-- DROP FUNCTION public.fn_credencial(text, text);
+
 CREATE OR REPLACE FUNCTION public.fn_credencial(
-	credencial text, actividad text)
+	credencial text,
+	actividad text)
     RETURNS text
-	
     LANGUAGE 'plpgsql'
 
     COST 100
@@ -179,7 +183,7 @@ begin
  if actividad = 'D' then
 	vNumero := '';  
 	vContrasennia := '';
-	credencial := credencial || '-'
+	credencial := credencial || '-';
 	vLongitud := character_length(credencial);
 	for i in 1 .. vLongitud
 	loop	
@@ -197,6 +201,14 @@ begin
 	end loop;
 	return vContrasennia;
  end if;
+
+ end;
+
+$BODY$;
+
+ALTER FUNCTION public.fn_credencial(text, text)
+    OWNER TO evaplus;
+
 /*Cambia la contraseña*/
 CREATE OR REPLACE FUNCTION public.fn_insert_credencial(vId_persona bigint, vContrasennia text)
     RETURNS boolean 
