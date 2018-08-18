@@ -1,14 +1,14 @@
 <?php
 
 require_once "Controllers/controller.php";
-require_once "Models/conection.php";
-require_once "Models/model.php";
+//$prueba = PatronSingleton::singleton();
+
 
 //$ficha = new MvcController;
 //$ficha  -> ConsultarFichaControllerSigleton();
 
-$prueba = new ModelConection;
-$prueba -> ConsultarFichaModelSigleton();
+$prueba = new MvcController;
+$prueba -> ConsultarFichaControllerSigleton();
 //$conect = new Conexion;
 //$conect -> conection();
 echo "string";

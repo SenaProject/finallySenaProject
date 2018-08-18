@@ -1,5 +1,5 @@
 <?php
-
+require_once "Models/conection.php";
 /**
  *
  */
@@ -18,16 +18,18 @@ var_dump ($statement);
 /**
  *
  */
-class ModelConection extends PatronSingleton
+class ModelConection
 {
 
   function ConsultarFichaModelSigleton($datos ,  $tabla)
   {
     // code...
-    $statement = parent::singleton()->query("SELECT $datos FROM $tabla");
+    $statement = PatronSingleton::singleton();
+    $query = $statement->prepare('SELECT $datos FROM $tabla');
+    $query->execute();
 
-    return $statement;
-    echo "strinkgjkjkg";
+    return $query;
+    //var_dump($statement);
 
   }
 }
