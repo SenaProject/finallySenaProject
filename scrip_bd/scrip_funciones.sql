@@ -221,11 +221,11 @@ AS $BODY$
 
 begin
 	update credencial
-	   set estado_credencial = false
+	   set estado_credencial = 'I'
 	 where id_persona = vId_persona;
 	   
 	INSERT INTO public.credencial(aud_ffecha, aud_cestado, aud_nidusuario, id_credencial, estado_credencial, credencial, fecha_aviso, fecha_caducidad, id_persona) 
-	                      VALUES (now(), 'A', vId_persona, fn_id_tabla('credencial','id_credencial'), true, fn_credencial( vContrasennia, 'E'), fn_fecha_credencial('A'), fn_fecha_credencial('C'), vId_persona);   
+	                      VALUES (now(), 'A', vId_persona, fn_id_tabla('credencial','id_credencial'), 'A', fn_credencial( vContrasennia, 'E'), fn_fecha_credencial('A'), fn_fecha_credencial('C'), vId_persona);   
 	return true;
  end;
 $BODY$;
