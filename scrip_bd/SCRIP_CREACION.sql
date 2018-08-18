@@ -1,6 +1,6 @@
 /*
 Nombre: Pablo Emilio Garcia
-Fecha: 04/08/2018
+Fecha: 18/08/2018
 Descripcion: scrip de la baase de datos  evaplus
 */
 
@@ -59,7 +59,7 @@ CREATE TABLE persona (
 	nombre_dos CHARACTER VARYING,
 	apellido_uno CHARACTER VARYING NOT NULL,
 	apellido_dos CHARACTER VARYING,
-	fecha_nacimiento DATE NOT NULL,
+	fecha_nacimiento DATE,
 	telefono CHARACTER VARYING,
 	correo_electronico CHARACTER VARYING,
 	direccion CHARACTER VARYING,
