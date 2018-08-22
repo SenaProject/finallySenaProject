@@ -1,6 +1,25 @@
-body {
+body,html {
 	font-family: arial;
 	color: black;
+	width: 100%;
+	height: 100%;
+}
+
+.footer{
+	width: 100%;
+	height: 10%;
+}
+
+header{
+	width: 10%;
+	height: 100%;
+	float: left;
+}
+
+nav{
+	width: 90%;
+	height: 100%;
+	float: left;
 }
 /* estilos menu principal */
 nav ul{
