@@ -1,11 +1,13 @@
 <?php
 
-require_once "Controllers/controller.php";
+require_once "models/enlaces.php";
+require_once "models/crud.php";
+require_once "controllers/controller.php";
 
-$ficha = new MvcController;
-$ficha  -> ConsultarFichaController();
+$mvc = new MvcController();
+$mvc -> pagina();
 
-//echo "string";
+$con = new Conexion;
+$con -> conectar();
 
-
-
+?>
