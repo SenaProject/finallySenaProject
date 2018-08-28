@@ -1,0 +1,3 @@
+/*
+crea registros dentro de las tablas
+*/

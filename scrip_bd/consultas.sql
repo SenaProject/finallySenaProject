@@ -33,3 +33,16 @@ select bre.descripcion, ire.descripcion, ire.valor
 	 where per.aud_cestado = 'A' 
 	   and per.estado_persona = true 
 	   and cur.id_rol = 2;
+
+select pro.nombre_programa, fic.id_ficha, fn_persona_nom_com(per.id_persona), rol.nombre_rol
+  from programa pro 
+ inner join ficha fic 
+    on (fic.id_programa = pro.id_programa)
+ inner join curso cur
+    on (cur.id_ficha = fic.id_ficha)
+ inner join persona per
+    on (per.id_persona = cur.id_persona)
+ inner join persona_rol prol
+    on (prol.id_persona = per.id_persona)
+ inner join rol rol
+    on (rol.id_rol = prol.id_rol)	   

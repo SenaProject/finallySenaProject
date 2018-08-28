@@ -98,6 +98,7 @@ $BODY$;
 
 ALTER FUNCTION public.fn_persona_iniciales( bigint)
     OWNER TO evaplus;
+	
 CREATE OR REPLACE FUNCTION public.fn_fecha_credencial(
 	tipo_fecha text)
     RETURNS date
