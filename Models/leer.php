@@ -49,6 +49,23 @@ class ConsultaPersona extends Conexion{
     $this->conexionBD=null;
   }
 }
+class ConsultaGrupoPregunta extends Conexion{
+  public function Consultapersona(){
+    parent::conectar();
+  }
+  public function TraeGrupoPregunta(){
+
+    $sql="SELECT gp.Id_Grupo, gp.descripcion FROM grupo_pregunta gp " ;
+    $sentencia=$this->conexionBD->prepare($sql);
+    $sentencia->execute();
+    $resultado=$sentencia->fetch();
+    $sentencia->closeCursor();
+    //print_r($sentencia);
+    print_r($resultado[1]);
+    return $resultado;
+    $this->conexionBD=null;
+  }
+}
 
 
  ?>

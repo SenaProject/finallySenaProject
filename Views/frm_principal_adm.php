@@ -27,21 +27,40 @@
   echo		"</li>";
   echo		"<li><a>Crear</a>";
   echo      "<ul>";
+
   echo        "<li><a target='iframe_a'>Persona</a>";
   echo          "<ul>";
   echo            "<li><a href='frm_persona_individual_pl.php' target='iframe_a'>Uno a Uno</a></li>";
   echo            "<li><a href='frm_persona_masivo.php' target='iframe_a'>Masivo</a></li>";
   echo          "</ul>";
   echo        "</li>";
-  echo       "<li><a target='iframe_a'>Ficha</a></li>";
-  echo        "<li><a target='iframe_a'>Instructor</a>";
+
+  echo       "<li><a target='iframe_a'>Programa</a>";
   echo          "<ul>";
-  echo            "<li><a href='' target='iframe_a'>Asignar ficha</a></li>";
+  echo            "<li><a href='' target='iframe_a'>Crear</a></li>";
   echo          "</ul>";
+  echo       "</li>";
+
+  echo       "<li><a target='iframe_a'>Curso</a>";
+  echo          "<ul>";
+  echo            "<li><a href='' target='iframe_a'>Crear Curso</a></li>";
+  echo          "</ul>";
+  echo          "<ul>";
+  echo            "<li><a href='' target='iframe_a'>Asignar ficha a Instructor</a></li>";
+  echo          "</ul>";
+  echo       "</li>";
+
+  echo       "<li><a target='iframe_a'>Ficha</a></li>";
+
+  echo        "<li><a>Grupo Preguntas</a>";
+  echo          "<ul>";
+  echo    				"<li><a href='Frm_Ban_Preguntas.html' target='iframe_a'>Uno a Uno</a></li>";
+  echo            "<li><a target='iframe_a'>Masivo</a></li>";
+  echo    			"</ul>";
   echo        "</li>";
   echo        "<li><a>Banco de preguntas</a>";
   echo          "<ul>";
-  echo    				"<li><a href='Frm_Ban_Preguntas.html' target='iframe_a'>Uno a Uno</a></li>";
+  echo    				"<li><a href='Frm_crear_preguntas.php' target='iframe_a'>Uno a Uno</a></li>";
   echo            "<li><a target='iframe_a'>Masivo</a></li>";
   echo    			"</ul>";
   echo        "</li>";
