@@ -44,7 +44,7 @@ class ConsultaPersona extends Conexion{
     $resultado=$sentencia->fetch();
     $sentencia->closeCursor();
     //print_r($sentencia);
-    print_r($resultado);
+    print_r($resultado[0]);
     return $resultado;
     $this->conexionBD=null;
   }

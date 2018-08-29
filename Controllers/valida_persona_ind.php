@@ -12,17 +12,17 @@ $email = $_POST["email"];
 $Tel = $_POST["Tel"];
 $Dir = $_POST["Dir"];
 //Botones de Crud
-  $BtnM ="1";
+  // $BtnMM ="1";
  // $BtnM = $_POST["BtnM"];
 // $BtnE = $_POST["BtnE"];
 // $BtnB = $_POST["BtnB"];
 // $BtnG = $_POST["BtnG"];
 
-//print_r($BtnM);
+print_r($_POST["BtnM"]);
 
-if ($BtnM = "1"){
-$consultar= new ConsultaPersona();
-$ver=$consultar->TraePersona($IdPersona, $BtnM);
-}
+// if ($BtnMM = "1"){
+// $consultar= new ConsultaPersona();
+// $ver=$consultar->TraePersona($IdPersona, $BtnMM);
+// }
 
  ?>
