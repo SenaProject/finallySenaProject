@@ -13,6 +13,7 @@
 </head>
 <body id="Byfrm1Ppl" style="background-color:WHITE">
 
+<a href "frm_persona_individual_pl.php">Volver a tras</a>
 <?php
 // <form id="frm1" action="/buscar.php" method="post">
 // <Div id="DivGranDatosBusqueda">
@@ -67,7 +68,7 @@
 //     </div>
 // </Div>
 // </form>
-echo "<form id='frm1' action='../Controllers/valida_persona_ind.php' method='post'>";
+echo "<form id='frm1' action='../Controllers/valida_persona_ind.php?1' method='post'>";
 echo "<fieldset>";
 echo "    <legend>Nombre de la persona:</legend>";
 echo "<Div id='DivGranDatosBusqueda'>";
@@ -124,10 +125,6 @@ echo "<br>";
 // echo "    </div>";
 // con button
 echo "    <div id='BtnFrm1Ppl' class='button'>";
-echo "        <button Id='btnN' type='submit'>Nuevo</button>";
-echo "		     <button Id='btnM' type='submit'>Modificar</button>";
-echo "        <button Id='btnE' type='submit'>Eliminar</button>";
-echo "        <button Id='btnB' type='submit'>Buscar</button>";
 echo "        <button Id='btnG' type='submit'>Guardar</button>";
 echo "    </div>";
 echo "</Div>";

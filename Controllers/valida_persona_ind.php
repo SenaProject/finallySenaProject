@@ -18,8 +18,10 @@ $Dir = $_POST["Dir"];
 // $BtnB = $_POST["BtnB"];
 // $BtnG = $_POST["BtnG"];
 
-print_r($_POST["BtnM"]);
-
+// print_r($_POST["BtnM"]);
+// if (){
+//
+// }
 // if ($BtnMM = "1"){
 // $consultar= new ConsultaPersona();
 // $ver=$consultar->TraePersona($IdPersona, $BtnMM);

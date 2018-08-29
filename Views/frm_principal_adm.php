@@ -29,7 +29,7 @@
   echo      "<ul>";
   echo        "<li><a target='iframe_a'>Persona</a>";
   echo          "<ul>";
-  echo            "<li><a href='frm_persona_individual.php' target='iframe_a'>Uno a Uno</a></li>";
+  echo            "<li><a href='frm_persona_individual_pl.php' target='iframe_a'>Uno a Uno</a></li>";
   echo            "<li><a href='frm_persona_masivo.php' target='iframe_a'>Masivo</a></li>";
   echo          "</ul>";
   echo        "</li>";
