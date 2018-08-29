@@ -44,8 +44,6 @@
   echo       "<li><a target='iframe_a'>Curso</a>";
   echo          "<ul>";
   echo            "<li><a href='' target='iframe_a'>Crear Curso</a></li>";
-  echo          "</ul>";
-  echo          "<ul>";
   echo            "<li><a href='' target='iframe_a'>Asignar ficha a Instructor</a></li>";
   echo          "</ul>";
   echo       "</li>";
