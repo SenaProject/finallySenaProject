@@ -3,22 +3,19 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/frm_persona_individual_pl.css">
-    <title>Listado de Personas</title>
+    <title>Listado de Programas</title>
 <body>
-        <a href="frm_persona_individual_add.php">Adicionar nuevo registro</a>
+        <a href="">Adicionar nuevo registro</a>
         <br>
         <br>
         <br>
     <table >
       <tr>
         <th>
-          <a>Id de la persona</a>
+          <a>Id del programa</a>
         </th>
         <th>
-          <a>Primer Nombre</a>
-        </th>
-        <th>
-          <a>Segundo Nombre</a>
+          <a>Nombre </a>
         </th>
         <th>
           <a>Edicion</a>
@@ -35,9 +32,6 @@
           <a>Pablo</a>
         </td>
         <td>
-          <a>Emilio</a>
-        </td>
-        <td>
           <a href="#">Editar</a>
         </td>
         <td>
@@ -50,9 +44,6 @@
         </td>
         <td>
           <a>Dora</a>
-        </td>
-        <td>
-          <a>Marina</a>
         </td>
         <td>
           <a href="#">Editar</a>

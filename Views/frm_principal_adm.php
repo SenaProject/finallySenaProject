@@ -37,7 +37,8 @@
 
   echo       "<li><a target='iframe_a'>Programa</a>";
   echo          "<ul>";
-  echo            "<li><a href='' target='iframe_a'>Crear</a></li>";
+  echo            "<li><a href='frm_programa.php' target='iframe_a'>Uno a Uno</a></li>";
+  echo            "<li><a href='' target='iframe_a'>Masivo</a></li>";
   echo          "</ul>";
   echo       "</li>";
 
@@ -48,7 +49,12 @@
   echo          "</ul>";
   echo       "</li>";
 
-  echo       "<li><a target='iframe_a'>Ficha</a></li>";
+  echo       "<li><a target='iframe_a'>Ficha</a>";
+  echo          "<ul>";
+  echo            "<li><a href='' target='iframe_a'>Uno a Uno</a></li>";
+  echo            "<li><a href='' target='iframe_a'>Masivo</a></li>";
+  echo          "</ul>";
+  echo       "</li>";
 
   echo        "<li><a>Grupo Preguntas</a>";
   echo          "<ul>";
