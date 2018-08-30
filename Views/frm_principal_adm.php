@@ -51,7 +51,7 @@
 
   echo       "<li><a target='iframe_a'>Ficha</a>";
   echo          "<ul>";
-  echo            "<li><a href='' target='iframe_a'>Uno a Uno</a></li>";
+  echo            "<li><a href='frm_ficha.php' target='iframe_a'>Uno a Uno</a></li>";
   echo            "<li><a href='' target='iframe_a'>Masivo</a></li>";
   echo          "</ul>";
   echo       "</li>";

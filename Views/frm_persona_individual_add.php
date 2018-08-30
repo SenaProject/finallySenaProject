@@ -13,7 +13,7 @@
 </head>
 <body id="Byfrm1Ppl" style="background-color:WHITE">
 
-<a href "frm_persona_individual_pl.php">Volver a tras</a>
+<a href ="frm_persona_individual_pl.php">Volver a tras</a>
 <?php
 // <form id="frm1" action="/buscar.php" method="post">
 // <Div id="DivGranDatosBusqueda">

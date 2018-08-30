@@ -113,6 +113,7 @@ CREATE TABLE ficha (
 	CONSTRAINT fk_jornada FOREIGN KEY (id_jornada) REFERENCES parametro (id_parametro),
 	CONSTRAINT fk_programa FOREIGN KEY (id_programa) REFERENCES programa (id_programa)
 );
+
 CREATE TABLE banco_respuesta(
 	aud_ffecha DATE NOT NULL,
 	aud_cestado CHARACTER VARYING NOT NULL,

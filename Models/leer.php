@@ -48,6 +48,18 @@ class ConsultaPersona extends Conexion{
     return $resultado;
     $this->conexionBD=null;
   }
+  public function TraeAllPersona(){
+
+    $sql="SELECT '.$BtnM.' , per.id_persona, fn_persona_nom_com(per.id_persona), per.estado_persona, per.fecha_nacimiento, per.correo_electronico, per.telefono, per.direccion FROM persona per";
+    $sentencia=$this->conexionBD->prepare($sql);
+    $sentencia->execute();
+    $resultado=$sentencia->fetch();
+    $sentencia->closeCursor();
+    //print_r($sentencia);
+    //print_r($resultado[0]);
+    return $resultado;
+    $this->conexionBD=null;
+  }
 }
 class ConsultaGrupoPregunta extends Conexion{
   public function Consultapersona(){
@@ -64,6 +76,7 @@ class ConsultaGrupoPregunta extends Conexion{
     print_r($resultado[1]);
     return $resultado;
     $this->conexionBD=null;
+    
   }
 }
 
