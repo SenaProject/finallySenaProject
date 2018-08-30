@@ -15,6 +15,11 @@
 
 <a href ="frm_persona_individual_pl.php">Volver a tras</a>
 <?php
+
+// require "../Models/leer.php";
+//
+// $consultar= new ConsultaPersona();
+// $ver=$consultar->TraePersona();
 // <form id="frm1" action="/buscar.php" method="post">
 // <Div id="DivGranDatosBusqueda">
 //     <div id="DivDatosBusq">
@@ -126,6 +131,7 @@ echo "<br>";
 // con button
 echo "    <div id='BtnFrm1Ppl' class='button'>";
 echo "        <button Id='btnG' type='submit'>Guardar</button>";
+echo "        <button Id='btnC' type='reset'>Cancelar</button>";
 echo "    </div>";
 echo "</Div>";
 echo "</form>";

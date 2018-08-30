@@ -31,6 +31,7 @@
   echo        "<li><a target='iframe_a'>Persona</a>";
   echo          "<ul>";
   echo            "<li><a href='frm_persona_individual_pl.php' target='iframe_a'>Uno a Uno</a></li>";
+  echo            "<li><a href='frm_en_blanco.php' target='iframe_a'>Asigna ficha </a></li>";
   echo            "<li><a href='frm_persona_masivo.php' target='iframe_a'>Masivo</a></li>";
   echo          "</ul>";
   echo        "</li>";
@@ -44,8 +45,8 @@
 
   echo       "<li><a target='iframe_a'>Curso</a>";
   echo          "<ul>";
-  echo            "<li><a href='' target='iframe_a'>Crear Curso</a></li>";
-  echo            "<li><a href='' target='iframe_a'>Asignar ficha a Instructor</a></li>";
+  echo            "<li><a href='frm_en_blanco.php' target='iframe_a'>Crear Curso</a></li>";
+
   echo          "</ul>";
   echo       "</li>";
 
@@ -58,24 +59,24 @@
 
   echo        "<li><a>Grupo Preguntas</a>";
   echo          "<ul>";
-  echo    				"<li><a href='Frm_Ban_Preguntas.html' target='iframe_a'>Uno a Uno</a></li>";
-  echo            "<li><a target='iframe_a'>Masivo</a></li>";
-  echo    			"</ul>";
-  echo        "</li>";
-  echo        "<li><a>Banco de preguntas</a>";
-  echo          "<ul>";
-  echo    				"<li><a href='Frm_crear_preguntas.php' target='iframe_a'>Uno a Uno</a></li>";
+  echo    				"<li><a href='frm_grupo_pregunta.php' target='iframe_a'>Uno a Uno</a></li>";
   echo            "<li><a target='iframe_a'>Masivo</a></li>";
   echo    			"</ul>";
   echo        "</li>";
   echo        "<li><a>Banco de respuestas</a>";
   echo          "<ul>";
-  echo    				"<li><a href='Frm_Ban_Respuestas.html' target='iframe_a'>Uno a Uno</a></li>";
+  echo    				"<li><a href='frm_Ban_Respuestas.php' target='iframe_a'>Uno a Uno</a></li>";
+  echo            "<li><a target='iframe_a'>Masivo</a></li>";
+  echo    			"</ul>";
+  echo        "</li>";
+  echo    "</li>";
+  echo        "<li><a>Banco de preguntas</a>";
+  echo          "<ul>";
+  echo    				"<li><a href='frm_banco_preguntas.php' target='iframe_a'>Uno a Uno</a></li>";
   echo            "<li><a target='iframe_a'>Masivo</a></li>";
   echo    			"</ul>";
   echo        "</li>";
   echo      "</ul>";
-  echo    "</li>";
   echo		"<li><a>Encuesta</a>";
   echo      "<ul>";
   echo        "<li><a href='frm_crear_encuesta.php' target='iframe_a'>Crear</a></li>";
