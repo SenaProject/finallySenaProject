@@ -2,7 +2,7 @@
 require "../Models/leer.php";
 
 $consultar= new ConsultaFicha();
-$ver=$consultar->TraeFicha();
+$ver=$consultar->TraeFichaAll();
 // var_dump ($ver);
 ?>
 

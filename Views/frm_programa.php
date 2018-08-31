@@ -2,7 +2,7 @@
 require "../Models/leer.php";
 
 $consultar= new ConsultaPrograma();
-$ver=$consultar->TraePrograma();
+$ver=$consultar->TraeAllPrograma();
 // var_dump ($ver);
 ?>
 
@@ -36,8 +36,8 @@ foreach ($ver as $value) {
   // var_dump ($value);
 echo        "<td><a>".$value[0]."</a></td>";
 echo        "<td><a>".$value[1]."</a></td>";
-// echo        "<td><a>".$value[2]."</a></td>";
-echo        "<td><a href='#'>Editar</a></td>";
+// echo        "<td><a>".$value[2]."</a></td>";  href=""
+echo        "<td><a href='frm_programa_edi.php?id_prg=".$value[0]."'>Editar</a></td>";
 echo        "<td><a href='#'>Eliminar</a></td>";
 echo "</tr>";
 }

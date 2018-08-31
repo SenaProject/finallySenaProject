@@ -39,7 +39,7 @@ class ConsultaPersona extends Conexion{
   }
   public function TraePersona($IdPersona){
 
-    $sql="SELECT per.id_persona, per.nombre_uno, per.nombre_dos, per.apellido_uno, per.apellido_dos, fn_persona_nom_com(per.id_persona), per.estado_persona, per.fecha_nacimiento, per.correo_electronico, per.telefono, per.direccion FROM persona per WHERE per.id_persona = " . $IdPersona;
+    $sql="SELECT per.id_persona, per.nombre_uno, per.nombre_dos, per.apellido_uno, per.apellido_dos, fn_persona_nom_com(per.id_persona), per.estado_persona, per.fecha_nacimiento, per.correo_electronico, per.telefono, per.direccion, per.id_tipo_documento FROM persona per WHERE per.id_persona = " . $IdPersona;
     $sentencia=$this->conexionBD->prepare($sql);
     $sentencia->execute();
     $resultado=$sentencia->fetch();
@@ -82,11 +82,20 @@ class ConsultaPrograma extends Conexion{
   public function ConsultaPrograma(){
     parent::conectar();
   }
-  public function TraePrograma(){
-    $sql="SELECT pr.id_programa, pr.nombre_programa FROM programa pr";
+  public function TraeAllPrograma(){
+    $sql="SELECT pr.id_programa, pr.nombre_programa FROM programa pr ORDER BY 1";
     $sentencia=$this->conexionBD->prepare($sql);
     $sentencia->execute();
     $resultado=$sentencia->fetchAll();
+    $sentencia->closeCursor();
+    return $resultado;
+    $this->conexionBD=null;
+  }
+  public function TraePrograma($id_prg){
+    $sql="SELECT pr.id_programa, pr.nombre_programa FROM programa pr WHERE pr.id_programa = ".$id_prg;
+    $sentencia=$this->conexionBD->prepare($sql);
+    $sentencia->execute();
+    $resultado=$sentencia->fetch();
     $sentencia->closeCursor();
     return $resultado;
     $this->conexionBD=null;
@@ -97,7 +106,16 @@ class ConsultaFicha extends Conexion{
   public function ConsultaFicha(){
     parent::conectar();
   }
-  public function TraeFicha(){
+  public function TraeFicha($NumFicha){
+    $sql="SELECT fi.id_ficha FROM ficha fi where fi.id_ficha = ".$NumFicha;
+    $sentencia=$this->conexionBD->prepare($sql);
+    $sentencia->execute();
+    $resultado=$sentencia->fetch();
+    $sentencia->closeCursor();
+    return $resultado;
+    $this->conexionBD=null;
+  }
+  public function TraeFichaAll(){
     $sql="SELECT fi.id_ficha, pr.nombre_programa FROM ficha fi inner join programa pr on (pr.id_programa = fi.id_programa)";
     $sentencia=$this->conexionBD->prepare($sql);
     $sentencia->execute();
@@ -138,5 +156,50 @@ class ConsultaPregunta extends Conexion{
     $this->conexionBD=null;
   }
 }
+
+class ConsultaParametros extends Conexion{
+  public function ConsultaParametros(){
+    parent::conectar();
+  }
+  public function TraeParametros($IdParametro,$Grupo){
+    if ($IdParametro == 0 && $Grupo !==''){
+          $sql="SELECT par.id_parametro, par.detalle FROM parametro par WHERE par.grupo = '".$Grupo."'";
+          $sentencia=$this->conexionBD->prepare($sql);
+          $sentencia->execute();
+          $resultado=$sentencia->fetchAll();
+
+    } else if ($IdParametro !== 0 && $Grupo =='') {
+          $sql="SELECT par.detalle FROM parametro par WHERE par.id_parametro =".$IdParametro;
+          $sentencia=$this->conexionBD->prepare($sql);
+          $sentencia->execute();
+          $resultado=$sentencia->fetch();
+
+    } else {
+      // $sql="SELECT bp.id_pregunta, bp.descripcion, gp.descripcion FROM banco_pregunta bp INNER JOIN grupo_pregunta gp ON(gp.id_grupo = bp.id_grupo)";
+    }
+    $sentencia->closeCursor();
+    return $resultado;
+    // print_r($resultado);
+    $this->conexionBD=null;
+  }
+}
+
+class ConsultaRoles extends Conexion{
+  public function ConsultaRoles(){
+    parent::conectar();
+  }
+  public function TraeRoles($IdPersona){
+
+          $sql="SELECT r.Nombre_rol, pr.id_persona FROM persona_rol pr inner join rol r on (pr.id_rol = r.id_rol) where pr.id_persona = ".$IdPersona;
+          $sentencia=$this->conexionBD->prepare($sql);
+          $sentencia->execute();
+          $resultado=$sentencia->fetchAll();
+          $sentencia->closeCursor();
+          if ($resultado ==''){return 'Sin Rol';}
+          else {return $resultado;}
+          $this->conexionBD=null;
+  }
+}
+
 
  ?>

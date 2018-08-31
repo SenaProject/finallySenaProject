@@ -19,7 +19,7 @@ $ver=$consultar->TraePersona($_GET['valor']);
 
 <a href ="frm_persona_individual_pl.php">Volver a tras</a>
 <?php
-
+$selec = "";
 echo "<form id='frm1' action='../Controllers/valida_persona_ind.php?1' method='post'>";
 echo "<fieldset>";
 echo "    <legend>Nombre de la persona: ".$ver[5]."</legend>";
@@ -27,6 +27,16 @@ echo "<Div id='DivGranDatosBusqueda'>";
 echo "    <div id='DivDatosBusq'>";
 echo "        <label for='NumDoc'>Documento No.:</label>";
 echo "        <input type='Text' id='NumDoc' name='NumDoc' maxlength='20' Value='".$ver[0]."' required = 'required' placeholder = 'Numero de identificacion'/>";
+echo "        <label for='TipDoc'>Tipo de Documento:</label>";
+$consultar2= new ConsultaParametros();
+$ver2=$consultar2->TraeParametros(0,'tipodocumento');
+echo "				<select name='tipodocumento' required = 'required'>";
+				               echo "<option value='Nulo' ></option>";
+				        foreach ($ver2 as $valor) {
+                      if($valor[0]==$ver[11]){$selec="selected";} else {$selec="";};
+                       echo "<option value='".$valor[0]."' ".$selec.">".$valor[1]."</option>";
+				               }
+echo "				</select>";
 echo "    </div><br>";
 echo "    <div id='DivDatosBusq'>";
 echo "        <label for='Apellido1'>Primer Apellido</label>";
@@ -48,13 +58,29 @@ echo "        <label for='Estado'>Estado:</label>";
 echo "				<select name='estado' required = 'required'>";
 echo "				  <option value='Nulo' ></option>";
                   if ($ver[6] == True){echo "<option value='Activo' selected>Activo</option>";}
-                     else {echo "<option value='Activo'>Activo</option>";};                  
+                     else {echo "<option value='Activo'>Activo</option>";};
                   if ($ver[6] == False){echo "<option value='Inactivo' selected>Activo</option>";}
                      else {echo "<option value='Inactivo'>Inactivo</option>";};
-// echo "				  <option value='Inactivo'".if ($ver[6] == false){echo "selected";}.">Inactivo</option>";
 echo "				</select>";
+
+$consultar3= new ConsultaFicha();
+$ver3=$consultar3->TraeFicha($ver[0]);
+// echo "        <input type='Text' id='nFicha' name='nFicha' Value='".$ver3[0]."' placeholder = 'Ficha Numero'/>";
+
+echo "        <label for='nFichaText'>Ficha Numero:</label>";
+echo "        <label for='nFichaText2'><a href ='frm_en_blanco.php' >Pulse aqui</a></label>";
+
+
+$consultar4= new ConsultaRoles();
+$ver4=$consultar4->TraeRoles($ver[0]);
+echo "        <label for='nFichaText'>Rol(es):</label>";
+$roles = "";
+$roles2 = "";
+        foreach ($ver4 as $valor) { $roles = $valor[0] .", ". $roles2;
+                                    $roles2 = $roles;}
+echo "        <label for='nFichaText'>".$roles."</label>";
 echo "    </div><br>";
-// echo "";".."
+
 echo "    <div id='DivDatosBusq'>";
 echo "        <label for='fnacimiento'>Fecha de nacimiento:</label>";
 echo "        <input type='date' id='fnacimiento' name='fnacimiento' Value='".$ver[7]."' placeholder = 'Fecha de Naciomiento'/>";
@@ -66,19 +92,19 @@ echo "        <label for='Tel'>Telefono:</label>";
 echo "        <input type='Text' id='Tel' name='Tel' Value='".$ver[9]."' placeholder = 'Telefono'/>";
 echo "        <label for='Dir'>Direccion:</label>";
 echo "        <input type='Text' id='Dir' name='Dir' Value='".$ver[10]."'  placeholder = 'Dirección' size='60'/>";
+echo "        <label for='TipDoc'>Tipo de Documento:</label>";
+$consultar2= new ConsultaParametros();
+$ver2=$consultar2->TraeParametros(0,'tipodocumento');
+echo "				<select name='tipodocumento' required = 'required'>";
+				               echo "<option value='Nulo' ></option>";
+				        foreach ($ver2 as $valor) {
+                      if($valor[0]==$ver[11]){$selec="selected";} else {$selec="";};
+                       echo "<option value='".$valor[0]."' ".$selec.">".$valor[1]."</option>";
+				               }
+echo "				</select>";
 echo "    </div><br>";
 echo "</fieldset>";
 echo "<br>";
-// con input
-// echo "";
-// echo "    <div id='BtnFrm1Ppl'>";
-// echo "        <input Id='btnN' name='btnN' type='submit' Value= 'Nuevo'>";
-// echo "		    <input Id='btnN' name='btnM' type='submit' Value= 'Modifica'>";
-// echo "        <input Id='btnE' name='btnE' type='submit' Value= 'Elimina'>";
-// echo "        <input Id='btnB' name='btnB' type='submit' Value= 'Buscar'>";
-// echo "        <input Id='btnG' name='btnG' type='submit' Value= 'Guardar'>";
-// echo "    </div>";
-// con button
 echo "    <div id='BtnFrm1Ppl' class='button'>";
 echo "        <button Id='btnG' type='submit'>Guardar</button>";
 echo "        <button Id='btnC' type='reset'>Cancelar</button>";
