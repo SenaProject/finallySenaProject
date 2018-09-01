@@ -19,9 +19,6 @@ CREATE DATABASE evaplus
     CONNECTION LIMIT = -1;
 
 CREATE TABLE parametro(
-	aud_ffecha DATE NOT NULL,
-	aud_cestado CHARACTER VARYING NOT NULL,
-	aud_nIdUsuario BIGINT,
 	id_parametro BIGINT NOT NULL,
 	id_grupo BIGINT NOT NULL,
 	grupo CHARACTER VARYING NOT NULL,
@@ -32,9 +29,6 @@ CONSTRAINT pk_parametro PRIMARY KEY (id_parametro)
 );
 
 CREATE TABLE programa(
-	aud_ffecha DATE NOT NULL,
-	aud_cestado CHARACTER VARYING NOT NULL,
-	aud_nIdUsuario BIGINT,
 	id_programa BIGINT NOT NULL,
 	nombre_programa CHARACTER VARYING NOT NULL,
 	estado_programa BOOLEAN NOT NULL,
@@ -42,9 +36,6 @@ CHECK (id_programa > 0),
 CONSTRAINT pk_programa PRIMARY KEY (id_programa)
 );
  CREATE TABLE rol(
-	aud_ffecha DATE NOT NULL,
-	aud_cestado CHARACTER VARYING NOT NULL,
-	aud_nIdUsuario BIGINT,
 	id_rol BIGSERIAL,
 	estado_rol BOOLEAN NOT NULL,
 	nombre_rol CHARACTER VARYING NOT NULL,
@@ -53,9 +44,6 @@ CONSTRAINT pk_programa PRIMARY KEY (id_programa)
 	CONSTRAINT pk_id_rol PRIMARY KEY (id_rol)
  );
 CREATE TABLE persona (
-	aud_ffecha DATE NOT NULL,
-	aud_cestado CHARACTER VARYING NOT NULL,
-	aud_nIdUsuario BIGINT,
 	id_persona BIGINT,
 	id_tipo_documento BIGINT,
 	estado_persona BOOLEAN NOT NULL,
@@ -73,9 +61,6 @@ CREATE TABLE persona (
   );
 
 CREATE TABLE credencial(
-	aud_ffecha DATE NOT NULL,
-	aud_cestado CHARACTER VARYING NOT NULL,
-	aud_nIdUsuario BIGINT,
 	id_credencial BIGSERIAL,
 	estado_credencial text NOT NULL,
 	credencial CHARACTER VARYING NOT NULL,
@@ -89,9 +74,6 @@ CREATE TABLE credencial(
 
 
 CREATE TABLE persona_rol(
-	aud_ffecha DATE NOT NULL,
-	aud_cestado CHARACTER VARYING NOT NULL,
-	aud_nIdUsuario BIGINT,
 	id_rol BIGINT,
 	id_persona BIGINT,
 	CONSTRAINT pk_id_persona_rol PRIMARY KEY (id_rol, id_persona),
@@ -99,9 +81,6 @@ CREATE TABLE persona_rol(
 	CONSTRAINT fk_rol_persona FOREIGN KEY (id_rol) REFERENCES rol (id_rol)
 );
 CREATE TABLE ficha (
-	aud_ffecha DATE NOT NULL,
-	aud_cestado CHARACTER VARYING NOT NULL,
-	aud_nIdUsuario BIGINT,
 	id_ficha BIGINT,
 	id_programa BIGINT,
 	estado_ficha BOOLEAN NOT NULL,
@@ -115,18 +94,12 @@ CREATE TABLE ficha (
 );
 
 CREATE TABLE banco_respuesta(
-	aud_ffecha DATE NOT NULL,
-	aud_cestado CHARACTER VARYING NOT NULL,
-	aud_nIdUsuario BIGINT,
 	id_respuesta BIGINT,
 	descripcion CHARACTER VARYING NOT NULL,
 	estado BOOLEAN,
 	CONSTRAINT pk_banco_respuesta PRIMARY KEY (id_respuesta)
 );
 CREATE TABLE item_respuesta(
-	aud_ffecha DATE NOT NULL,
-	aud_cestado CHARACTER VARYING NOT NULL,
-	aud_nIdUsuario BIGINT,
 	id_item_respuesta BIGINT,
 	id_respuesta BIGINT,
 	id_tipo_respuesta BIGINT,
@@ -138,27 +111,18 @@ CREATE TABLE item_respuesta(
 	CONSTRAINT fk_tipo_respuesta FOREIGN KEY (id_tipo_respuesta) REFERENCES parametro (id_parametro)
 );
 CREATE TABLE formulario(
-	aud_ffecha DATE NOT NULL,
-	aud_cestado CHARACTER VARYING NOT NULL,
-	aud_nIdUsuario BIGINT,
 	id_formulario BIGINT,
 	descripcion CHARACTER VARYING NOT NULL,
 	estado BOOLEAN,
 	CONSTRAINT pk_formulario PRIMARY KEY (id_formulario)
 );
 CREATE TABLE grupo_pregunta(
-	aud_ffecha DATE NOT NULL,
-	aud_cestado CHARACTER VARYING NOT NULL,
-	aud_nIdUsuario BIGINT,
 	id_grupo BIGINT,
 	descripcion CHARACTER VARYING NOT NULL,
 	estado BOOLEAN,
 	CONSTRAINT pk_grupo_pregunta PRIMARY KEY (id_grupo)
 );
 CREATE TABLE banco_pregunta(
-	aud_ffecha DATE NOT NULL,
-	aud_cestado CHARACTER VARYING NOT NULL,
-	aud_nIdUsuario BIGINT,
 	id_grupo BIGINT,
 	id_pregunta BIGINT,
 	id_respuesta BIGINT,
@@ -170,9 +134,6 @@ CREATE TABLE banco_pregunta(
 	CONSTRAINT fk_formulario FOREIGN KEY (id_formulario) REFERENCES formulario (id_formulario)
 );
 CREATE TABLE detalle_formulario(
-	aud_ffecha DATE NOT NULL,
-	aud_cestado CHARACTER VARYING NOT NULL,
-	aud_nIdUsuario BIGINT,
 	id_formulario BIGINT,
 	id_pregunta BIGINT,
 	estado BOOLEAN,
@@ -181,9 +142,6 @@ CREATE TABLE detalle_formulario(
 );
 
 CREATE TABLE curso(
-	aud_ffecha DATE NOT NULL,
-	aud_cestado CHARACTER VARYING NOT NULL,
-	aud_nIdUsuario BIGINT,
 	id_curso BIGINT,
 	id_annio BIGINT,
 	id_trimestre BIGINT,
@@ -203,9 +161,6 @@ CONSTRAINT fk_curso_ficha FOREIGN KEY (id_ficha) REFERENCES ficha (id_ficha)
 );
 
 CREATE TABLE evaluacion(
-	aud_ffecha DATE NOT NULL,
-	aud_cestado CHARACTER VARYING NOT NULL,
-	aud_nIdUsuario BIGINT,
 	id_evaluacion BIGINT,
 	estado BOOLEAN,
 	fecha_inicio DATE,
@@ -214,9 +169,6 @@ CREATE TABLE evaluacion(
 );
 
 CREATE TABLE evaluacion_detalle(
-	aud_ffecha DATE NOT NULL,
-	aud_cestado CHARACTER VARYING NOT NULL,
-	aud_nIdUsuario BIGINT,
 	id_evaluacion_detalle BIGINT,
 	id_evaluacion BIGINT,
 	id_formulario BIGINT,
