@@ -18,9 +18,9 @@ class ConsultaUsuario extends Conexion{
        define ('NOMBRE_COMPLETO' , $resultado[1]);
        if ($resultado[3] == true){
          // print_r($resultado[3]);
-         header("location:../Views/frm_principal_adm.php") ;
+         header("location:../Views/frm_principal_adm.php?valor=".$resultado[1]) ;
        } else {
-         header("location:../Views/frm_principal_aprendiz.php") ;
+         header("location:../Views/frm_principal_aprendiz.php?valor=".$resultado[1]) ;
        }
 
      } else{

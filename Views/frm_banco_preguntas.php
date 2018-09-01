@@ -17,7 +17,7 @@ $ver=$consultar->TraePregunta();
         <br>
         <br>
         <br>
-        <a href="frm_grupo_preguntas_add.php">Adicionar nuevo registro</a>
+        <a href="frm_banco_preguntas_add.php">Adicionar nuevo registro</a>
         <br>
         <br>
         <br>

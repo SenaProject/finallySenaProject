@@ -1,27 +1,59 @@
-<?php
 
-$seguro = $_GET['actualiza'];
-if ($seguro =='actualiza') {
+<?php
+$seguro = $_GET['valor'];
+// print_r($seguro);
+// print_r($_GET['valor']);
+if ($seguro =="'actualiza'") {
 $IdPrograma = $_POST['idprg'];
 $NombrePrograma = $_POST['nomprg'];
+
+// print_r('por aqui');
+
 
 require "../Models/actualizar.php";
 
 $consultar= new ModificarPrograma();
 $ver=$consultar->fModificaPrograma($NombrePrograma, $IdPrograma);
 
-echo "
-<!DOCTYPE html>
-<html lang='en' dir='ltr'>
-  <head>
-    <meta charset='utf-8'>
-    <title></title>
-  </head>
-  <body>
-    <h2>REGISTRO ACTUALIZADO</h2>
-  </body>
-</html>
-";
+echo "<!DOCTYPE html>";
+echo "<html lang='en' dir='ltr'>";
+echo "  <head>";
+echo "    <meta charset='utf-8'>";
+echo "    <title></title>";
+echo "  </head>";
+echo "  <body>";
+echo "    <h2>REGISTRO ACTUALIZADO</h2>";
+echo "<a href='../Views/frm_programa.php'>ir a Programa</a>";
+echo "  </body>";
+echo "</html>";
 // code...
 }
+
+if ($seguro =="'crear'") {
+
+$NombrePrograma = $_POST['nombre_programa'];
+$estado = $_POST['estado_programa'];
+// print_r('por aqui');
+
+
+require "../Models/crear.php";
+
+$consultar= new CrearPrograma();
+$ver=$consultar->CreaPrograma($NombrePrograma, $estado);
+
+echo "<!DOCTYPE html>";
+echo "<html lang='en' dir='ltr'>";
+echo "  <head>";
+echo "    <meta charset='utf-8'>";
+echo "    <title></title>";
+echo "  </head>";
+echo "  <body>";
+echo "    <h2>REGISTRO ACTUALIZADO</h2>";
+echo "<a href='../Views/frm_programa.php'>ir a Programa</a>";
+echo "  </body>";
+echo "</html>";
+// code...
+}
+
+
 ?>

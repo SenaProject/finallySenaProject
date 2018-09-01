@@ -17,7 +17,7 @@ $ver=$consultar->TraeAllPrograma();
         <br>
         <br>
         <br>
-        <a href="frm_grupo_preguntas_add.php">Adicionar nuevo registro</a>
+        <a href="frm_programa_add.php">Adicionar nuevo registro</a>
         <br>
         <br>
         <br>
@@ -38,7 +38,7 @@ echo        "<td><a>".$value[0]."</a></td>";
 echo        "<td><a>".$value[1]."</a></td>";
 // echo        "<td><a>".$value[2]."</a></td>";  href=""
 echo        "<td><a href='frm_programa_edi.php?id_prg=".$value[0]."'>Editar</a></td>";
-echo        "<td><a href='#'>Eliminar</a></td>";
+echo        "<td><a href=''>Eliminar</a></td>";
 echo "</tr>";
 }
 

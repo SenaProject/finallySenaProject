@@ -14,7 +14,10 @@
     <title>Evaplus +</title>
   </head>
   <body>
+
 <?php
+$NomCom = $_GET['valor'];
+  echo "<h2>Nombre Usuario:   ".$NomCom."</h2>";
 	echo "<nav>";
 	echo "<ul>";
 	echo	"<li><a>Archivo</a>";
