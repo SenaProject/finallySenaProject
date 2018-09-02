@@ -36,7 +36,7 @@ CHECK (id_programa > 0),
 CONSTRAINT pk_programa PRIMARY KEY (id_programa)
 );
  CREATE TABLE rol(
-	id_rol BIGSERIAL,
+	id_rol BIGINT,
 	estado_rol BOOLEAN NOT NULL,
 	nombre_rol CHARACTER VARYING NOT NULL,
 	descripcion_rol CHARACTER VARYING NOT NULL,
@@ -60,9 +60,22 @@ CREATE TABLE persona (
  CONSTRAINT fk_tipo_documento FOREIGN KEY (id_tipo_documento) REFERENCES parametro (id_parametro)
   );
 
+CREATE TABLE his_persona (
+	id_persona BIGINT,
+	id_tipo_documento BIGINT,
+	estado_persona BOOLEAN NOT NULL,
+	nombre_uno CHARACTER VARYING NOT NULL,
+	nombre_dos CHARACTER VARYING,
+	apellido_uno CHARACTER VARYING NOT NULL,
+	apellido_dos CHARACTER VARYING,
+	fecha_nacimiento DATE,
+	telefono CHARACTER VARYING,
+	correo_electronico CHARACTER VARYING,
+	direccion CHARACTER VARYING);  
+  
 CREATE TABLE credencial(
-	id_credencial BIGSERIAL,
-	estado_credencial text NOT NULL,
+	id_credencial BIGINT,
+	estado_credencial CHARACTER VARYING NOT NULL,
 	credencial CHARACTER VARYING NOT NULL,
 	fecha_aviso DATE NOT NULL,
 	fecha_caducidad DATE NOT NULL,
@@ -160,6 +173,15 @@ CONSTRAINT fk_curso_persona FOREIGN KEY (id_persona) REFERENCES persona (id_pers
 CONSTRAINT fk_curso_ficha FOREIGN KEY (id_ficha) REFERENCES ficha (id_ficha)
 );
 
+CREATE TABLE his_curso(
+	id_curso BIGINT,
+	id_annio BIGINT,
+	id_trimestre BIGINT,
+	id_rol BIGINT,
+	id_persona BIGINT,
+	id_ficha BIGINT
+);
+
 CREATE TABLE evaluacion(
 	id_evaluacion BIGINT,
 	estado BOOLEAN,
@@ -179,9 +201,75 @@ CREATE TABLE evaluacion_detalle(
 	respuesta BIGINT,
 	CONSTRAINT pk_evaluacion_detalle PRIMARY KEY (id_evaluacion_detalle),
 	CONSTRAINT fk_evaluacion FOREIGN KEY (id_evaluacion) REFERENCES evaluacion(id_evaluacion),
+	CONSTRAINT fk_evaluacion FOREIGN KEY (id_evaluacion) REFERENCES evaluacion(id_evaluacion),
 	CONSTRAINT fk_formulario_evalucion FOREIGN KEY (id_formulario) REFERENCES formulario (id_formulario),
 	CONSTRAINT fk_pregunta_evaluacion FOREIGN KEY (id_pregunta, id_formulario) REFERENCES detalle_formulario(id_formulario, id_pregunta),
 	CONSTRAINT fk_instructor FOREIGN KEY (id_instructor) REFERENCES persona (id_persona),
 	CONSTRAINT fk_aprendiz FOREIGN KEY (id_aprendiz) REFERENCES persona (id_persona),
 	CONSTRAINT fk_respuesta FOREIGN KEY (respuesta) REFERENCES item_respuesta (id_item_respuesta)
+);
+CREATE TABLE his_evaluacion_detalle(
+	id_evaluacion_detalle BIGINT,
+	id_evaluacion BIGINT,
+	id_formulario BIGINT,
+	id_pregunta BIGINT,
+	id_instructor BIGINT,
+	id_aprendiz BIGINT,
+	estado BOOLEAN,
+	respuesta BIGINT
+);
+CREATE TABLE aud_estructura(
+	id_aud_estructura BIGINT,
+	nombre_tabla CHARACTER VARYING NOT NULL,
+	campo_tabla CHARACTER VARYING NOT NULL,
+	tipo_dato CHARACTER VARYING NOT NULL,
+	nombre_campo_aud CHARACTER VARYING NOT NULL,
+	CONSTRAINT pk_aud_estructura PRIMARY KEY (id_aud_estructura)
+);
+CREATE TABLE aud_datos(
+	id_aud_datos BIGINT,
+	fecha date,
+	usuario BIGINT,
+	movimiento BIGINT NOT NULL,
+	campo1 BIGINT,
+	campo2 BIGINT,
+	campo3 BIGINT,
+	campo4 BIGINT,
+	campo5 BIGINT,
+	campo6 BIGINT,
+	campo7 BIGINT,
+	campo8 BIGINT,
+	campo9 BIGINT,
+	campo10 BIGINT,
+	campo11 CHARACTER VARYING,
+	campo12 CHARACTER VARYING,
+	campo13 CHARACTER VARYING,
+	campo14 CHARACTER VARYING,
+	campo15 CHARACTER VARYING,
+	campo16 CHARACTER VARYING,
+	campo17 CHARACTER VARYING,
+	campo18 CHARACTER VARYING,
+	campo19 CHARACTER VARYING,
+	campo20 CHARACTER VARYING,
+	campo21 BOOLEAN,
+	campo22 BOOLEAN,
+	campo23 BOOLEAN,
+	campo24 BOOLEAN,
+	campo25 BOOLEAN,
+	campo26 BOOLEAN,
+	campo27 BOOLEAN,
+	campo28 BOOLEAN,
+	campo29 BOOLEAN,
+	campo30 BOOLEAN,
+	campo31 DATE,
+	campo32 DATE,
+	campo33 DATE,
+	campo34 DATE,
+	campo35 DATE,
+	campo36 DATE,
+	campo37 DATE,
+	campo38 DATE,
+	campo39 DATE,
+	campo40 DATE,
+	CONSTRAINT pk_aud_datos PRIMARY KEY (id_aud_datos)
 );

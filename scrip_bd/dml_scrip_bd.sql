@@ -219,3 +219,6 @@ INSERT INTO public.detalle_formulario(aud_ffecha, aud_cestado, aud_nidusuario, i
 INSERT INTO public.detalle_formulario(aud_ffecha, aud_cestado, aud_nidusuario, id_formulario, id_pregunta, estado) VALUES (now(), 'A', 79569257, 1, 69, true);
 INSERT INTO public.detalle_formulario(aud_ffecha, aud_cestado, aud_nidusuario, id_formulario, id_pregunta, estado) VALUES (now(), 'A', 79569257, 2, 70, true);
 INSERT INTO public.detalle_formulario(aud_ffecha, aud_cestado, aud_nidusuario, id_formulario, id_pregunta, estado) VALUES (now(), 'A', 79569257, 1, 71, true);
+insert into aud_estructura (id_aud_estructura, nombre_tabla, campo_tabla, tipo_dato, nombre_campo_aud ) values (fn_id_tabla('aud_estructura','id_aud_estructura'),'programa', 'id_programa','BIGINT', 'campo1');
+insert into aud_estructura (id_aud_estructura, nombre_tabla, campo_tabla, tipo_dato, nombre_campo_aud ) values (fn_id_tabla('aud_estructura','id_aud_estructura'),'programa', 'nombre_programa','CHARACTER VARYING', 'campo11');
+insert into aud_estructura (id_aud_estructura, nombre_tabla, campo_tabla, tipo_dato, nombre_campo_aud ) values (fn_id_tabla('aud_estructura','id_aud_estructura'),'programa', 'estado_programa','BOOLEAN', 'campo21');    

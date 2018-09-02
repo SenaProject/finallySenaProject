@@ -1,5 +1,5 @@
 <?php
-require "../Models/leer.php";
+ require "../Models/crear.php";
 
 $IdPersona = $_POST["NumDoc"];
 $Apellido1 = $_POST["Apellido1"];
@@ -8,9 +8,12 @@ $Nombres1 = $_POST["Nombres1"];
 $Nombres2 = $_POST["Nombres2"];
 $estado = $_POST["estado"];
 $fnacimiento = $_POST["fnacimiento"];
-$email = $_POST["email"];
 $Tel = $_POST["Tel"];
+$email = $_POST["email"];
 $Dir = $_POST["Dir"];
+$tipo_documento = $_POST["tipodocumento"];
+$Administrador = $_POST["vAdmin"];
+$Rol = $_POST["vRol"];
 //Botones de Crud
   // $BtnMM ="1";
  // $BtnM = $_POST["BtnM"];
@@ -26,5 +29,8 @@ $Dir = $_POST["Dir"];
 // $consultar= new ConsultaPersona();
 // $ver=$consultar->TraePersona($IdPersona, $BtnMM);
 // }
+
+$consultar= new CrearPersona();
+$ver=$consultar->fCrearPersona($IdPersona,$Nombres1,$Nombres2,$Apellido1,$Apellido2,$fnacimiento,$Tel,$email,$Dir,$tipo_documento,$Administrador,$Rol);
 
  ?>

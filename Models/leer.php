@@ -199,6 +199,18 @@ class ConsultaRoles extends Conexion{
           else {return $resultado;}
           $this->conexionBD=null;
   }
+  public function TraeAllRoles(){
+
+          $sql="SELECT r.id_rol, r.Nombre_rol FROM rol r ";
+          $sentencia=$this->conexionBD->prepare($sql);
+          $sentencia->execute();
+          $resultado=$sentencia->fetchAll();
+          $sentencia->closeCursor();
+          if ($resultado ==''){return 'Sin Rol';}
+          else {return $resultado;}
+          $this->conexionBD=null;
+  }
+
 }
 
 
