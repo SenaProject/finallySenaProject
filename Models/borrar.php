@@ -16,4 +16,29 @@ class BorrarPrograma extends Conexion{
     $this->conexionBD=null;
   }
 }
+
+
+
+class BorrarPersona extends Conexion{
+  public function BorrarPersona(){
+    parent::conectar();
+  }
+  public function fBorrarPersona($IdPersona){
+    $sql="DELETE FROM persona_rol WHERE Id_Persona = ".$IdPersona;
+    $sentencia=$this->conexionBD->prepare($sql);
+    $sentencia->execute();
+    $resultado=$sentencia->fetch();
+    $sentencia->closeCursor();
+    $sql="DELETE FROM persona WHERE Id_Persona = ".$IdPersona;
+    // print_r($sql);
+    $sentencia=$this->conexionBD->prepare($sql);
+    $sentencia->execute();
+    $resultado=$sentencia->fetch();
+    $sentencia->closeCursor();
+    return $resultado;
+    $this->conexionBD=null;
+  }
+}
+
+
  ?>

@@ -51,7 +51,7 @@ class ConsultaPersona extends Conexion{
   }
   public function TraeAllPersona(){
 
-    $sql="SELECT  per.id_persona, fn_persona_nom_com(per.id_persona), per.correo_electronico FROM persona per";
+    $sql="SELECT  per.id_persona, fn_persona_nom_com(per.id_persona), per.correo_electronico FROM persona per ORDER BY 1";
     $sentencia=$this->conexionBD->prepare($sql);
     $sentencia->execute();
     $resultado=$sentencia->fetchAll();
@@ -212,6 +212,56 @@ class ConsultaRoles extends Conexion{
   }
 
 }
+class ConsultaAnnio extends Conexion{
+  public function ConsultaAnnio(){
+    parent::conectar();
+  }
+  // public function TraeAnnio($IdParametro){
+  //
+  //         $sql="SELECT r.Nombre_rol, pr.id_persona FROM persona_rol pr inner join rol r on (pr.id_rol = r.id_rol) where pr.id_persona = ".$IdPersona;
+  //         $sentencia=$this->conexionBD->prepare($sql);
+  //         $sentencia->execute();
+  //         $resultado=$sentencia->fetchAll();
+  //         $sentencia->closeCursor();
+  //         if ($resultado ==''){return 'Sin Rol';}
+  //         else {return $resultado;}
+  //         $this->conexionBD=null;
+  // }
+  public function TraeAllAnnio(){
 
+          $sql="SELECT id_parametro, detalle FROM parametro WHERE id_grupo = 3";
+          $sentencia=$this->conexionBD->prepare($sql);
+          $sentencia->execute();
+          $resultado=$sentencia->fetchAll();
+          $sentencia->closeCursor();
+          return $resultado;
+          $this->conexionBD=null;
+  }
 
+}
+class ConsultaTrimestre extends Conexion{
+  public function ConsultaTrimestre(){
+    parent::conectar();
+  }
+  // public function TraeTrimestre($IdParametro){
+  //
+  //         $sql="SELECT r.Nombre_rol, pr.id_persona FROM persona_rol pr inner join rol r on (pr.id_rol = r.id_rol) where pr.id_persona = ".$IdPersona;
+  //         $sentencia=$this->conexionBD->prepare($sql);
+  //         $sentencia->execute();
+  //         $resultado=$sentencia->fetchAll();
+  //         $sentencia->closeCursor();
+  //         if ($resultado ==''){return 'Sin Rol';}
+  //         else {return $resultado;}
+  //         $this->conexionBD=null;
+  // }
+  public function TraeAllTrimestre(){
+          $sql="SELECT id_parametro, detalle FROM parametro WHERE id_grupo = 4";
+          $sentencia=$this->conexionBD->prepare($sql);
+          $sentencia->execute();
+          $resultado=$sentencia->fetchAll();
+          $sentencia->closeCursor();
+          return $resultado;
+          $this->conexionBD=null;
+  }
+}
  ?>

@@ -1,38 +1,46 @@
-<!Autor: Pablo Emilio Garcia>
-<!Fecha: 24/08/2018>
-<!Version:>
+<!DOCTYPE html>
 
-
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<html >
- <link rel="stylesheet" href="css/inicio.css">
 <head>
-<title>Ingreso de Personas</title>
-<div id="DivTitFrm1Ing" >
-	<img id="LogoInst" src="image/sena.jpg">
-	<a id="aTitulo">Ingreso al sistema de Evaluacion de Instructores</a>
-</div>
+	<title>Ingresa de Persona</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/inicio.css" rel="stylesheet" type="text/css"/>
+            
 </head>
-<body id="Byfrm1Ini" style="background-color:WHITE">
-<?php
-echo "<form id='frm1inicio' action='../Controllers/valida_inicio.php' method='POST'>";
-echo "<div id= 'dUsuario'>";
-echo        "<label  for='lUsua'>Usuario:</label>";
-echo	"</div>";
-echo	"<div id='dUsuario'>";
-echo        "<input type='tUsua' id='Usuario' name='Usuario1' value = '79569257' placeholder='Ingrese su usuario'/>";
-echo    "</div><br>";
-echo    "<div id='dPwd'>";
-echo        "<label id= 'LbPwd' for='lPwd'>Contraseña:</label>";
-echo	"</div>";
-echo	"<div id='dPwd'>";
-echo        "<input type='password' id='Pwd' name ='Pwd1' placeholder='Ingrese su contraseña'/>";
-echo    "</div><br>";
-echo    "<div id='BtnFrm1Ini' class='button'>";
-echo        "<button Id='btnIn' type='submit'>Ingresar</button>";
-echo		"<button Id='btnCanc' type='submit'>Cancelar</button>";
-echo    "</div>";
-echo "</form>";
-?>
+
+<body>
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 p-t-85 p-b-20">
+				<form id='frm1inicio' action='../Controllers/valida_inicio.php' method='POST'>
+					<span class="login100-form-title p-b-50">
+                                            <h3>Bienvenido</h3> 
+					</span>
+					<span class="login100-form-avatar">
+						<img src="images/avatar-01_1.jpg" alt="AVATAR">
+					</span>
+
+					<div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate = "Enter username">
+                                            <input class="input100" type="tUsua" name="Usuario1" value="79569257" required="">
+						<span class="focus-input100" data-placeholder=""></span>
+					</div>
+
+					<div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
+                                            <input class="input100" type="password" name="Pwd1" required="">
+						<span class="focus-input100" data-placeholder="Ingrese su contraseña"></span>
+					</div>
+                                    
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn">
+							Ingresar
+						</button>
+					</div>   
+				</form>
+			</div>
+		</div>
+	</div>
+	
+
+	<div id="dropDownSelect1"></div>
+	
 </body>
-</html>

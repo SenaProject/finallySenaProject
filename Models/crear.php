@@ -1,7 +1,7 @@
+<?php
 /*
 crea registros dentro de las tablas
 */
-<?php
 require "conection.php";
 
 
@@ -26,8 +26,8 @@ class CrearPersona extends Conexion{
     parent::conectar();
   }
 
-  public function fCrearPersona($IdPersona,$Nombres1,$Nombres2,$Apellido1,$Apellido2,$fnacimiento,$Tel,$email,$Dir,$tipo_documento,$Administrador,$Rol){
-    $sql="INSERT INTO persona(id_persona, estado_persona, nombre_uno, nombre_dos, apellido_uno, apellido_dos, fecha_nacimiento, telefono, correo_electronico, direccion, id_tipo_documento, ".chr(34)."Adm".chr(34).") VALUES (".$IdPersona.", True,'".$Nombres1."','".$Nombres2."','".$Apellido1."','".$Apellido2."','".$fnacimiento."','".$Tel."','".$email."','".$Dir."',".$tipo_documento.",".$Administrador.")";
+  public function fCrearPersona($IdPersona,$Nombre1,$Nombre2,$Apellido1,$Apellido2,$fnacimiento,$Tel,$email,$Dir,$tipo_documento,$Administrador,$Rol,$ficha){
+    $sql="INSERT INTO persona(id_persona, estado_persona, nombre_uno, nombre_dos, apellido_uno, apellido_dos, fecha_nacimiento, telefono, correo_electronico, direccion, id_tipo_documento, ".chr(34)."Adm".chr(34).") VALUES (".$IdPersona.", True,'".$Nombre1."','".$Nombre2."','".$Apellido1."','".$Apellido2."','".$fnacimiento."','".$Tel."','".$email."','".$Dir."',".$tipo_documento.",".$Administrador.")";
     // print_r($sql);
     $sentencia=$this->conexionBD->prepare($sql);
     $sentencia->execute();
@@ -40,10 +40,14 @@ class CrearPersona extends Conexion{
     $resultado=$sentencia->fetch();
     $sentencia->closeCursor();
 
+    $sql="INSERT INTO ficha_persona_rol (id_persona, id_rol, id_ficha) VALUES (".$IdPersona.",".$Rol.",".$ficha.")";
+    $sentencia=$this->conexionBD->prepare($sql);
+    $sentencia->execute();
+    $resultado=$sentencia->fetch();
+    $sentencia->closeCursor();
+
     return $resultado;
     $this->conexionBD=null;
   }
 }
-
-
  ?>

@@ -106,6 +106,16 @@ CREATE TABLE ficha (
 	CONSTRAINT fk_programa FOREIGN KEY (id_programa) REFERENCES programa (id_programa)
 );
 
+CREATE TABLE ficha_persona_rol(
+	id_ficha BIGINT,
+	id_persona BIGINT,
+	id_rol BIGINT,
+	estado BOOLEAN,
+	CONSTRAINT pk_id_ficha_persona_rol PRIMARY KEY (id_ficha, id_rol, id_persona),
+	CONSTRAINT fk_persona_fpr FOREIGN KEY (id_persona) REFERENCES persona (id_persona),
+	CONSTRAINT fk_rol_fpr FOREIGN KEY (id_rol) REFERENCES rol (id_rol)
+	);
+	
 CREATE TABLE banco_respuesta(
 	id_respuesta BIGINT,
 	descripcion CHARACTER VARYING NOT NULL,

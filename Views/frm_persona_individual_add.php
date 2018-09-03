@@ -29,7 +29,7 @@ $ver4=$consultar4->TraeAllRoles();
 
 <a href ="frm_persona_individual_pl.php">Volver a tras</a>
 <?php
-echo "<form id='frm1' action='../Controllers/valida_persona_ind.php?1' method='post'>";
+echo "<form id='frm1' action='../Controllers/valida_persona_ind.php?valor=CrearPersona' method='post'>";
 echo "<fieldset>";
 echo "    <legend>Nombre de la persona:</legend>";
 echo "<Div id='DivGranDatosBusqueda'>";
@@ -52,9 +52,9 @@ echo "        <input type='Text' id='Apellido2' name='Apellido2' Value=''   plac
 echo "    </div><br>";
 echo "    <div id='DivDatosBusq'>";
 echo "        <label for='Nombre1'>Primer Nombre:</label>";
-echo "        <input type='Text' id='Nombres1' name='Nombres1' Value=''  placeholder = 'Primer Nombre' />";
+echo "        <input type='Text' id='Nombre1' name='Nombre1' Value=''  placeholder = 'Primer Nombre' />";
 echo "        <label for='Nombre2'>Segundo Nombre:</label>";
-echo "        <input type='Text' id='Nombres2' name='Nombres2' Value='' placeholder = 'Segundo Nombre'/>";
+echo "        <input type='Text' id='Nombre2' name='Nombre2' Value='' placeholder = 'Segundo Nombre'/>";
 echo "    </div><br>";
 echo "</fieldset>";
 echo "<fieldset>";
@@ -66,15 +66,6 @@ echo "				  <option value='Nulo'></option>";
 echo "				  <option value='True'>Activo</option>";
 echo "				  <option value='False'>Inactivo</option>";
 echo "				</select>";
-// ficha
-echo "        <label for='nFichaText'>Ficha Numero:</label>";
-// echo "        <label for='nFichaText2'><a href ='frm_en_blanco.php' >Pulse aqui</a></label>";
-echo "				<select name='vFicha' required = 'required'>";
-				               echo "<option value='Nulo' ></option>";
-				        foreach ($ver3 as $valor) {
-                       echo "<option value='".$valor[0]."'>".$valor[0]." - ".$valor[1]."</option>";
-                     }
-echo "				</select>";
 // rol
 echo "        <label for='nFichaText'>Rol Principal:</label>";
 echo "				<select name='vRol' required = 'required'>";
@@ -83,7 +74,27 @@ echo "				<select name='vRol' required = 'required'>";
                        echo "<option value='".$valor[0]."'>".$valor[0]." - ".$valor[1]."</option>";
                      }
 echo "				</select>";
-echo "        <label for='tAdmin'>Estado:</label>";
+// ficha
+echo "        <label for='nFichaText'>Ficha Numero:</label>";
+// echo "        <label for='nFichaText2'><a href ='frm_en_blanco.php' >Pulse aqui</a></label>";
+
+if ($valor[0]==1) {
+echo "				<select name='vFicha' required = 'required'>";
+} else{
+echo "				<select name='vFicha'>";
+}
+
+
+
+
+
+				               echo "<option value='Nulo' ></option>";
+				        foreach ($ver3 as $valor3) {
+                       echo "<option value='".$valor3[0]."'>".$valor3[0]." - ".$valor3[1]."</option>";
+                     }
+echo "				</select>";
+
+echo "        <label for='tAdmin'>Administrador del sistema:</label>";
 echo "				<select name='vAdmin' required = 'required'>";
 echo "          <option value='Nulo' ></option>";
 echo "				  <option value='True'>Si</option>";
