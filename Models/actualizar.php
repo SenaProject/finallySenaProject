@@ -1,5 +1,10 @@
 <?php
 
+//DOCTYPE html , php 
+//Autor: Pablo Emilio Garcia
+//Fecha: 03/09/2018
+//Version: 1.0.0.0	
+
 // $IdPersona = $_POST['NumDoc'];
 // $Apellido1 = $_POST['Apellido1'];
 // $Apellido2 = $_POST['Apellido2'];

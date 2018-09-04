@@ -46,3 +46,6 @@ select pro.nombre_programa, fic.id_ficha, fn_persona_nom_com(per.id_persona), ro
     on (prol.id_persona = per.id_persona)
  inner join rol rol
     on (rol.id_rol = prol.id_rol)	   
+	
+	
+SELECT fpr.id_ficha, per.id_persona, fn_persona_nom_com(per.id_persona) FROM ficha_persona_rol fpr INNER JOIN persona per ON (per.id_persona = fpr.id_persona) WHERE fpr.id_rol = 1 AND fpr.id_ficha = 1298372	

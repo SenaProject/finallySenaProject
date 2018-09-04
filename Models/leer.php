@@ -1,5 +1,9 @@
 
 <?php
+//DOCTYPE html , php
+//Autor: Pablo Emilio Garcia
+//Fecha: 03/09/2018
+//Version: 1.0.0.0
 
 // lee registros dentro de las tablas
 
@@ -61,6 +65,26 @@ class ConsultaPersona extends Conexion{
     return $resultado;
     $this->conexionBD=null;
   }
+  public function TraeAllInstructor(){
+
+    $sql="SELECT  per.id_persona, fn_persona_nom_com(per.id_persona), per.correo_electronico FROM persona per INNER JOIN persona_rol pro on (pro.id_persona= per.id_persona) WHERE pro.id_rol = 2 ORDER BY 1";
+    $sentencia=$this->conexionBD->prepare($sql);
+    $sentencia->execute();
+    $resultado=$sentencia->fetchAll();
+    $sentencia->closeCursor();
+    return $resultado;
+    $this->conexionBD=null;
+  }
+  public function TraeAllAprendices_x_Ficha($idFicha){
+    $sql="SELECT fpr.id_ficha, per.id_persona, fn_persona_nom_com(per.id_persona) FROM ficha_persona_rol fpr INNER JOIN persona per ON (per.id_persona = fpr.id_persona) WHERE fpr.id_rol = 1 AND fpr.id_ficha =". $idFicha;
+    $sentencia=$this->conexionBD->prepare($sql);
+    $sentencia->execute();
+    $resultado=$sentencia->fetchAll();
+    $sentencia->closeCursor();
+    return $resultado;
+    $this->conexionBD=null;
+  }
+
 }
 class ConsultaGrupoPregunta extends Conexion{
   public function ConsultaGrupoPregunta(){
@@ -124,6 +148,7 @@ class ConsultaFicha extends Conexion{
     return $resultado;
     $this->conexionBD=null;
   }
+
 }
 // ConsultaBanRespuesta
 
@@ -216,17 +241,7 @@ class ConsultaAnnio extends Conexion{
   public function ConsultaAnnio(){
     parent::conectar();
   }
-  // public function TraeAnnio($IdParametro){
-  //
-  //         $sql="SELECT r.Nombre_rol, pr.id_persona FROM persona_rol pr inner join rol r on (pr.id_rol = r.id_rol) where pr.id_persona = ".$IdPersona;
-  //         $sentencia=$this->conexionBD->prepare($sql);
-  //         $sentencia->execute();
-  //         $resultado=$sentencia->fetchAll();
-  //         $sentencia->closeCursor();
-  //         if ($resultado ==''){return 'Sin Rol';}
-  //         else {return $resultado;}
-  //         $this->conexionBD=null;
-  // }
+
   public function TraeAllAnnio(){
 
           $sql="SELECT id_parametro, detalle FROM parametro WHERE id_grupo = 3";
@@ -243,17 +258,6 @@ class ConsultaTrimestre extends Conexion{
   public function ConsultaTrimestre(){
     parent::conectar();
   }
-  // public function TraeTrimestre($IdParametro){
-  //
-  //         $sql="SELECT r.Nombre_rol, pr.id_persona FROM persona_rol pr inner join rol r on (pr.id_rol = r.id_rol) where pr.id_persona = ".$IdPersona;
-  //         $sentencia=$this->conexionBD->prepare($sql);
-  //         $sentencia->execute();
-  //         $resultado=$sentencia->fetchAll();
-  //         $sentencia->closeCursor();
-  //         if ($resultado ==''){return 'Sin Rol';}
-  //         else {return $resultado;}
-  //         $this->conexionBD=null;
-  // }
   public function TraeAllTrimestre(){
           $sql="SELECT id_parametro, detalle FROM parametro WHERE id_grupo = 4";
           $sentencia=$this->conexionBD->prepare($sql);

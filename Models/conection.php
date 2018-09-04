@@ -1,4 +1,10 @@
 <?php
+
+//DOCTYPE html , php 
+//Autor: Pablo Emilio Garcia
+//Fecha: 03/07/2018
+//Version: 1.0.0.0	
+
 require "config.php";
 
 class Conexion{
