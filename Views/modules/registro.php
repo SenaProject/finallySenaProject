@@ -13,8 +13,8 @@
 </form>
 
 <?php
-
-$registro = new MvcController();
+require_once "Controllers/registroUsuario.php";
+$registro = new MvcRegistro();
 $registro -> registroUsuarioController();
 
 
@@ -22,6 +22,8 @@ if(isset($_GET["action"])){
 
 	if($_GET["action"] == "ok"){
 
+     	// code...
+		include "Views/modules/loading.php";
 		echo "Registro Exitoso";
 
 	}

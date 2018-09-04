@@ -87,8 +87,8 @@
 
 <body>
 
-<?php include "modules/navegacion.php";
-include "views/modules/loading.php";
+<?php
+include "modules/navegacion.php";
 ?>
 
 
@@ -96,7 +96,7 @@ include "views/modules/loading.php";
 
 <?php
 
-$mvc = new MvcController();
+$mvc = new MvcPageManagement();
 $mvc -> enlacesPaginasController();
 
  ?>
