@@ -68,9 +68,7 @@ $ver3=$consultar3->TraeFicha($ver[0]);
 // echo "        <input type='Text' id='nFicha' name='nFicha' Value='".$ver3[0]."' placeholder = 'Ficha Numero'/>";
 
 echo "        <label for='nFichaText'>Ficha Numero:</label>";
-echo "        <label for='nFichaText2'><a href ='frm_en_blanco.php' >Pulse aqui</a></label>";
-
-
+echo "        <label for='nFichaText2'><a href ='frm_persona_ficha_ver.php?valor=".$ver[0]."&&valor2=".$ver[5]."' >Pulse aqui</a></label>";
 $consultar4= new ConsultaRoles();
 $ver4=$consultar4->TraeRoles($ver[0]);
 echo "        <label for='nFichaText'>Rol(es):</label>";
@@ -92,16 +90,14 @@ echo "        <label for='Tel'>Telefono:</label>";
 echo "        <input type='Text' id='Tel' name='Tel' Value='".$ver[9]."' placeholder = 'Telefono'/>";
 echo "        <label for='Dir'>Direccion:</label>";
 echo "        <input type='Text' id='Dir' name='Dir' Value='".$ver[10]."'  placeholder = 'Dirección' size='60'/>";
-echo "        <label for='TipDoc'>Tipo de Documento:</label>";
-// $consultar2= new ConsultaParametros();
-// $ver2=$consultar2->TraeParametros(0,'tipodocumento');
-// echo "				<select name='tipodocumento' required = 'required'>";
-// 				               echo "<option value='Nulo' ></option>";
-// 				        foreach ($ver2 as $valor) {
-//                       if($valor[0]==$ver[11]){$selec="selected";} else {$selec="";};
-//                        echo "<option value='".$valor[0]."' ".$selec.">".$valor[1]."</option>";
-// 				               }
-// echo "				</select>";
+echo "        <label for='TipDoc'>Administrador del sistema:</label>";
+$consultar5= new ConsultaPersona();
+$ver5=$consultar5->TraePersAdmin($ver[0]);
+echo "				<select name='tipoadmin' required = 'required'>";
+
+if($ver[12]==True) {echo  "<option value='True' selected >Si</option>";} else {echo  "<option value='True' >Si</option>";}
+if($ver[12]==False) {echo "<option value='False' selected >No</option>";} else {echo "<option value='False' >No</option>";};
+echo "				</select>";
 echo "    </div><br>";
 echo "</fieldset>";
 echo "<br>";

@@ -1,10 +1,10 @@
 <?php
-//DOCTYPE html , php 
+//DOCTYPE html , php
 //Autor: Pablo Emilio Garcia
 //Fecha: 02/09/2018
-//Version: 1.0.0.0	
+//Version: 1.0.0.0
 
-require "conection.php";
+require_once "conection.php";
 
 
 class BorrarPrograma extends Conexion{
@@ -29,13 +29,19 @@ class BorrarPersona extends Conexion{
     parent::conectar();
   }
   public function fBorrarPersona($IdPersona){
+    $sql="DELETE FROM ficha_persona_rol WHERE Id_Persona = ".$IdPersona;
+    $sentencia=$this->conexionBD->prepare($sql);
+    $sentencia->execute();
+    $resultado=$sentencia->fetch();
+    $sentencia->closeCursor();
+
     $sql="DELETE FROM persona_rol WHERE Id_Persona = ".$IdPersona;
     $sentencia=$this->conexionBD->prepare($sql);
     $sentencia->execute();
     $resultado=$sentencia->fetch();
     $sentencia->closeCursor();
+
     $sql="DELETE FROM persona WHERE Id_Persona = ".$IdPersona;
-    // print_r($sql);
     $sentencia=$this->conexionBD->prepare($sql);
     $sentencia->execute();
     $resultado=$sentencia->fetch();

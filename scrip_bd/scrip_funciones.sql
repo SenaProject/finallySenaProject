@@ -4,17 +4,17 @@ CREATE OR REPLACE FUNCTION public.fn_parametro_grupo(
     LANGUAGE 'plpgsql'
 
     COST 100
-    VOLATILE 
+    VOLATILE
 AS $BODY$
 
 declare Total BIGINT;
 begin
   Total:=(select distinct id_grupo from public.parametro where grupo = nom_grupo);
-  if Total is null then 
+  if Total is null then
    Total:=(select  max (id_grupo) +1 from public.parametro );
-   if Total is null then 
+   if Total is null then
     Total:= 1;
-   end if;  
+   end if;
   end if;
  return Total;
 end;
@@ -23,8 +23,8 @@ $BODY$;
 
 ALTER FUNCTION public.fn_parametro_grupo(character varying)
     OWNER TO evaplus;
-	
-	
+
+
 /* funcion para id en todas las tablas*/
 
 CREATE OR REPLACE FUNCTION public.fn_id_tabla(
@@ -34,7 +34,7 @@ CREATE OR REPLACE FUNCTION public.fn_id_tabla(
     LANGUAGE 'plpgsql'
 
     COST 100
-    VOLATILE 
+    VOLATILE
 AS $BODY$
 
 declare Total int;
@@ -57,11 +57,11 @@ ALTER FUNCTION public.fn_id_tabla(text, text)
 CREATE OR REPLACE FUNCTION public.fn_persona_nom_com(
 	id_documento bigint)
     RETURNS text
-	
+
     LANGUAGE 'plpgsql'
 
     COST 100
-    VOLATILE 
+    VOLATILE
 AS $BODY$
 
 declare nom_com text;
@@ -80,11 +80,11 @@ ALTER FUNCTION public.fn_persona_nom_com( bigint)
 CREATE OR REPLACE FUNCTION public.fn_persona_iniciales(
 	id_documento bigint)
     RETURNS text
-	
+
     LANGUAGE 'plpgsql'
 
     COST 100
-    VOLATILE 
+    VOLATILE
 AS $BODY$
 
 declare nom_com text;
@@ -98,15 +98,15 @@ $BODY$;
 
 ALTER FUNCTION public.fn_persona_iniciales( bigint)
     OWNER TO evaplus;
-	
+
 CREATE OR REPLACE FUNCTION public.fn_fecha_credencial(
 	tipo_fecha text)
     RETURNS date
-	
+
     LANGUAGE 'plpgsql'
 
     COST 100
-    VOLATILE 
+    VOLATILE
 AS $BODY$
 
 declare vFcaducidad text ;
@@ -128,7 +128,7 @@ vDiaAviso := '80 days';
  if tipo_fecha = 'C' then
 	vFcaducidad :='SELECT CAST(CAST(now() AS DATE) + CAST('||chr(39)||vDiaCaduca||chr(39)||' AS INTERVAL)as date)';
 	execute vFcaducidad into vFcaducidad2;
-	return cast(vFcaducidad2 as date); 
+	return cast(vFcaducidad2 as date);
  end if;
 
  end;
@@ -148,7 +148,7 @@ CREATE OR REPLACE FUNCTION public.fn_credencial(
     LANGUAGE 'plpgsql'
 
     COST 100
-    VOLATILE 
+    VOLATILE
 AS $BODY$
 
 declare vLongitud int;
@@ -176,29 +176,29 @@ begin
 		if i > 1 then
 			vContrasennia := vContrasennia || '-' || vCaracterT ;
 		end if;
-		
+
 	end loop;
 	return vContrasennia;
  end if;
- 
+
  if actividad = 'D' then
-	vNumero := '';  
+	vNumero := '';
 	vContrasennia := '';
 	credencial := credencial || '-';
 	vLongitud := character_length(credencial);
 	for i in 1 .. vLongitud
-	loop	
+	loop
 	vCaracter := substr(credencial, i, 1);
 		if (vCaracter != '-') then
 			vNumero := vNumero || vCaracter ;
-		end if;	
+		end if;
 		if vCaracter = '-' then
 			vNum :=cast(vNumero as int);
 		vNum := vNum-365;
 			vCaracterRec := CHR(vNum);
 			vContrasennia := vContrasennia || vCaracterRec;
 			vNumero := '';
-		end if; 
+		end if;
 	end loop;
 	return vContrasennia;
  end if;
@@ -212,21 +212,21 @@ ALTER FUNCTION public.fn_credencial(text, text)
 
 /*Cambia la contraseña*/
 CREATE OR REPLACE FUNCTION public.fn_insert_credencial(vId_persona bigint, vContrasennia text)
-    RETURNS boolean 
-	
+    RETURNS boolean
+
     LANGUAGE 'plpgsql'
 
     COST 100
-    VOLATILE 
+    VOLATILE
 AS $BODY$
 
 begin
 	update credencial
 	   set estado_credencial = 'I'
 	 where id_persona = vId_persona;
-	   
-	INSERT INTO public.credencial(aud_ffecha, aud_cestado, aud_nidusuario, id_credencial, estado_credencial, credencial, fecha_aviso, fecha_caducidad, id_persona) 
-	                      VALUES (now(), 'A', vId_persona, fn_id_tabla('credencial','id_credencial'), 'A', fn_credencial( vContrasennia, 'E'), fn_fecha_credencial('A'), fn_fecha_credencial('C'), vId_persona);   
+
+	INSERT INTO public.credencial( id_credencial, estado_credencial, credencial, fecha_aviso, fecha_caducidad, id_persona)
+	                      VALUES ( fn_id_tabla('credencial','id_credencial'), 'A', fn_credencial( vContrasennia, 'E'), fn_fecha_credencial('A'), fn_fecha_credencial('C'), vId_persona);   
 	return true;
  end;
 $BODY$;

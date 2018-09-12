@@ -26,6 +26,7 @@ $ver=$consultar->TraeAllPersona();
         <th><a>Id de la persona</a></th>
         <th><a>Nombre Completo</a></th>
         <th><a>Correo Electronico</a></th>
+        <th><a>Fichas</a></th>
         <th><a>Edicion</a></th>
         <th><a>Eliminacion</a></th>
       </tr>
@@ -37,6 +38,7 @@ foreach ($ver as $value) {
 echo        "<td><a>".$value[0]."</a></td>";
 echo        "<td><a>".$value[1]."</a></td>";
 echo        "<td><a>".$value[2]."</a></td>";
+echo        "<td><a href='frm_persona_ficha_ver.php?valor=".$value[0]."&&valor2=".$value[1]."'>Fichas</a></td>";
 echo        "<td><a href='frm_persona_individual_edi.php?valor=".$value[0]."'>Editar</a></td>";
 echo        "<td><a href='../Controllers/valida_persona_ind.php?valor=BorrarPersona&IdPersona=".$value[0]."'>Eliminar</a></td>";  // AQUI VOY
 echo "</tr>";

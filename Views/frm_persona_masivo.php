@@ -12,14 +12,13 @@
 </div>
 </head>
 <body id="Byfrm1Ppl" style="background-color:WHITE">
-<form id="frm1" action="/buscar.php" method="post">
+<form action="../Controllers/valida_persona_ind.php?valor=cargue" method="POST" enctype="multipart/form-data">
 <Div id="DivGranDatosBusqueda">
     <div id="BtnFrm1Ppl" class="button">
-        <input type="file" id="NumDoc" Value="valor" />
+        <input type="file" name="archivo"/>
 		    <button Id="btnM" type="submit">Adicionar</button>
     </div>
 </Div>
 </form>
-
 </body>
 </html>

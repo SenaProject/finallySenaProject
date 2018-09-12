@@ -2,15 +2,11 @@
 <!Autor: Pablo Emilio Garcia>
 <!Fecha: 04/06/2018>
 <!Version: >
-
-
 <html lang="en" dir="ltr">
   <head>
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/frm_principal.css">
     <meta charset="utf-8">
-
     <title>Evaplus +</title>
   </head>
   <body>
@@ -37,8 +33,8 @@ $NomCom = $_GET['valor'];
   echo            "<li><a href='frm_persona_masivo.php' target='iframe_a'>Masivo</a></li>";
   echo            "<li><a target='iframe_a'>Asigna ficha </a>";
   echo          "<ul>";
-  echo    				"<li><a href='#' target='iframe_a'>Uno a Uno</a></li>";
-  echo            "<li><a target='iframe_a'>Masivo</a></li>";
+  echo    				"<li><a href='frm_ficha_asigna.php' target='iframe_a'>Uno a Uno</a></li>";
+  echo            "<li><a href='frm_ficha_asigna_m.php' target='iframe_a'>Masivo</a></li>";
   echo    			"</ul>";
   echo    			"</li>";
   echo          "</ul>";
@@ -46,14 +42,24 @@ $NomCom = $_GET['valor'];
   echo       "<li><a>Programa</a>";
   echo          "<ul>";
   echo            "<li><a href='frm_programa.php' target='iframe_a'>Uno a Uno</a></li>";
-  echo            "<li><a href='' target='iframe_a'>Masivo</a></li>";
+  echo            "<li><a href='frm_programa_masivo.php' target='iframe_a'>Masivo</a></li>";
   echo          "</ul>";
   echo       "</li>";
   echo       "<li><a>Curso</a>";
   echo          "<ul>";
   echo            "<li><a href='frm_curso_ver.php' target='iframe_a'>Ver</a></li>";
-  echo            "<li><a href='frm_curso_asignar.php' target='iframe_a'>Asignar</a></li>";
-  echo            "<li><a href='frm_curso_quitar.php' target='iframe_a'>Quitar</a></li>";
+  echo            "<li><a href='' target='iframe_a'>Asignar</a>";
+  echo          "<ul>";
+  echo            "<li><a href='frm_curso_asignar_ins.php' target='iframe_a'>Instructor</a></li>";
+  echo            "<li><a href='frm_curso_asignar_ficha.php' target='iframe_a'>Ficha</a></li>";
+  echo          "</ul>";
+  echo       "</li>";
+  echo            "<li><a href='frm_curso_quitar.php' target='iframe_a'>Quitar</a>";
+  echo          "<ul>";
+  echo            "<li><a href='frm_curso_quitar_ins.php' target='iframe_a'>Instructor</a></li>";
+  echo            "<li><a href='frm_curso_quitar_ficha.php' target='iframe_a'>Ficha</a></li>";
+  echo          "</ul>";
+  echo            "</li>";
   echo          "</ul>";
   echo       "</li>";
   echo       "<li><a target='iframe_a'>Ficha</a>";
@@ -89,10 +95,16 @@ $NomCom = $_GET['valor'];
   echo        "</li>";
   echo        "<li><a href='frm_listar_encuestas.php' target='iframe_a'>Formulario</a>";
   echo        "<ul>";
-  echo        " <li><a href='frm_aplicar_encuesta.php' target='iframe_a'>Encabezado</a></li>";
-  echo        " <li><a href='frm_aplicar_encuesta.php' target='iframe_a'>Detalle</a></li>";
+  echo        " <li><a href='frm_formulario_maestro.php' target='iframe_a'>Encabezado</a></li>";
+  echo        " <li><a href='frm_formulario_detalle.php' target='iframe_a'>Detalle</a></li>";
   echo        "</ul>";
   echo        "</li>";
+  echo      "</ul>";
+  echo    "</li>";
+  echo		"<li><a>Reportes</a>";
+  echo      "<ul>";
+  echo        "<li><a target='iframe_a'>uno</li>";
+  echo        "<li><a target='iframe_a'>dos</li>";
   echo      "</ul>";
   echo    "</li>";
   echo		"<li><a>Administracion</a>";

@@ -13,6 +13,7 @@ if ($valor=="EditarPersona") {
   $email = $_POST["email"];
   $Dir = $_POST["Dir"];
   $tipo_documento = $_POST["tipodocumento"];
+  $admin = $_POST["tipoadmin"];
   echo "<!DOCTYPE html>";
   echo "<html lang='en' dir='ltr'>";
   echo "  <head>";
@@ -24,14 +25,14 @@ if ($valor=="EditarPersona") {
   echo "  </body>";
   echo "</html>";
 
-  require "../Models/actualizar.php";
+  require_once "../Models/actualizar.php";
 
   $consultar= new ModificarPersona();
-  $ver=$consultar->ModificaPer($IdPersona,$Nombre1,$Nombre2,$Apellido1,$Apellido2, $estado, $fnacimiento, $email, $Tel, $Dir, $tipo_documento);
+  $ver=$consultar->ModificaPer($IdPersona,$Nombre1,$Nombre2,$Apellido1,$Apellido2, $estado, $fnacimiento, $email, $Tel, $Dir, $tipo_documento, $admin);
 }
 
 if ($valor=="CrearPersona") {
-  require "../Models/crear.php";
+  require_once "../Models/crear.php";
   $IdPersona = $_POST["NumDoc"];
   $Apellido1 = $_POST["Apellido1"];
   $Apellido2 = $_POST["Apellido2"];
@@ -63,7 +64,7 @@ echo "</html>";
 }
 if ($valor=='BorrarPersona') {
 $IdPersona = $_GET["IdPersona"];
-  require "../Models/borrar.php";
+  require_once "../Models/borrar.php";
 
 
   $consultar= new BorrarPersona();
@@ -79,4 +80,134 @@ $IdPersona = $_GET["IdPersona"];
   echo "  </body>";
   echo "</html>";
 }
- ?>
+if ($valor=='cargue') {
+require_once "../Models/leer.php";
+$consultar= new ConsultaPersona();
+$consultar2= new ConsultaParametros();
+
+$archivo = $_FILES['archivo']['name'];
+$bandera=0;
+echo "<form class='' action='valida_persona_ind.php?valor=cargueexec&archivo=".$archivo."' method='POST'>";
+echo "<table border='3'>";
+echo    "<tr>";
+echo          "<th>Numero de documento</th>";
+echo          "<th>Tipo de Documento</th>";
+echo          "<th>Primer Nombre</th>";
+echo          "<th>Segundo Nombre</th>";
+echo          "<th>Primer Apellido</th>";
+echo          "<th>Segundo Apellido</th>";
+echo          "<th>Ficha</th>";
+echo          "<th>Fecha de nacimiento</th>";
+echo          "<th>Correo electronico</th>";
+echo          "<th>Telefono</th>";
+echo          "<th>Direccion</th>";
+echo          "<th>Rol</th>";
+echo    "</tr>";
+$file=fopen($archivo,'r') or die("Problemas al abrir el archivo");
+$allfile=fread($file,filesize($archivo));
+// echo $allfile;
+
+$linea=explode(chr(13).chr(10),$allfile);
+for ($i=0; $i < count($linea); $i++) {
+  echo "<tr>";
+  $campo=explode(chr(59),$linea[$i]);
+  for ($x=0; $x < count($campo); $x++) {
+    echo "<td>";
+    if ($x==0) {
+      $ver=$consultar->TraePersona($campo[$x]);
+      if (isset($ver[0])) {
+          echo "<font color='green'><b>".$campo[$x]." </b></font>";
+          // echo $campo[$x]." - ".$ver[0];
+          $bandera=$bandera+1;
+        } else {
+          echo $campo[$x];
+          $bandera=$bandera+0;
+
+        }
+    }elseif ($x==1) {
+      $ver2=$consultar2->TraeParametros($campo[$x],'tipodocumento');
+      if (isset($ver2[0])) {
+          echo $campo[$x]." - ".$ver2[0];
+          $bandera=$bandera+0;
+        } else {
+          echo "<font color='red'><b>".$campo[$x]."</b></font>";
+          $bandera=$bandera+1;
+        }
+    } elseif($x==6) {
+    echo $campo[$x];
+    echo "y";
+  }  else {echo $campo[$x];}
+    if ($x==count($campo)-1) {
+    echo "</tr>";
+  } else {
+    echo "</td>";
+  }
+  }
+}
+echo "<tr>";
+echo "<td colspan='12'>";
+// print_r($bandera);
+if ($bandera<1) {
+  echo "<b>Al dar click en el siguiente boton cargara los anteriores registros al sistema</b>";
+  echo "<input type='submit' name='btnCargar' value='Cargar'>";
+} else {
+  echo "<b>Atencion:</b><br> Por favor validar el archivo en los campos de color <font color='red'><b>rojo</b>. </font><br>Retirara los registros que los documentos esten en <font color='green'><b>verde</b></font>, ya existen, <b>eliminarlos</b> y volver a intentar -  ";
+  echo "<b></b><a href='../Views/frm_persona_masivo.php'>Volver ...</a></b>";
+}
+echo "</td>";
+echo "</tr>";
+echo "</table>";
+echo "</form>";
+}
+
+if ($valor=='cargueexec') {
+  require "../Models/crear.php";
+  $consultar= new CrearPersona();
+
+$IdPersona='';
+$Nombre1='';
+$Nombre2='';
+$Apellido1='';
+$Apellido2='';
+$fnacimiento='';
+$Tel='';
+$email='';
+$Dir='';
+$tipo_documento='';
+$Administrador='False';
+$Rol='';
+$ficha='';
+
+
+$archivo = $_GET["archivo"];
+$file=fopen($archivo,'r') or die("Problemas al abrir el archivo");
+$allfile=fread($file,filesize($archivo));
+$linea=explode(chr(13).chr(10),$allfile);
+for ($i=0; $i < count($linea); $i++) {
+  $campo=explode(chr(59),$linea[$i]);
+  for ($x=0; $x < count($campo); $x++) {
+    if ($x==0) { $IdPersona=$campo[$x];}
+    if ($x==1) { $tipo_documento=$campo[$x];}
+    if ($x==2) { $Nombre1=$campo[$x];}
+    if ($x==3) { $Nombre2=$campo[$x];}
+    if ($x==4) { $Apellido1=$campo[$x];}
+    if ($x==5) { $Apellido2=$campo[$x];}
+    if ($x==6) { $ficha=$campo[$x];}
+    if ($x==7) { $fnacimiento=$campo[$x];}
+    if ($x==8) { $email=$campo[$x];}
+    if ($x==9) { $Tel=$campo[$x];}
+    if ($x==10) { $Dir=$campo[$x];}
+    if ($x==11) { $Rol=$campo[$x];}
+    // echo $campo[$x];
+
+}
+    // echo "NumDoc ".$IdPersona." Nom1 ".$Nombre1." Nom2 ".$Nombre2." Ape1 ".$Apellido1." Ape2 ".$Apellido2." fn ".$fnacimiento." tel ".$Tel." email ".$email." dir ".$Dir." tipodoc ".$tipo_documento." adm ".$Administrador." rol ".$Rol." ficha ".$ficha;
+$ver=$consultar->fCrearPersona($IdPersona,$Nombre1,$Nombre2,$Apellido1,$Apellido2,$fnacimiento,$Tel,$email,$Dir,$tipo_documento,$Administrador,$Rol,$ficha);
+}
+
+// echo "aqui toy";
+
+// print_r($archivo);
+
+}
+?>

@@ -1,11 +1,11 @@
 <?php
 
-//DOCTYPE html , php 
+//DOCTYPE html , php
 //Autor: Pablo Emilio Garcia
 //Fecha: 03/07/2018
-//Version: 1.0.0.0	
+//Version: 1.0.0.0
 
-require "config.php";
+require_once "config.php";
 
 class Conexion{
   protected $conexionBD;

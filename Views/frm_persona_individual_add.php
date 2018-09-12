@@ -1,5 +1,5 @@
 <?php
-require "../Models/leer.php";
+require_once "../Models/leer.php";
 
 $consultar2= new ConsultaParametros();
 $ver2=$consultar2->TraeParametros(0,'tipodocumento');
@@ -35,7 +35,7 @@ echo "    <legend>Nombre de la persona:</legend>";
 echo "<Div id='DivGranDatosBusqueda'>";
 echo "    <div id='DivDatosBusq'>";
 echo "        <label for='NumDoc'>Documento No.:</label>";
-echo "        <input type='Text' id='NumDoc' name='NumDoc' maxlength='20' Value='' required = 'required' placeholder = 'Numero de identificacion'/>";
+echo "        <input type='number' id='NumDoc' name='NumDoc' maxlength='20' Value='' required = 'required' placeholder = 'Numero de identificacion'/>";
 echo "        <label for='TipDoc'>Tipo de Documento:</label>";
 echo "				<select name='tipodocumento' required = 'required'>";
 				               echo "<option value='Nulo'></option>";
@@ -46,13 +46,13 @@ echo "				</select>";
 echo "    </div><br>";
 echo "    <div id='DivDatosBusq'>";
 echo "        <label for='Apellido1'>Primer Apellido</label>";
-echo "        <input type='Text' id='Apellido1' name='Apellido1' Value=''  placeholder = 'Primer Apellido'/>";
+echo "        <input type='Text' id='Apellido1' name='Apellido1' Value=''  placeholder = 'Primer Apellido' required = 'required'/>";
 echo "        <label for='Apellido2'>Segundo Apellido</label>";
 echo "        <input type='Text' id='Apellido2' name='Apellido2' Value=''   placeholder = 'Segundo Apellido'/>";
 echo "    </div><br>";
 echo "    <div id='DivDatosBusq'>";
 echo "        <label for='Nombre1'>Primer Nombre:</label>";
-echo "        <input type='Text' id='Nombre1' name='Nombre1' Value=''  placeholder = 'Primer Nombre' />";
+echo "        <input type='Text' id='Nombre1' name='Nombre1' Value=''  placeholder = 'Primer Nombre' required = 'required'/>";
 echo "        <label for='Nombre2'>Segundo Nombre:</label>";
 echo "        <input type='Text' id='Nombre2' name='Nombre2' Value='' placeholder = 'Segundo Nombre'/>";
 echo "    </div><br>";
@@ -83,11 +83,6 @@ echo "				<select name='vFicha' required = 'required'>";
 } else{
 echo "				<select name='vFicha'>";
 }
-
-
-
-
-
 				               echo "<option value='Nulo' ></option>";
 				        foreach ($ver3 as $valor3) {
                        echo "<option value='".$valor3[0]."'>".$valor3[0]." - ".$valor3[1]."</option>";

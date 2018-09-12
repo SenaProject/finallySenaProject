@@ -5,6 +5,12 @@
     <title></title>
   </head>
   <body>
+<?php
+session_start();
+session_unset();
+session_destroy();
+header("location:inicio.php");  
+ ?>
     <h1>SE HA CERRADO LA SECION DEL USUARIO</h1>
   </body>
 </html>

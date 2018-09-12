@@ -55,6 +55,8 @@ CREATE TABLE persona (
 	telefono CHARACTER VARYING,
 	correo_electronico CHARACTER VARYING,
 	direccion CHARACTER VARYING,
+  id_tipo_documento BIGINT;
+  "Adm" boolean;
 	CHECK (id_persona > 0),
  CONSTRAINT pk_persona PRIMARY KEY (id_persona),
  CONSTRAINT fk_tipo_documento FOREIGN KEY (id_tipo_documento) REFERENCES parametro (id_parametro)
@@ -71,8 +73,8 @@ CREATE TABLE his_persona (
 	fecha_nacimiento DATE,
 	telefono CHARACTER VARYING,
 	correo_electronico CHARACTER VARYING,
-	direccion CHARACTER VARYING);  
-  
+	direccion CHARACTER VARYING);
+
 CREATE TABLE credencial(
 	id_credencial BIGINT,
 	estado_credencial CHARACTER VARYING NOT NULL,
@@ -115,7 +117,7 @@ CREATE TABLE ficha_persona_rol(
 	CONSTRAINT fk_persona_fpr FOREIGN KEY (id_persona) REFERENCES persona (id_persona),
 	CONSTRAINT fk_rol_fpr FOREIGN KEY (id_rol) REFERENCES rol (id_rol)
 	);
-	
+
 CREATE TABLE banco_respuesta(
 	id_respuesta BIGINT,
 	descripcion CHARACTER VARYING NOT NULL,

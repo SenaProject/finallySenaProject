@@ -2,7 +2,7 @@
 
 //DOCTYPE html , php
 //Autor: Pablo Emilio Garcia
-//Fecha: 06/09/2018
+//Fecha: 03/09/2018
 //Version: 1.0.0.0
 
 require "../Models/leer.php";
@@ -49,9 +49,9 @@ $ver5=$consultar5->TraeAllInstructor();
 
   </head>
   <body>
-    <h1>VER CURSO POR FICHA</h1>
+    <h1>ASIGNACION DE FICHA</h1>
 
-    <form class="" action="../Controllers/validar_curso.php?valor=ver" method="post">
+    <form class="" action="../Controllers/validar_curso.php?valor=asignarficha" method="POST">
       <label for="lannio">Año:</label>
       <select name="sAnnio">
 
@@ -92,36 +92,8 @@ echo        "<option value='".$valor4[0]."'>".$valor4[0]." - ".$valor4[1]."</opt
       </select>
       <br>
       <br>
-      <input type="submit" name="BtnConsultar" value="Consultar">
-    </form>
-
-
-
-<!-- <table>
-  <tr>
-    <th>Numero Documento</th>
-    <th>Nombre</th>
-    <th>Seleccionado</th>
-  </tr>
-<?php
-// foreach ($ver5 as $valor5) {
-// echo "<tr>";
-// echo "<td>";
-// echo    $valor5[0];
-// echo "</td>";
-// echo "<td>";
-// echo    $valor5[1];
-// echo "</td>";
-// echo "<td>";
-// echo "<input type='checkbox' name='instructores' value='".$valor5[0]."'>";
-// echo "</td>";
-// echo "</tr>";
-// }
-?>
-</table> -->
-
-
       <br>
-
+      <input type="submit" name="BtnGuardar" value="Guardar">
+    </form>
   </body>
 </html>

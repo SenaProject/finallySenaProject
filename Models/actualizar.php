@@ -1,9 +1,9 @@
 <?php
 
-//DOCTYPE html , php 
+//DOCTYPE html , php
 //Autor: Pablo Emilio Garcia
 //Fecha: 03/09/2018
-//Version: 1.0.0.0	
+//Version: 1.0.0.0
 
 // $IdPersona = $_POST['NumDoc'];
 // $Apellido1 = $_POST['Apellido1'];
@@ -25,12 +25,12 @@ class ModificarPersona extends Conexion{
   public function ModificarPersona(){
     parent::conectar();
   }
-  public function ModificaPer($IdPersona,$Nombre1,$Nombre2,$Apellido1,$Apellido2, $estado, $fnacimiento, $email, $Tel, $Dir, $tipo_documento ){
+  public function ModificaPer($IdPersona,$Nombre1,$Nombre2,$Apellido1,$Apellido2, $estado, $fnacimiento, $email, $Tel, $Dir, $tipo_documento, $admin ){
 // $IdPersona,$Nombre1,$Nombre2,$Apellido1,$Apellido2, $estado, $fnacimiento, $email, $Tel, $Dir, $tipo_documento
-     $sql="UPDATE persona SET  estado_persona=".$estado.", nombre_uno='".$Nombre1."', nombre_dos='".$Nombre2."', apellido_uno='".$Apellido1."', apellido_dos='".$Apellido2."', fecha_nacimiento='".$fnacimiento."', telefono='".$Tel."', correo_electronico='".$email."', direccion='".$Dir."',id_tipo_documento=".$tipo_documento." WHERE id_persona=".$IdPersona;
+     $sql="UPDATE persona SET  estado_persona=".$estado.", nombre_uno='".$Nombre1."', nombre_dos='".$Nombre2."', apellido_uno='".$Apellido1."', apellido_dos='".$Apellido2."', fecha_nacimiento='".$fnacimiento."', telefono='".$Tel."', correo_electronico='".$email."', direccion='".$Dir."',id_tipo_documento=".$tipo_documento.",".chr(34)."Adm".chr(34)."= ".$admin." WHERE id_persona=".$IdPersona;
 //
 //
-    print_r($sql);
+    // print_r($sql);
     // SELECT per.id_persona, per.nombre_uno, per.nombre_dos, per.apellido_uno, per.apellido_dos, fn_persona_nom_com(per.id_persona), per.estado_persona, per.fecha_nacimiento, per.correo_electronico, per.telefono, per.direccion FROM persona per WHERE per.id_persona = " . $IdPersona;
     $sentencia=$this->conexionBD->prepare($sql);
     $sentencia->execute();

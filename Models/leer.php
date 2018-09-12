@@ -7,7 +7,7 @@
 
 // lee registros dentro de las tablas
 
-require "conection.php";
+require_once "conection.php";
 
 class ConsultaUsuario extends Conexion{
   public function ConsultaUsuario(){
@@ -43,12 +43,13 @@ class ConsultaPersona extends Conexion{
   }
   public function TraePersona($IdPersona){
 
-    $sql="SELECT per.id_persona, per.nombre_uno, per.nombre_dos, per.apellido_uno, per.apellido_dos, fn_persona_nom_com(per.id_persona), per.estado_persona, per.fecha_nacimiento, per.correo_electronico, per.telefono, per.direccion, per.id_tipo_documento FROM persona per WHERE per.id_persona = " . $IdPersona;
+    $sql="SELECT per.id_persona, per.nombre_uno, per.nombre_dos, per.apellido_uno, per.apellido_dos, fn_persona_nom_com(per.id_persona), per.estado_persona, per.fecha_nacimiento, per.correo_electronico, per.telefono, per.direccion, per.id_tipo_documento, per.".chr(34)."Adm".chr(34)." FROM persona per WHERE per.id_persona = " . $IdPersona;
+    // print_r($sql);
     $sentencia=$this->conexionBD->prepare($sql);
     $sentencia->execute();
     $resultado=$sentencia->fetch();
     $sentencia->closeCursor();
-    //print_r($sentencia);
+    // print_r($sentencia);
     //print_r($resultado[0]);
     return $resultado;
     $this->conexionBD=null;
@@ -84,7 +85,47 @@ class ConsultaPersona extends Conexion{
     return $resultado;
     $this->conexionBD=null;
   }
+  public function TraePersAdmin($IdPersonaAdm){
+    $sql="SELECT per.".chr(34)."Adm".chr(34)." FROM persona per  WHERE per.Id_persona = ". $IdPersonaAdm;
+    $sentencia=$this->conexionBD->prepare($sql);
+    // print_r($sentencia);
+    $sentencia->execute();
+    $resultado=$sentencia->fetchAll();
+    $sentencia->closeCursor();
+    return $resultado;
+    $this->conexionBD=null;
+  }
+  public function TraePersFichaRolAll($IdPersFR){
+    $sql="SELECT fpr.id_ficha, pro.nombre_programa, rol.nombre_rol FROM ficha_persona_rol fpr INNER JOIN ficha fic ON (fic.id_ficha = fpr.id_ficha) INNER JOIN programa pro ON (pro.id_programa = fic.id_programa) INNER JOIN rol rol ON (rol.id_rol = fpr.id_rol) WHERE fpr.id_persona =".$IdPersFR;
+    $sentencia=$this->conexionBD->prepare($sql);
+     // print_r($sentencia);
+    $sentencia->execute();
+    $resultado=$sentencia->fetchAll();
+    $sentencia->closeCursor();
+    return $resultado;
+    $this->conexionBD=null;
+  }
 
+  public function TraePersRol($IdPersFR){
+    $sql="SELECT pro.id_persona, pro.id_rol, rol.nombre_rol FROM persona_rol pro INNER JOIN rol rol ON (rol.id_rol = pro.id_rol) WHERE pro.id_persona =".$IdPersFR;
+    $sentencia=$this->conexionBD->prepare($sql);
+     // print_r($sentencia);
+    $sentencia->execute();
+    $resultado=$sentencia->fetchAll();
+    $sentencia->closeCursor();
+    return $resultado;
+    $this->conexionBD=null;
+  }
+  public function TraePersRolxPxR($IdPersFR,$Rol){
+    $sql="SELECT pro.id_persona, pro.id_rol, rol.nombre_rol FROM persona_rol pro INNER JOIN rol rol ON (rol.id_rol = pro.id_rol) WHERE pro.id_persona =".$IdPersFR." and pro.id_rol =".$Rol;
+    $sentencia=$this->conexionBD->prepare($sql);
+     // print_r($sentencia);
+    $sentencia->execute();
+    $resultado=$sentencia->fetchAll();
+    $sentencia->closeCursor();
+    return $resultado;
+    $this->conexionBD=null;
+  }
 }
 class ConsultaGrupoPregunta extends Conexion{
   public function ConsultaGrupoPregunta(){
@@ -131,7 +172,7 @@ class ConsultaFicha extends Conexion{
     parent::conectar();
   }
   public function TraeFicha($NumFicha){
-    $sql="SELECT fi.id_ficha FROM ficha fi where fi.id_ficha = ".$NumFicha;
+    $sql="SELECT fi.id_ficha, pr.nombre_programa FROM ficha fi inner join programa pr on (pr.id_programa = fi.id_programa) where fi.id_ficha = ".$NumFicha;
     $sentencia=$this->conexionBD->prepare($sql);
     $sentencia->execute();
     $resultado=$sentencia->fetch();
@@ -201,6 +242,10 @@ class ConsultaParametros extends Conexion{
 
     } else {
       // $sql="SELECT bp.id_pregunta, bp.descripcion, gp.descripcion FROM banco_pregunta bp INNER JOIN grupo_pregunta gp ON(gp.id_grupo = bp.id_grupo)";
+      $sql="SELECT par.detalle FROM parametro par WHERE par.id_parametro =".$IdParametro. "and par.grupo = '".$Grupo."'";
+      $sentencia=$this->conexionBD->prepare($sql);
+      $sentencia->execute();
+      $resultado=$sentencia->fetch();
     }
     $sentencia->closeCursor();
     return $resultado;
@@ -268,4 +313,78 @@ class ConsultaTrimestre extends Conexion{
           $this->conexionBD=null;
   }
 }
+class ConsultarCurso extends Conexion{
+  public function ConsultarCurso(){
+    parent::conectar();
+  }
+  // public function ConsultarCurso(){
+  //         $sql="SELECT fn_persona_nom_com(per.id_persona), rol.nombre_rol, annio.detalle, trim.detalle, cur.id_ficha FROM curso cur INNER JOIN persona per ON (per.id_persona = cur.id_persona) INNER JOIN parametro annio ON (annio.id_parametro = cur.id_annio) INNER JOIN parametro trim ON (trim.id_parametro = cur.id_trimestre) INNER JOIN rol rol ON (rol.id_rol = cur.id_rol)";
+  //         $sentencia=$this->conexionBD->prepare($sql);
+  //         $sentencia->execute();
+  //         $resultado=$sentencia->fetchAll();
+  //         $sentencia->closeCursor();
+  //         return $resultado;
+  //         $this->conexionBD=null;
+  // }
+  public function ConsultarCursoATF($annio, $trimestre, $ficha){
+// Para realizar la consulta de un curso por los paramtros annio, trimestre y ficha.
+          $sql="SELECT fn_persona_nom_com(cur.id_persona), ro.nombre_rol FROM curso cur INNER JOIN rol ro ON (ro.id_rol = cur.id_rol) WHERE cur.id_annio = ".$annio." and cur.id_trimestre = ".$trimestre." and cur.id_ficha = ".$ficha." order by 1";
+          $sentencia=$this->conexionBD->prepare($sql);
+          $sentencia->execute();
+          $resultado=$sentencia->fetchAll();
+          $sentencia->closeCursor();
+          return $resultado;
+          $this->conexionBD=null;
+  }
+  public function ConsultarInsAsigCurso($annio, $trimestre, $ficha){
+// Para realizar la consulta de un curso por los paramtros annio, trimestre y ficha.
+          $sql="SELECT fn_persona_nom_com(cur.id_persona), ro.nombre_rol FROM curso cur INNER JOIN rol ro ON (ro.id_rol = cur.id_rol) WHERE cur.id_annio = ".$annio." and cur.id_trimestre = ".$trimestre." and cur.id_ficha = ".$ficha." and cur.id_rol = 2 order by 1";
+          $sentencia=$this->conexionBD->prepare($sql);
+          $sentencia->execute();
+          $resultado=$sentencia->fetchAll();
+          $sentencia->closeCursor();
+          return $resultado;
+          $this->conexionBD=null;
+  }
+
+
+}
+class ConsultarFormulario extends Conexion{
+  public function ConsultarFormulario(){
+    parent::conectar();
+  }
+  public function ConsultaForm(){
+// Para realizar la consulta de las plantillas existentes .
+          $sql="SELECT id_formulario, id_pregunta FROM detalle_formulario";
+          $sentencia=$this->conexionBD->prepare($sql);
+          $sentencia->execute();
+          $resultado=$sentencia->fetchAll();
+          $sentencia->closeCursor();
+          return $resultado;
+          $this->conexionBD=null;
+  }
+  public function Consulta_x_Form($idFormulario){
+// Para realizar la consulta de un curso por los paramtros annio, trimestre y ficha.
+          $sql="SELECT id_formulario, detalle FROM detalle_formulario WHERE id_formulario=".$idFormulario;
+          $sentencia=$this->conexionBD->prepare($sql);
+          $sentencia->execute();
+          $resultado=$sentencia->fetchAll();
+          $sentencia->closeCursor();
+          return $resultado;
+          $this->conexionBD=null;
+  }
+  public function ConsultaFormM(){
+// Para realizar la consulta de un curso por los paramtros annio, trimestre y ficha.
+          $sql="SELECT id_formulario, descripcion FROM formulario";
+          $sentencia=$this->conexionBD->prepare($sql);
+          $sentencia->execute();
+          $resultado=$sentencia->fetchAll();
+          $sentencia->closeCursor();
+          return $resultado;
+          $this->conexionBD=null;
+  }
+
+
+}
+
  ?>
