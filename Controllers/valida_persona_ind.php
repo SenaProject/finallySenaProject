@@ -82,11 +82,13 @@ $IdPersona = $_GET["IdPersona"];
 }
 if ($valor=='cargue') {
 require_once "../Models/leer.php";
+$control = 0;
 $consultar= new ConsultaPersona();
 $consultar2= new ConsultaParametros();
-
+$consultar3= new ConsultaRol();
+$bandera =0;
 $archivo = $_FILES['archivo']['name'];
-$bandera=0;
+// $ver = 0;
 echo "<form class='' action='valida_persona_ind.php?valor=cargueexec&archivo=".$archivo."' method='POST'>";
 echo "<table border='3'>";
 echo    "<tr>";
@@ -105,48 +107,60 @@ echo          "<th>Rol</th>";
 echo    "</tr>";
 $file=fopen($archivo,'r') or die("Problemas al abrir el archivo");
 $allfile=fread($file,filesize($archivo));
-// echo $allfile;
+
 
 $linea=explode(chr(13).chr(10),$allfile);
 for ($i=0; $i < count($linea); $i++) {
   echo "<tr>";
   $campo=explode(chr(59),$linea[$i]);
+  print_r($campo[0]);
   for ($x=0; $x < count($campo); $x++) {
     echo "<td>";
     if ($x==0) {
-      $ver=$consultar->TraePersona($campo[$x]);
-      if (isset($ver[0])) {
-          echo "<font color='green'><b>".$campo[$x]." </b></font>";
-          // echo $campo[$x]." - ".$ver[0];
-          $bandera=$bandera+1;
-        } else {
+      $ver= 0;
+      print_r($campo[$x]);
+      $ver=$consultar->ExistePersona($campo[$x]);
+      print_r($ver);
+        if ($ver[0] == 0) {
           echo $campo[$x];
           $bandera=$bandera+0;
-
+        } else {
+          echo "<font color='green'><b>".$campo[$x]." </b></font>";
+          $bandera=$bandera+1;
         }
+        // Tipo de documento
     }elseif ($x==1) {
       $ver2=$consultar2->TraeParametros($campo[$x],'tipodocumento');
-      if (isset($ver2[0])) {
+      if ($ver2[0]) {
           echo $campo[$x]." - ".$ver2[0];
           $bandera=$bandera+0;
         } else {
           echo "<font color='red'><b>".$campo[$x]."</b></font>";
           $bandera=$bandera+1;
         }
+        // ficha
     } elseif($x==6) {
     echo $campo[$x];
     echo "y";
-  }  else {echo $campo[$x];}
+    // Rol
+  }  elseif($x==11) {
+      $ver3=$consultar3->TraeRol($campo[$x]);
+      echo $campo[$x]." - ".$ver3[1];
+
+      }
+      else {
+        echo $campo[$x];
+      }
     if ($x==count($campo)-1) {
     echo "</tr>";
   } else {
     echo "</td>";
   }
-  }
+}// hasta aqui
 }
 echo "<tr>";
 echo "<td colspan='12'>";
-// print_r($bandera);
+
 if ($bandera<1) {
   echo "<b>Al dar click en el siguiente boton cargara los anteriores registros al sistema</b>";
   echo "<input type='submit' name='btnCargar' value='Cargar'>";
@@ -158,6 +172,7 @@ echo "</td>";
 echo "</tr>";
 echo "</table>";
 echo "</form>";
+
 }
 
 if ($valor=='cargueexec') {

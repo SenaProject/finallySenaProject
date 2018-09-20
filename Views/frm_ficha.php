@@ -13,11 +13,11 @@ $ver=$consultar->TraeFichaAll();
     <link rel="stylesheet" href="css/frm_persona_individual_pl.css">
     <title>Grupo de Preguntas</title>
 <body>
-        <h2>FICHAS</h2></h2>
+        <h2>Ficha</h2></h2>
         <br>
         <br>
         <br>
-        <a href="frm_grupo_preguntas_add.php">Adicionar nuevo registro</a>
+        <a href="frm_ficha_add.php">Adicionar nuevo registro</a>
         <br>
         <br>
         <br>

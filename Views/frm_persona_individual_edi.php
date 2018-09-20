@@ -57,10 +57,12 @@ echo "    <div id='DivDatosBusq'>";
 echo "        <label for='Estado'>Estado:</label>";
 echo "				<select name='estado' required = 'required'>";
 echo "				  <option value='Nulo' ></option>";
-                  if ($ver[6] == True){echo "<option value='True' selected>Activo</option>";}
-                     else {echo "<option value='False'>Inactivo</option>";};
-                  if ($ver[6] == False){echo "<option value='Falso' selected>Inactivo</option>";}
-                     else {echo "<option value='True'>Activo</option>";};
+                  if ($ver[6] == True){echo "<option value='True' selected>Activo</option>";
+                                       echo "<option value='False'>Inactivo</option>";
+                      }
+                     else {echo "<option value='False' selected>Inactivo</option>";
+                           echo "<option value='True'>Activo</option>";
+                     };
 echo "				</select>";
 
 $consultar3= new ConsultaFicha();

@@ -1,8 +1,8 @@
 <?php
-require "../Models/leer.php";
+require_once "../Models/leer.php";
 
-$consultar= new ConsultarFormularioM();
-$ver=$consultar->TraeFormularioMall();
+$consultar= new ConsultaEvaluacion();
+$ver=$consultar->TraeMaestroEvaluacionAll();
 // var_dump ($ver);
 ?>
 
@@ -13,20 +13,20 @@ $ver=$consultar->TraeFormularioMall();
     <link rel="stylesheet" href="css/frm_persona_individual_pl.css">
     <title>Listado de Personas</title>
 <body>
-        <h1>Formulario</h1>
+        <h1>Administracion de evaluacion</h1>
         <br>
         <br>
         <br>
-        <h3><a href="frm_formulario_maestro_add.php?valor=nuevomaestro">Adicionar nuevo registro</a></h3>
+        <h3><a href="frm_evaluar_adm_add.php?valor=nuevomaestro">Adicionar nueva evaluación</a></h3>
         <br>
         <br>
         <br>
     <table >
       <tr>
-        <th><a>Id de formulario</a></th>
-        <th><a>Descripcion</a></th>
+        <th><a>Id Evaluacion</a></th>
+        <th><a>Fecha Inicial</a></th>
+        <th><a>Fecha Final</a></th>
         <th><a>Detalle</a></th>
-        <th><a>Edicion</a></th>
         <th><a>Eliminacion</a></th>
       </tr>
       <tr>
@@ -35,9 +35,9 @@ $ver=$consultar->TraeFormularioMall();
             // code...
             // var_dump ($value);
           echo        "<td><a>".$value[0]."</a></td>";
-          echo        "<td><a>".$value[1]."</a></td>";
-          echo        "<td><a href='frm_formulario_detalle.php?valor=".$value[0]."'>Detalle de: ".$value[1]."</a></td>";
-          echo        "<td><a href='frm_formulario_maestro_edi.php?valor=".$value[0]."'>Editar</a></td>";
+          echo        "<td><a>".$value[2]."</a></td>";
+          echo        "<td><a>".$value[3]."</a></td>";
+          echo        "<td><a href='frm_evaluacion_detalle.php?valor=".$value[0]."'>Asignar:</a></td>";
           echo        "<td><a href='../Controllers/valida_formulario.php?valor=BorrarMaestro&IdFormulario=".$value[0]."'>Eliminar</a></td>";  // AQUI VOY
           echo "</tr>";
 }

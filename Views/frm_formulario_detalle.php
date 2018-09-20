@@ -1,56 +1,72 @@
+<?php
+$IdFormulario = $_GET['valor'];
+require_once "../Models/leer.php";
+
+$consultar= new ConsultarFormularioD();
+$ver=$consultar->TraeFormularioDall($IdFormulario);
+$consultar1= new ConsultarFormularioM();
+$ver1=$consultar1->TraeFormularioM($IdFormulario);
+$consultar2= new ConsultaPregunta();
+$ver2=$consultar2->TraeGrupoPreguntas();
+
+// var_dump ($ver);
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="css/frm_persona_individual_pl.css">
     <title></title>
+<body>
+        <h1>Formulario detalle</h1>
+        <h3><?php echo "Formulario No.: ".$ver1[1]; ?> </h3>
+        <br>
+        <h3>De cual grupo desea adicionar pregunta </h3>
+        <br>
+
+
+        <?php
+        echo "<form class='' action='frm_formulario_detalle_add.php?valor=nuevodetalle&formulario=$IdFormulario' method='POST'>";
+            echo "<select class='' name='sGrupoPreguntas' >";
+            echo "<option value='0' ></option>";
+            foreach ($ver2 as $value2){
+            echo "<option value='".$value2[0]."'>".$value2[0]." - ".$value2[1]."</option>";
+            }
+            echo "</select>";
+            echo "<br><br>";
+            echo "<input type='submit' name='BtnAdicion' value='Adicionar nuevo registro'>";
+        echo "</form>";
+            ?>
+
+        <br>
+        <br>
+        <h3><a href="frm_formulario_maestro.php"> volver </a></h3>
+    <table >
+      <tr>
+        <th><a>Id Grupo</a></th>
+        <th><a>Nombre Grupo</a></th>
+        <th><a>Id Pregunta</a></th>
+        <th><a>Descripcion</a></th>
+        <!-- <th><a>Edicion</a></th> -->
+        <th><a>Eliminacion</a></th>
+      </tr>
+      <tr>
+        <?php
+          foreach ($ver as $value) {
+            // code...
+            // var_dump ($value);
+          echo        "<td><a>".$value[2]."</a></td>";
+          echo        "<td><a>".$value[3]."</a></td>";
+          echo        "<td><a>".$value[4]."</a></td>";
+          echo        "<td><a>".$value[5]."</a></td>";
+          // echo        "<td><a href='frm_formulario_maestro_edi.php?valor=".$value[0]."'>Editar</a></td>";
+          echo        "<td><a href='../Controllers/valida_formulario.php?valor=BorrarMaestro&IdFormulario=".$value[0]."'>Eliminar</a></td>";  // AQUI VOY
+          echo "</tr>";
+}
+         ?>
+    </table>
+
   </head>
-  <body>
-    <form class="" action="frm_formulario_detalle.php?valor=detalle" method="post">
-    <label for="lFicha">Formulario: </label>
-    <select name="sFicha">
-      Formulario No.:
-      <!-- lista desplega con los formularios activos
-      Consulta_x_Form
-      target='iframe_dte'
-      -->
-      <?php
-      require_once "../Models/leer.php";
-
-      $consultar= new ConsultarFormulario();
-      $ver=$consultar->ConsultaFormM();
-
-      echo        "<option value='Nulo'></option>";
-      foreach ($ver as $valor) {
-      echo        "<option value='".$valor[0]."'>".$valor[0]." - ".$valor[1]."</option>";
-      }
-      ?>
-
-    </select>
-    <input type="submit" name="BtnTraer" value="Recargar">
-    </form>
-    <?php
-    // print_r($_GET['valor']);
-// if (isset($_GET['valor']=="Nulo")) {
-//   echo "por aqui paso";
-// }
-// elseif ($_GET['valor']=='detalle') {
-//
-//
-//
-// echo "<table border=4>";
-// echo "  <tr>";
-// echo "    <th>Numero Pregunta</th>";
-// echo "    <th>Pregunta</th>";
-// echo "  </tr>";
-// echo "  <tr>";
-// echo "    <td></td>";
-// echo "    <td></td>";
-// echo "  </tr>";
-// echo "</table>";
-// }
-     ?>
-    <!-- <div class="">
-      <iframe height="400px" width="95%" src="" name="iframe_dte"></iframe>
-    </div> -->
   </body>
 </html>

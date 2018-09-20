@@ -24,6 +24,7 @@ echo "<h3>Nombre:".$NombreCompleto."</h3>";
 
 
  ?>
+ <h3><a href="frm_persona_individual_pl.php">Volver ...</a></h3>
     <table>
       <tr>
         <th>Fichas ligadas a la persona</th>

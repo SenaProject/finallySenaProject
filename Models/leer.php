@@ -8,7 +8,7 @@
 // lee registros dentro de las tablas
 
 require_once "conection.php";
-
+$IdPersona = 0;
 class ConsultaUsuario extends Conexion{
   public function ConsultaUsuario(){
     parent::conectar();
@@ -38,12 +38,14 @@ class ConsultaUsuario extends Conexion{
 }
 
 class ConsultaPersona extends Conexion{
+
   public function Consultapersona(){
     parent::conectar();
   }
+
   public function TraePersona($IdPersona){
 
-    $sql="SELECT per.id_persona, per.nombre_uno, per.nombre_dos, per.apellido_uno, per.apellido_dos, fn_persona_nom_com(per.id_persona), per.estado_persona, per.fecha_nacimiento, per.correo_electronico, per.telefono, per.direccion, per.id_tipo_documento, per.".chr(34)."Adm".chr(34)." FROM persona per WHERE per.id_persona = " . $IdPersona;
+    $sql="SELECT per.id_persona, per.nombre_uno, per.nombre_dos, per.apellido_uno, per.apellido_dos, fn_persona_nom_com(per.id_persona), per.estado_persona, per.fecha_nacimiento, per.correo_electronico, per.telefono, per.direccion, per.id_tipo_documento, per.".chr(34)."Adm".chr(34)." FROM persona per WHERE per.id_persona = ".$IdPersona;
     // print_r($sql);
     $sentencia=$this->conexionBD->prepare($sql);
     $sentencia->execute();
@@ -54,6 +56,44 @@ class ConsultaPersona extends Conexion{
     return $resultado;
     $this->conexionBD=null;
   }
+  public function ExistePersona($IdPersona){
+    try {
+      // $resultado = 0;
+      // print_r($IdPersona);
+      // settype($resultado,'integer');
+
+      // desde aqui
+      if (is_null($IdPersona)) {
+          $IdPersona = -1;
+          }
+      $sql="SELECT count(id_persona) FROM persona WHERE id_persona = ".$IdPersona;
+      // print_r($sql);
+      $sentencia=$this->conexionBD->prepare($sql);
+      $sentencia->execute();
+      $resultado=$sentencia->fetchall();
+      $sentencia->closeCursor();
+      // print_r($sentencia);
+      // print_r($resultado[0]);
+      return $resultado;
+      $this->conexionBD=null;
+    //
+    } catch (\Exception $e) {
+      return 0;
+    }
+
+    //
+    // $sql="SELECT count(id_persona) FROM persona WHERE id_persona =".$IdPersona;
+    // // print_r($sql);
+    // $sentencia=$this->conexionBD->prepare($sql);
+    // $sentencia->execute();
+    // $resultado=$sentencia->fetch();
+    // $sentencia->closeCursor();
+    // // print_r($sentencia);
+    // //print_r($resultado[0]);
+    // return $resultado;
+    // $this->conexionBD=null;
+  }
+
   public function TraeAllPersona(){
 
     $sql="SELECT  per.id_persona, fn_persona_nom_com(per.id_persona), per.correo_electronico FROM persona per ORDER BY 1";
@@ -221,6 +261,25 @@ class ConsultaPregunta extends Conexion{
     return $resultado;
     $this->conexionBD=null;
   }
+
+  public function TraePreguntasLibres($IdFormulario,$IdGrupo){
+    $sql="SELECT bp.id_pregunta, bp.descripcion, gp.descripcion FROM banco_pregunta bp INNER JOIN grupo_pregunta gp ON(gp.id_grupo = bp.id_grupo) WHERE bp.id_pregunta not in (SELECT id_pregunta FROM detalle_formulario WHERE id_formulario = ".$IdFormulario.") AND gp.id_grupo = ".$IdGrupo." ORDER BY 3,2";
+    $sentencia=$this->conexionBD->prepare($sql);
+    $sentencia->execute();
+    $resultado=$sentencia->fetchAll();
+    $sentencia->closeCursor();
+    return $resultado;
+    $this->conexionBD=null;
+  }
+  public function TraeGrupoPreguntas(){
+    $sql="SELECT gp.id_grupo, gp.descripcion FROM grupo_pregunta gp";
+    $sentencia=$this->conexionBD->prepare($sql);
+    $sentencia->execute();
+    $resultado=$sentencia->fetchAll();
+    $sentencia->closeCursor();
+    return $resultado;
+    $this->conexionBD=null;
+  }
 }
 
 class ConsultaParametros extends Conexion{
@@ -349,32 +408,12 @@ class ConsultarCurso extends Conexion{
 
 
 }
-class ConsultarFormulario extends Conexion{
-  public function ConsultarFormulario(){
+class ConsultarFormularioM extends Conexion{
+  public function ConsultarFormularioM(){
     parent::conectar();
   }
-  public function ConsultaForm(){
-// Para realizar la consulta de las plantillas existentes .
-          $sql="SELECT id_formulario, id_pregunta FROM detalle_formulario";
-          $sentencia=$this->conexionBD->prepare($sql);
-          $sentencia->execute();
-          $resultado=$sentencia->fetchAll();
-          $sentencia->closeCursor();
-          return $resultado;
-          $this->conexionBD=null;
-  }
-  public function Consulta_x_Form($idFormulario){
-// Para realizar la consulta de un curso por los paramtros annio, trimestre y ficha.
-          $sql="SELECT id_formulario, detalle FROM detalle_formulario WHERE id_formulario=".$idFormulario;
-          $sentencia=$this->conexionBD->prepare($sql);
-          $sentencia->execute();
-          $resultado=$sentencia->fetchAll();
-          $sentencia->closeCursor();
-          return $resultado;
-          $this->conexionBD=null;
-  }
-  public function ConsultaFormM(){
-// Para realizar la consulta de un curso por los paramtros annio, trimestre y ficha.
+  public function TraeFormularioMall(){
+// Para realizar la consulta de todas las plantillas existentes.
           $sql="SELECT id_formulario, descripcion FROM formulario";
           $sentencia=$this->conexionBD->prepare($sql);
           $sentencia->execute();
@@ -383,8 +422,60 @@ class ConsultarFormulario extends Conexion{
           return $resultado;
           $this->conexionBD=null;
   }
-
-
+  public function TraeFormularioM($idFormulario){
+// Para realizar la consulta de un plantillas existente.
+          $sql="SELECT id_formulario, descripcion FROM formulario WHERE id_formulario=".$idFormulario;
+          $sentencia=$this->conexionBD->prepare($sql);
+          $sentencia->execute();
+          $resultado=$sentencia->fetch();
+          $sentencia->closeCursor();
+          return $resultado;
+          $this->conexionBD=null;
+  }
 }
-
+class ConsultarFormularioD extends Conexion{
+  public function ConsultarFormularioD(){
+    parent::conectar();
+  }
+  public function TraeFormularioDall($IdFormularioD){
+    $sql="SELECT df.id_formulario, f.descripcion, gp.id_grupo, gp.descripcion, df.id_pregunta, bp.descripcion FROM detalle_formulario df INNER JOIN formulario f ON (f.id_formulario = df.id_formulario) INNER JOIN banco_pregunta bp ON(bp.id_pregunta = df.id_pregunta) INNER JOIN grupo_pregunta gp ON(gp.id_grupo = bp.id_grupo) WHERE df.id_formulario = ".$IdFormularioD." ORDER BY 1,3";
+     // print_r($sql);
+    $sentencia=$this->conexionBD->prepare($sql);
+    $sentencia->execute();
+    $resultado=$sentencia->fetchall();
+    $sentencia->closeCursor();
+    return $resultado;
+    $this->conexionBD=null;
+  }
+}
+class ConsultaRol extends Conexion{
+  public function ConsultaRol(){
+    parent::conectar();
+  }
+  public function TraeRol($IdRol){
+    $sql="SELECT id_rol, nombre_rol FROM rol WHERE id_rol = ".$IdRol;
+    // print_r($sql);
+    $sentencia=$this->conexionBD->prepare($sql);
+    $sentencia->execute();
+    $resultado=$sentencia->fetch();
+    $sentencia->closeCursor();
+    return $resultado;
+    $this->conexionBD=null;
+  }
+}
+class ConsultaEvaluacion extends Conexion{
+  public function ConsultaEvaluacion(){
+    parent::conectar();
+  }
+  public function TraeMaestroEvaluacionAll(){
+    $sql="SELECT id_evaluacion, estado, fecha_inicio, fecha_final FROM evaluacion";
+    // print_r($sql);
+    $sentencia=$this->conexionBD->prepare($sql);
+    $sentencia->execute();
+    $resultado=$sentencia->fetchall();
+    $sentencia->closeCursor();
+    return $resultado;
+    $this->conexionBD=null;
+  }
+}
  ?>

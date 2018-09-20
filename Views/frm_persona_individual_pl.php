@@ -13,11 +13,11 @@ $ver=$consultar->TraeAllPersona();
     <link rel="stylesheet" href="css/frm_persona_individual_pl.css">
     <title>Listado de Personas</title>
 <body>
-        <h2>PERSONAS</h2>
+        <h2>Personas</h2>
         <br>
         <br>
         <br>
-        <a href="frm_persona_individual_add.php">Adicionar nuevo registro</a>
+        <h3><a href="frm_persona_individual_add.php">Adicionar nuevo registro</a></h3>
         <br>
         <br>
         <br>

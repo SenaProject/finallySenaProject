@@ -1,8 +1,17 @@
+<?php
+require "../Models/leer.php";
+
+$consultar1= new ConsultaGrupoPregunta();
+$ver1=$consultar1->TraeGrupoPregunta();
+
+$consultar2= new ConsultaBanRespuesta();
+$ver2=$consultar2->TraeBanRespuesta();
+?>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
-        <title>frm_banco_preguntas</title>
+        <title>Evaluacion de Instructores</title>
         <link href="css/frm_banco_preguntas_add.css" rel="stylesheet" type="text/css"/>
         <style type="text/css">
 h2 { color: red; font-family: Arial; font-size: large; }
@@ -10,40 +19,41 @@ h2 { color: red; font-family: Arial; font-size: large; }
 label { color: black; font-family: Arial; }
 </style>
     </head>
+    <a href ="frm_banco_preguntas.php">Volver a tras</a>
     <center>
     <body>
-        <form class="contact_form" action="" method="post" name="contact_form" >
+        <form class="contact_form" action="../Controllers/valida_pregunta_ind.php?valor=CrearPregunta" method="post" name="contact_form" >
             <ul>
                 <li>
-                    <h2>Crear Pregunta</h2>
+                    <h2>Ingreso manual de preguntas</h2>
                     <span class="required_notification">* Denotes Required Field</span>
                 </li>
                 <li>
-                    <label for="Grupo Pregunta">Grupo de Pregunta</label>
-                    <select type="text" name="Grupo Pregunta" class="form-control" required="" >
-                        <option selected value="0">Elige el grupo Pregunta</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                    </select>
+                  <?php
+echo "        <label for='GruPre'>Grupo de Pregunta</label>";
+echo "				<select name='grupopregunta' class='form-control' required = 'required'>";
+				               echo "<option value='Nulo'></option>";
+				        foreach ($ver1 as $valor) {
+                       echo "<option value='".$valor[0]."' ".$selec.">".$valor[1]."</option>";
+                     }
+echo "				</select>";
+?>
                 </li>
             </ul>
             <ul>
                 <li>
                     <label for="text">Descripcion</label>
-                    <textarea name="message" cols="40" rows="6" required ></textarea>
+                    <textarea name="descripcionpregunta" cols="40" rows="6" required ></textarea>
                 </li>
                 <li>
-                    <label for="Grupo Pregunta">Tipo de Respuesta</label>
-                    <select type="text" name="" class="form-control" required >
-                        <option selected value="0">Elige de Respuesta</option>
-                        <option value="Opcion Multiple">De 1 a 5</option>
-                        <option value="Lista desplegable">SI/NO</option>
-                    </select>
+                  <?php
+echo "        <label for='TipRes'>Grupo de Respuesta</label>";
+echo "				<select name='tiporespuesta' required = 'required'>";
+echo "<option value='Nulo'></option>";
+              foreach ($ver2 as $valor) {
+echo "<option value='".$valor[0]."' ".$selec.">".$valor[1]."</option>";                   }
+echo "				</select>";
+                    ?>
                 </li>
                 <li>
                     <button class="submit" type="submit">Guardar</button>

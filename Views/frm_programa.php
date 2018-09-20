@@ -13,11 +13,11 @@ $ver=$consultar->TraeAllPrograma();
     <link rel="stylesheet" href="css/frm_persona_individual_pl.css">
     <title>Programas</title>
 <body>
-        <h2>PROGRAMAS</h2>
+        <h2>Programa</h2>
         <br>
         <br>
         <br>
-        <a href="frm_programa_add.php">Adicionar nuevo registro</a>
+        <h3><a href="frm_programa_add.php">Adicionar nuevo registro</a></h3>
         <br>
         <br>
         <br>

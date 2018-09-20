@@ -85,4 +85,133 @@ class CrearCurso extends Conexion{
     $this->conexionBD=null;
   }
 }
+
+class CrearFormularioM extends Conexion{
+  public function CrearFormularioM(){
+        parent::conectar();
+  }
+  public function fCrearFormularioM($NomForm){
+    $sql="INSERT INTO formulario(id_formulario, descripcion, estado) VALUES (fn_id_tabla('formulario','id_formulario'), '".$NomForm."', 'True')";
+    $sentencia=$this->conexionBD->prepare($sql);
+    $sentencia->execute();
+    $resultado=$sentencia->fetch();
+    $sentencia->closeCursor();
+
+    return $resultado;
+    $this->conexionBD=null;
+  }
+
+}
+
+class CrearDetalleFormulario extends Conexion{
+  public function CrearDetalleFormulario(){
+        parent::conectar();
+  }
+  public function fCrearDetalleFormulario($Formulario,$IdPregunta){
+// $Formulario,$IdPregunta
+    $sql="INSERT INTO detalle_formulario(id_formulario, id_pregunta, estado) VALUES (".$Formulario.", ".$IdPregunta.", 'True')";
+    $sentencia=$this->conexionBD->prepare($sql);
+    $sentencia->execute();
+    $resultado=$sentencia->fetch();
+    $sentencia->closeCursor();
+
+    return $resultado;
+    $this->conexionBD=null;
+
+
+}}
+
+class CrearEvaluacionMaestro extends Conexion{
+  public function CrearEvaluacionMaestro(){
+        parent::conectar();
+  }
+  public function fCrearEvaluacionMaestro($fecha_inicio, $fecha_final){
+    $sql="INSERT INTO evaluacion(id_evaluacion, estado, fecha_inicio, fecha_final) VALUES (fn_id_tabla('evaluacion','id_evaluacion'),'True','".$fecha_inicio."', '".$fecha_final."')";
+    $sentencia=$this->conexionBD->prepare($sql);
+    $sentencia->execute();
+    $resultado=$sentencia->fetch();
+    $sentencia->closeCursor();
+
+    return $resultado;
+    $this->conexionBD=null;
+  }
+}
+class CrearEvaluacionDetalle extends Conexion{
+  public function CrearEvaluacionDetalle(){
+        parent::conectar();
+  }
+  public function fCrearEvaDetAll($IdEvaluacion, $IdFormulario, $IdPregunta, $IdInstructor, $IdAprendiz, $Estado){
+    $sql="INSERT INTO evaluacion_detalle(id_evaluacion_detalle, id_evaluacion, id_formulario, id_pregunta, id_instructor, id_aprendiz, estado) VALUES (fn_id_tabla('evaluacion_detalle','id_evaluacion_detalle'), ".$IdEvaluacion.", ".$IdFormulario.", ".$IdPregunta.", ".$IdInstructor.", ".$IdAprendiz.", ".$Estado.")";
+    $sentencia=$this->conexionBD->prepare($sql);
+    $sentencia->execute();
+    $resultado=$sentencia->fetch();
+    $sentencia->closeCursor();
+    return $resultado;
+    $this->conexionBD=null;
+  }
+}
+  class CrearFicha extends Conexion{
+    public function CrearFicha(){
+          parent::conectar();
+    }
+    public function fCrearFicha($Ficha, $IdPrograma, $FInicio, $FFin,$IdJornada){
+      $sql="INSERT INTO ficha(id_ficha, id_programa, estado_ficha, fecha_inicio, fecha_final, id_jornada) VALUES (".$Ficha.", ".$IdPrograma.", 'True','".$FInicio."', '".$FFin."', ".$IdJornada.")";
+      $sentencia=$this->conexionBD->prepare($sql);
+      $sentencia->execute();
+      $resultado=$sentencia->fetch();
+      $sentencia->closeCursor();
+      return $resultado;
+      $this->conexionBD=null;
+    }
+
+  // public function fCrearEvaDetAll(){
+  //   $sql="";
+  //   $sentencia=$this->conexionBD->prepare($sql);
+  //   $sentencia->execute();
+  //   $resultado=$sentencia->fetch();
+  //   $sentencia->closeCursor();
+  //   return $resultado;
+  //   $this->conexionBD=null;
+  // }
+  // public function fCrearEvaDetXPrg(){
+  //   $sql="";
+  //   $sentencia=$this->conexionBD->prepare($sql);
+  //   $sentencia->execute();
+  //   $resultado=$sentencia->fetch();
+  //   $sentencia->closeCursor();
+  //   return $resultado;
+  //   $this->conexionBD=null;
+  // }
+  // public function fCrearEvaDetXFic(){
+  //   $sql="";
+  //   $sentencia=$this->conexionBD->prepare($sql);
+  //   $sentencia->execute();
+  //   $resultado=$sentencia->fetch();
+  //   $sentencia->closeCursor();
+  //   return $resultado;
+  //   $this->conexionBD=null;
+  // }
+  // public function fCrearEvaDetXIns(){
+  //   $sql="";
+  //   $sentencia=$this->conexionBD->prepare($sql);
+  //   $sentencia->execute();
+  //   $resultado=$sentencia->fetch();
+  //   $sentencia->closeCursor();
+  //   return $resultado;
+  //   $this->conexionBD=null;
+  // }
+}
+class CrearPregunta extends Conexion{
+  public function CrearPregunta(){
+    parent::conectar();
+  }
+
+  public function fCrearPregunta($IdGrupo, $IdRespuesta,$Descripcion){
+    $sql="INSERT INTO banco_pregunta(id_pregunta, id_grupo, id_respuesta, descripcion, estado) VALUES (fn_id_tabla('banco_pregunta','id_pregunta'), ".$IdGrupo.",".$IdRespuesta.", '".$Descripcion."' , 'True')";
+    $sentencia=$this->conexionBD->prepare($sql);
+    $sentencia->execute();
+    $resultado=$sentencia->fetch();
+    $sentencia->closeCursor();
+  }
+}
  ?>

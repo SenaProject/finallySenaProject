@@ -19,11 +19,7 @@
 
    ?>
 </form>
-<form class="" action="frm_programa.php" method="post">
-  <?php
-  echo "  <input type='submit' name='BtnCancelar' value='Cancelar'>";
-   ?>
-</form>
+<h2><a href="frm_programa.php">Volver ...</a></h2>
 
   </body>
 </html>
