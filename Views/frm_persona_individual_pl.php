@@ -17,7 +17,7 @@ $ver=$consultar->TraeAllPersona();
         <br>
         <br>
         <br>
-        <h3><a href="frm_persona_individual_add.php">Adicionar nuevo registro</a></h3>
+        <h3><a href="frm_persona_individual_add.php">Crear persona</a></h3>
         <br>
         <br>
         <br>

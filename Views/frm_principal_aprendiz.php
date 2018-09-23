@@ -17,29 +17,52 @@
 <?php
 $NomCom = $_GET['valor'];
   echo "<h2>Nombre Usuario:   ".$NomCom."</h2>";
-  echo "<nav>";
-	echo "<ul>";
-	echo	"<li><a>Archivo</a>";
-	echo		"<ul>";
-  echo				"<li><a></a></li>";
-  echo				"<li><a></a></li>";
-  echo				"<li><a></a></li>";
-  echo				"<li><a>Salida</a></li>";
-  echo			"</ul>";
-  echo		"</li>";
-  echo		"<li><a>Encuesta</a>";
-  echo      "<ul>";
-  echo        "<li><a href='frm_aplicar_encuesta.php' target='iframe_a'>Aplicar </a></li>";
-  echo      "</ul>";
-  echo    "</li>";
-  echo		"<li><a>Administracion</a>";
-  echo      "<ul>";
-  echo        "<li><a target='iframe_a'>Cambio de contraseña</li>";
-  echo      "</ul>";
-  echo    "</li>";
-  echo	"</ul>";
-  echo	"</nav>";
- ?>
+
+  // echo "<nav>";
+	// echo "<ul>";
+	// echo	"<li><a>Archivo</a>";
+	// echo		"<ul>";
+  // echo				"<li><a></a></li>";
+  // echo				"<li><a></a></li>";
+  // echo				"<li><a></a></li>";
+  // echo				"<li><a>Salida</a></li>";
+  // echo			"</ul>";
+  // echo		"</li>";
+  // echo		"<li><a>Encuesta</a>";
+  // echo      "<ul>";
+  // echo        "<li><a href='frm_aplicar_encuesta.php' target='iframe_a'>Aplicar </a></li>";
+  // echo      "</ul>";
+  // echo    "</li>";
+  // echo		"<li><a>Administracion</a>";
+  // echo      "<ul>";
+  // echo        "<li><a target='iframe_a'>Cambio de contraseña</li>";
+  // echo      "</ul>";
+  // echo    "</li>";
+  // echo	"</ul>";
+  // echo	"</nav>";
+?>
+<nav>
+  <ul>
+
+	   <li><a>Archivo</a>
+	        <ul>
+            <li><a href='frm_cerrar.php'>Salida</a></li>
+          </ul>
+      </li>
+        <li><a>Evaluacion</a>
+          <ul>
+            <!-- frm_aplicar_encuesta.php -->
+            <li><a href='frm_aplicar_evaluacion.php' target='iframe_a'>Evaluar</a></li>
+          </ul>
+        </li>
+
+        <li><a>Administracion</a>
+          <ul>
+            <li><a href='frm_cambio_contrasenna.php' target='iframe_a'>Cambio de contraseña</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
 	<div class="">
 		<iframe height="500px" width="100%" src="" name="iframe_a"></iframe>
 	</div>

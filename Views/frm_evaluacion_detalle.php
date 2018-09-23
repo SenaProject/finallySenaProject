@@ -9,9 +9,7 @@
   </head>
   <body>
     <h1>Asignacion de detalle de evaluación</h1>
-
-
-    <?php
+<?php
     require_once "../Models/leer.php";
     $consultar= new ConsultarFormularioM();
     $ver=$consultar->TraeFormularioMall();
@@ -20,91 +18,103 @@
     $consultar2= new ConsultaParametros();
     $ver2=$consultar2->TraeParametros(0,'trimestre');
 
-      $IdEvaluacion = $_GET['valor'];
-      echo "<form class='' action='../Controllers/validar_detalle_eva.php?valor=".$IdEvaluacion."' method='POST'>";
-      echo "<table>";
-      echo "<tr>";
-      echo "<td>";
-      echo "Evaluacion No.: ";
-      echo "</td>";
-      echo "<td>";
-      echo $IdEvaluacion;
-      echo "</td>";
-      echo "</tr>";
-      echo "<tr>";
-      echo "<td>";
-      echo "Formulario a asignar: ";
-      echo "</td>";
-      echo "<td>";
-      // echo $IdEvaluacion;
-      echo "<select class='' name='ListaForm'>";
-        echo "<option value='Nulo' ></option>";
+    $IdEvaluacion = $_GET['valor'];
+
+
+echo "<form class='' action='frm_evaluacion_detalle.php?valor=$IdEvaluacion' method='POST'>";
+?>
+
+<table>
+  <tr>
+    <td>
+      Evaluacion No.:
+    </td>
+    <td>
+<?php
+echo $IdEvaluacion;
+?>
+    </td>
+  </tr>
+  <tr>
+    <td>
+        Formulario a asignar:
+    </td>
+    <td>
+      <select class='' name='ListaForm'>
+      <option value='Nulo' ></option>
+<?php
       foreach ($ver as $value) {
         echo "<option value='".$value[0]."' >".$value[1]."</option>";
               }
-      echo "</select>";
-      echo "</td>";
-      echo "</tr>";
-      echo "<tr>";
-      echo "<td>";
-      echo "Año";
-      echo "</td>";
-      echo "<td>";
-      echo "<select class='' name='lannio'>";
-        echo "<option value='Nulo' ></option>";
-      foreach ($ver1 as $value1) {
-        echo "<option value='".$value1[0]."' >".$value1[1]."</option>";
-              }
-      echo "</select>";
-      echo "</td>";
-      echo "</tr>";
-      echo "<tr>";
-      echo "<td>";
-      echo "Trimestre: ";
-      echo "</td>";
-      echo "<td>";
-      echo "<select class='' name='lannio'>";
-        echo "<option value='Nulo' ></option>";
-      foreach ($ver2 as $value2) {
-        echo "<option value='".$value2[0]."' >".$value2[1]."</option>";
-              }
-      echo "</select>";
-      echo "</td>";
-      echo "</tr>";
-
-
-
-      echo "<tr>";
-      echo "<td>";
-      echo "Seleccione a cual grupo humano va a aplicarsele la evaluacion";
-      echo "</td>";
-      echo "<td>";
-      echo "<select class='' name='ListaHumano'>";
-      echo "<option value='0' >Seleccione ...</option>";
+?>
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Aplicar evaluacion a:
+    </td>
+    <td>
+      <select class='' name='ListaHumano'>
+      <option value='0' >Seleccione ...</option>
+<?php
       echo "<option value='1' >Todos</option>";
       echo "<option value='2' >Por Programa</option>";
       echo "<option value='3' >Por Ficha</option>";
       echo "<option value='4' >Por Instructor</option>";
-      echo "</select>";
-      echo "</td>";
-      echo "</tr>";
+?>
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <input type='submit' name='BtnSiguiente' value='Siguiente..'>
+      <input type='reset' name='BtnCancelar' value='Cancelar'>
+    </td>
+  </tr>
+</form>
+  <!-- segunda carga -->
+<form class='' action='../Controllers/validar_detalle_eva.php?valor=".$IdEvaluacion."' method='POST'>
+  <?php
 
 
+  ?>
+  <tr>
+    <td>
+      Año
+    </td>
+    <td>
+      <select class='' name='lannio'>
+      <option value='Nulo' ></option>
+<?php
+      foreach ($ver1 as $value1) {
+        echo "<option value='".$value1[0]."' >".$value1[1]."</option>";
+              }
+?>
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Trimestre:
+    </td>
+    <td>
+      <select class='' name='lannio'>
+      <option value='Nulo' ></option>
+<?php
+      foreach ($ver2 as $value2) {
+        echo "<option value='".$value2[0]."' >".$value2[1]."</option>";
+              }
+?>
+      </select>
+    </td>
+  </tr>
 
-      echo "</table>";
-
-
-      // echo "<h3>Seleccione el formulario a asignar</h3>";
-      echo "<br>";
-
-
-      echo "<br>";
-
-      // echo "id_instructor"."<br>";
-      // echo "id_aprendiz"."<br>";
-      echo "<input type='submit' name='BtnGuardar' value='Guardar'>";
-      echo "<input type='reset' name='BtnCancelar' value='Cancelar'>";
-      echo "</form>";
-     ?>
+</table>
+<br>
+<br>
+  <input type='submit' name='BtnGuardar' value='Guardar'>
+<input type='reset' name='BtnCancelar' value='Cancelar'>
+</form>
   </body>
 </html>

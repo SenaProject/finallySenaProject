@@ -51,6 +51,41 @@ class CrearPersona extends Conexion{
     $resultado=$sentencia->fetch();
     $sentencia->closeCursor();
 
+    $sql="INSERT INTO credencial (id_credencial, estado_credencial, credencial, fecha_aviso, fecha_caducidad, id_persona)
+    VALUES (fn_id_tabla('credencial','id_credencial'), 'A', fn_credencial('".$IdPersona."','E'), fn_fecha_credencial('A'), fn_fecha_credencial('C'), ".$IdPersona.")";
+    // print_r($sql);
+    $sentencia=$this->conexionBD->prepare($sql);
+    $sentencia->execute();
+    $resultado=$sentencia->fetch();
+    $sentencia->closeCursor();
+
+    return $resultado;
+    $this->conexionBD=null;
+  }
+}
+class CrearNuevoPwd extends Conexion{
+  public function CrearNuevoPwd(){
+    parent::conectar();
+  }
+
+  public function fCrearNuevoPwd($IdPersona,$NewPwd){
+    // Cambia la contraseña anterior a inactiva
+    $sql="UPDATE credencial SET estado_credencial = 'I' WHERE id_persona = ".$IdPersona;
+    $sentencia=$this->conexionBD->prepare($sql);
+    $sentencia->execute();
+    $resultado=$sentencia->fetch();
+    $sentencia->closeCursor();
+
+
+// inserta la nueva contraseña
+    $sql="INSERT INTO credencial (id_credencial, estado_credencial, credencial, fecha_aviso, fecha_caducidad, id_persona)
+    VALUES (fn_id_tabla('credencial','id_credencial'), 'A', fn_credencial('".$NewPwd."','E'), fn_fecha_credencial('A'), fn_fecha_credencial('C'), ".$IdPersona.")";
+    // print_r($sql);
+    $sentencia=$this->conexionBD->prepare($sql);
+    $sentencia->execute();
+    $resultado=$sentencia->fetch();
+    $sentencia->closeCursor();
+
     return $resultado;
     $this->conexionBD=null;
   }

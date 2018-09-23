@@ -14,17 +14,20 @@ class ConsultaUsuario extends Conexion{
     parent::conectar();
   }
   public function TraeUsuario($IdPersona, $Pwd){
-    $sql="SELECT per.id_persona, fn_persona_nom_com(per.id_persona), fn_credencial(cre.credencial,'D'), per.".chr(34)."Adm".chr(34)." FROM persona per INNER JOIN credencial cre ON (cre.id_persona = per.id_persona AND cre.estado_credencial='A') WHERE per.id_persona = " . $IdPersona;
+    $sql="SELECT per.id_persona, fn_persona_nom_com(per.id_persona), fn_credencial(cre.credencial,'D'), per.".chr(34)."Adm".chr(34)." FROM persona per INNER JOIN credencial cre ON (cre.id_persona = per.id_persona AND cre.estado_credencial='A') WHERE estado_persona = True and per.id_persona = " . $IdPersona;
     $sentencia=$this->conexionBD->prepare($sql);
     $sentencia->execute();
     $resultado=$sentencia->fetch();
+    // global USUARIO;
      if ($resultado[2] == $Pwd){
        define ('NOMBRE_COMPLETO' , $resultado[1]);
        if ($resultado[3] == true){
          // print_r($resultado[3]);
-         header("location:../Views/frm_principal_adm.php?valor=".$resultado[1]) ;
+
+         header("location:../Views/frm_principal_adm.php?valor=".$resultado[1]."&user=".$resultado[0]) ;
        } else {
-         header("location:../Views/frm_principal_aprendiz.php?valor=".$resultado[1]) ;
+         define ('USUARIO',$resultado[0]);
+         header("location:../Views/frm_principal_aprendiz.php?valor=".$resultado[1]."&user=".$resultado[0]) ;
        }
 
      } else{
@@ -35,6 +38,16 @@ class ConsultaUsuario extends Conexion{
     return $resultado;
     $this->conexionBD=null;
   }
+  public function fValidaUsuario($IdPersona, $Pwd){
+    $sql="SELECT per.id_persona, fn_persona_nom_com(per.id_persona), fn_credencial(cre.credencial,'D'), per.".chr(34)."Adm".chr(34)." FROM persona per INNER JOIN credencial cre ON (cre.id_persona = per.id_persona AND cre.estado_credencial='A') WHERE per.id_persona = " . $IdPersona;
+    $sentencia=$this->conexionBD->prepare($sql);
+    $sentencia->execute();
+    $resultado=$sentencia->fetch();
+    $sentencia->closeCursor();
+    // print_r($sentencia);
+    return $resultado;
+    $this->conexionBD=null;
+ }
 }
 
 class ConsultaPersona extends Conexion{
@@ -477,5 +490,59 @@ class ConsultaEvaluacion extends Conexion{
     return $resultado;
     $this->conexionBD=null;
   }
+}
+class ConsultaAplicarEvaluacion extends Conexion{
+  public function ConsultaAplicarEvaluacion(){
+    parent::conectar();
+  }
+  // esta es la informacion de la evaluacion se filtra para saber los años trimestres y fihcas que el aprendiz esta ligdo
+  // para ficha $control es igual a 0
+  // para año  $control es igual a 1
+  public function fTraeInfoEva($IdPersona, $ficha , $annio, $trimestre, $instructor, $control){
+    // Resultante las fichas
+    if ($ficha == 0 && $annio == 0 && $trimestre == 0 && $instructor==0 && $control == 0) {
+      $sql="SELECT DISTINCT id_ficha FROM public.curso WHERE id_rol = 1 and id_persona = ".$IdPersona;
+      // print_r($sql);
+      $sentencia=$this->conexionBD->prepare($sql);
+      $sentencia->execute();
+      $resultado=$sentencia->fetchall();
+      $sentencia->closeCursor();
+      return $resultado;
+      $this->conexionBD=null;
+    }
+    // Resultante los años
+    if ($ficha !== 0 && $annio == 0 && $trimestre == 0 && $instructor==0 && $control == 1) {
+      $sql="SELECT DISTINCT c.id_annio, p.detalle  FROM curso c INNER JOIN parametro p ON(p.id_parametro = c.id_annio) WHERE c.id_rol = 1 AND c.id_persona = ".$IdPersona." AND c.id_ficha =".$ficha;
+      // print_r($sql);
+      $sentencia=$this->conexionBD->prepare($sql);
+      $sentencia->execute();
+      $resultado=$sentencia->fetchall();
+      $sentencia->closeCursor();
+      return $resultado;
+      $this->conexionBD=null;
+    }
+    // Resultante trimestre
+    if ($ficha !== 0 && $annio !== 0 && $trimestre == 0 && $instructor==0  && $control == 3) {
+      $sql="SELECT DISTINCT c.id_trimestre, p.detalle FROM curso c INNER JOIN  parametro p ON(p.id_parametro = c.id_trimestre) WHERE id_rol = 1 and id_persona = ".$IdPersona." and id_ficha =".$ficha." and id_annio = ".$annio;
+       print_r($sql);
+      $sentencia=$this->conexionBD->prepare($sql);
+      $sentencia->execute();
+      $resultado=$sentencia->fetchall();
+      $sentencia->closeCursor();
+      return $resultado;
+      $this->conexionBD=null;
+    }
+    // Evaluacion
+    if ($ficha !== 0 && $annio !== 0 && $trimestre !== 0  && $instructor==0 && $control == 4) {
+      $sql="SELECT DISTINCT c.id_trimestre, p.detalle FROM curso c INNER JOIN  parametro p ON(p.id_parametro = c.id_trimestre) WHERE id_rol = 1 and id_persona = ".$IdPersona." and id_ficha =".$ficha." and id_annio = ".$annio;
+       print_r($sql);
+      $sentencia=$this->conexionBD->prepare($sql);
+      $sentencia->execute();
+      $resultado=$sentencia->fetchall();
+      $sentencia->closeCursor();
+      return $resultado;
+      $this->conexionBD=null;
+    }
+}
 }
  ?>
