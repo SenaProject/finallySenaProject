@@ -11,15 +11,16 @@
     // $IdPersona = USUARIO;
     $UserApp = $_POST['usuario'];
     $vFicha = $_POST['tFicha'];
-    $vAnnio = $_POST['Selectannio'];
-    $cTrimestre= new ConsultaAplicarEvaluacion();
-    $vTrimestre=$cTrimestre->fTraeInfoEva($UserApp, $vFicha, $vAnnio, 0, 0, 3);
+    $vAnnio = $_POST['tAnnio'];
+    $vTrimestre = $_POST['SelectTrimestre'];
+    $cInstructor= new ConsultaAplicarEvaluacion();
+    $vInstructor=$cInstructor->fTraeInfoEva($UserApp, $vFicha, $vAnnio, $vTrimestre, 0, 4);
     ?>
   </head>
   <body>
 
-      <h1>Aplicar Evaluacion [Trimestre]</h1>
-          <form class="" action="frm_aplicar_eva_instructor.php" method="POST">
+      <h1>Aplicar Evaluacion [Instructor]</h1>
+          <form class="" action="frm_aplicar_eva_evaluacion.php" method="POST">
            <br>
              Usuario:
             <input type="text" name="usuario" value=<?php echo $UserApp; ?> readonly>
@@ -29,13 +30,16 @@
             <br>
             Año:
             <input type="text" name="tAnnio" value=<?php echo $vAnnio; ?> readonly>
-           <br>
-             Trimestre:
-             <select id="SelectTrimestre" name ="SelectTrimestre">
+            <br>
+            Trimestre:
+            <input type="text" name="tTrimestre" value=<?php echo $vTrimestre; ?> readonly>
+            <br>
+            Instructor:
+             <select id="SelectInstructor" name = "SelectInstructor">
                <option value='0'></option>
                <?php
-                 foreach ($vTrimestre as $vTrimestreInt) {
-                     echo "<option value='".$vTrimestreInt[0]."'>".$vTrimestreInt[1]."</option>";
+                 foreach ($vInstructor as $vInstructorInt) {
+                     echo "<option value='".$vInstructorInt[0]."'>".$vInstructorInt[0]."</option>";
                  }
                 ?>
              </select>
