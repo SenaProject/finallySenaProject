@@ -11,7 +11,7 @@
     $UserApp = $_GET['valor'];
 
     $cFicha= new ConsultaAplicarEvaluacion();
-    $vFicha=$cFicha->fTraeInfoEva($UserApp, 0, 0, 0, 0);
+    $vFicha=$cFicha->fTraeInfoEva($UserApp, 0, 0, 0, 0, 0);
     ?>
   </head>
   <body>
@@ -19,7 +19,7 @@
       <br>
         <form class="" action="frm_aplicar_eva_annio.php" method="POST">
            Usuario:
-           <input type="text" name="usuario" value=<?php echo $UserApp; ?>>
+           <input type="text" name="usuario" value=<?php echo $UserApp; ?> readonly>
            <br>
            Ficha:
            <select id="SelectFicha" name ="SelectFicha">

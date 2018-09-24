@@ -17,7 +17,9 @@ $ver=$consultar->TraeAllPersona();
         <br>
         <br>
         <br>
-        <h3><a href="frm_persona_individual_add.php">Crear persona</a></h3>
+        <form class="submit_booton" action="frm_persona_individual_add.php" method="post">
+          <button type="submit" class="submit_booton" name="Adicions">Crear persona</button>
+        </form>
         <br>
         <br>
         <br>

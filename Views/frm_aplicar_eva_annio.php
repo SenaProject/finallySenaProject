@@ -13,7 +13,7 @@
     $vFicha =  $_POST['SelectFicha'];
 
     $cAnnio= new ConsultaAplicarEvaluacion();
-    $vAnnio=$cAnnio->fTraeInfoEva($UserApp, $vFicha, 0, 0, 1);
+    $vAnnio=$cAnnio->fTraeInfoEva($UserApp, $vFicha, 0, 0, 0, 1);
     ?>
   </head>
   <body>
@@ -21,9 +21,9 @@
       <h1>Aplicar Evaluacion [Año]</h1>
           <form class="" action="frm_aplicar_eva_trimestre.php" method="POST">
            <br>
-             Usuario: <input type="text" name="usuario" value=<?php echo $UserApp; ?>>
+             Usuario: <input type="text" name="usuario" value=<?php echo $UserApp; ?> readonly>
              <br>
-             Ficha: <input type="text" name="tFicha" value=<?php echo $vFicha; ?>>
+             Ficha: <input type="text" name="tFicha" value=<?php echo $vFicha; ?> readonly>
             <br>
              Año:
              <select id="Selectannio" name = "Selectannio">

@@ -501,8 +501,9 @@ class ConsultaAplicarEvaluacion extends Conexion{
   public function fTraeInfoEva($IdPersona, $ficha , $annio, $trimestre, $instructor, $control){
     // Resultante las fichas
     if ($ficha == 0 && $annio == 0 && $trimestre == 0 && $instructor==0 && $control == 0) {
-      $sql="SELECT DISTINCT id_ficha FROM public.curso WHERE id_rol = 1 and id_persona = ".$IdPersona;
-      // print_r($sql);
+      // $sql="SELECT DISTINCT id_ficha FROM public.curso WHERE id_rol = 1 and id_persona = ".$IdPersona;
+      $sql="SELECT DISTINCT id_ficha FROM evaluacion_detalle WHERE id_aprendiz =".$IdPersona;
+      print_r($sql);
       $sentencia=$this->conexionBD->prepare($sql);
       $sentencia->execute();
       $resultado=$sentencia->fetchall();
@@ -512,8 +513,9 @@ class ConsultaAplicarEvaluacion extends Conexion{
     }
     // Resultante los años
     if ($ficha !== 0 && $annio == 0 && $trimestre == 0 && $instructor==0 && $control == 1) {
-      $sql="SELECT DISTINCT c.id_annio, p.detalle  FROM curso c INNER JOIN parametro p ON(p.id_parametro = c.id_annio) WHERE c.id_rol = 1 AND c.id_persona = ".$IdPersona." AND c.id_ficha =".$ficha;
-      // print_r($sql);
+      // $sql="SELECT DISTINCT c.id_annio, p.detalle  FROM curso c INNER JOIN parametro p ON(p.id_parametro = c.id_annio) WHERE c.id_rol = 1 AND c.id_persona = ".$IdPersona." AND c.id_ficha =".$ficha;
+      $sql="SELECT DISTINCT ed.id_annio, p.detalle  FROM evaluacion_detalle ed INNER JOIN parametro p ON(p.id_parametro = ed.id_annio) WHERE ed.id_aprendiz = ".$IdPersona." AND ed.id_ficha =".$ficha;
+      print_r($sql);
       $sentencia=$this->conexionBD->prepare($sql);
       $sentencia->execute();
       $resultado=$sentencia->fetchall();
@@ -523,8 +525,9 @@ class ConsultaAplicarEvaluacion extends Conexion{
     }
     // Resultante trimestre
     if ($ficha !== 0 && $annio !== 0 && $trimestre == 0 && $instructor==0  && $control == 3) {
-      $sql="SELECT DISTINCT c.id_trimestre, p.detalle FROM curso c INNER JOIN  parametro p ON(p.id_parametro = c.id_trimestre) WHERE id_rol = 1 and id_persona = ".$IdPersona." and id_ficha =".$ficha." and id_annio = ".$annio;
-       print_r($sql);
+      // $sql="SELECT DISTINCT c.id_trimestre, p.detalle FROM curso c INNER JOIN  parametro p ON(p.id_parametro = c.id_trimestre) WHERE id_rol = 1 and id_persona = ".$IdPersona." and id_ficha =".$ficha." and id_annio = ".$annio;
+      $sql="SELECT DISTINCT ed.id_trimestre, p.detalle FROM evaluacion_detalle ed INNER JOIN  parametro p ON(p.id_parametro = ed.id_trimestre) WHERE ed.id_aprendiz = ".$IdPersona." and ed.id_ficha =".$ficha." and ed.id_annio = ".$annio;
+      print_r($sql);
       $sentencia=$this->conexionBD->prepare($sql);
       $sentencia->execute();
       $resultado=$sentencia->fetchall();
@@ -534,8 +537,9 @@ class ConsultaAplicarEvaluacion extends Conexion{
     }
     // Evaluacion
     if ($ficha !== 0 && $annio !== 0 && $trimestre !== 0  && $instructor==0 && $control == 4) {
+      // $sql="SELECT DISTINCT c.id_trimestre, p.detalle FROM curso c INNER JOIN  parametro p ON(p.id_parametro = c.id_trimestre) WHERE id_rol = 1 and id_persona = ".$IdPersona." and id_ficha =".$ficha." and id_annio = ".$annio;
       $sql="SELECT DISTINCT c.id_trimestre, p.detalle FROM curso c INNER JOIN  parametro p ON(p.id_parametro = c.id_trimestre) WHERE id_rol = 1 and id_persona = ".$IdPersona." and id_ficha =".$ficha." and id_annio = ".$annio;
-       print_r($sql);
+      print_r($sql);
       $sentencia=$this->conexionBD->prepare($sql);
       $sentencia->execute();
       $resultado=$sentencia->fetchall();
