@@ -20,13 +20,13 @@
   </head>
   <body>
 
-      <h1>Aplicar Evaluacion [Instructor]</h1>
-          <form class="" action="" method="POST">
+      <h1>Aplicar Evaluacion [Evaluacion]</h1>
+          <form class="" action="frm_evaluar_pregunta.php" method="POST">
            <br>
-             Usuario:
+            Usuario:
             <input type="text" name="usuario" value=<?php echo $UserApp; ?> readonly>
             <br>
-             Ficha:
+            Ficha:
             <input type="text" name="tFicha" value=<?php echo $vFicha; ?> readonly>
             <br>
             Año:
@@ -39,16 +39,16 @@
             <input type="text" name="tInstructor" value=<?php echo $vInstructor; ?> readonly>
             <br>
             Evaluacion:
-             <select id="SelectEvaluacion">
-               <option value='0'></option>
-               <?php
-                 foreach ($vEvaluacion as $vEvaluacionInt) {
-                     echo "<option value='".$vEvaluacionInt[0]."'>".$vEvaluacionInt[0]."</option>";
-                 }
-                ?>
-             </select>
-             <br>
-           <input type="submit" name="btnSig" value="Siguiente ...">
+            <select id="SelectEvaluacion" name ="SelectEvaluacion">
+             <option value='0'></option>
+             <?php
+               foreach ($vEvaluacion as $vEvaluacionInt) {
+                   echo "<option value='".$vEvaluacionInt[0]."'>".$vEvaluacionInt[0]."</option>";
+               }
+              ?>
+            </select>
+            <br>
+            <input type="submit" name="btnSig" value="Siguiente ...">
     </form>
   </body>
 </html>
