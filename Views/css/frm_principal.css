@@ -1,11 +1,33 @@
 body {
 	font-family: arial;
 	color: black;
+	margin: 0;
 }
 /* estilos menu principal */
+.footer_main {
+float: none;
+height: 93%;
+margin: auto;
+height: 50px;
+}
+
+.title_user{
+float: right;
+color: white;
+}
+
+footer {
+background-color: green;
+	}
+
+.nav_main{
+background: rgb(51, 51, 51);
+}
+
 nav ul{
 	list-style: none;
 	padding: 0;
+	margin: 0;
 }
 nav li{
 	line-height: 3rem;
