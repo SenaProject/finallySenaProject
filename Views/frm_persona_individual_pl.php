@@ -10,14 +10,14 @@ $ver=$consultar->TraeAllPersona();
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="css/frm_persona_individual_pl.css">
+    <link rel="stylesheet" type="text/css" href="css/frm_persona_individual_pl.css">
     <title>Listado de Personas</title>
 <body>
         <h2>Personas</h2>
         <br>
         <br>
         <br>
-        <form class="submit_booton" action="frm_persona_individual_add.php" method="post">
+        <form action="frm_persona_individual_add.php" method="post">
           <button type="submit" class="submit_booton" name="Adicions">Crear persona</button>
         </form>
         <br>
