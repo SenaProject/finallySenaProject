@@ -129,6 +129,16 @@ class ConsultaPersona extends Conexion{
     return $resultado;
     $this->conexionBD=null;
   }
+  public function TraeInstructor($instructor){
+
+    $sql="SELECT  per.id_persona, fn_persona_nom_com(per.id_persona), per.correo_electronico FROM persona per INNER JOIN persona_rol pro on (pro.id_persona= per.id_persona) WHERE pro.id_rol = 2 AND per.id_persona =".$instructor." ORDER BY 1";
+    $sentencia=$this->conexionBD->prepare($sql);
+    $sentencia->execute();
+    $resultado=$sentencia->fetch();
+    $sentencia->closeCursor();
+    return $resultado;
+    $this->conexionBD=null;
+    }
   public function TraeAllAprendices_x_Ficha($idFicha){
     $sql="SELECT fpr.id_ficha, per.id_persona, fn_persona_nom_com(per.id_persona) FROM ficha_persona_rol fpr INNER JOIN persona per ON (per.id_persona = fpr.id_persona) WHERE fpr.id_rol = 1 AND fpr.id_ficha =". $idFicha;
     $sentencia=$this->conexionBD->prepare($sql);
@@ -369,6 +379,16 @@ class ConsultaAnnio extends Conexion{
           return $resultado;
           $this->conexionBD=null;
   }
+  public function TraeAnnio($annio){
+
+          $sql="SELECT id_parametro, detalle FROM parametro WHERE id_grupo = 3 and id_parametro = ".$annio;
+          $sentencia=$this->conexionBD->prepare($sql);
+          $sentencia->execute();
+          $resultado=$sentencia->fetch();
+          $sentencia->closeCursor();
+          return $resultado;
+          $this->conexionBD=null;
+  }
 
 }
 class ConsultaTrimestre extends Conexion{
@@ -380,6 +400,15 @@ class ConsultaTrimestre extends Conexion{
           $sentencia=$this->conexionBD->prepare($sql);
           $sentencia->execute();
           $resultado=$sentencia->fetchAll();
+          $sentencia->closeCursor();
+          return $resultado;
+          $this->conexionBD=null;
+  }
+  public function TraeTrimestre($trimestre){
+          $sql="SELECT id_parametro, detalle FROM parametro WHERE id_grupo = 4 and id_parametro = ".$trimestre;
+          $sentencia=$this->conexionBD->prepare($sql);
+          $sentencia->execute();
+          $resultado=$sentencia->fetch();
           $sentencia->closeCursor();
           return $resultado;
           $this->conexionBD=null;
@@ -501,9 +530,8 @@ class ConsultaAplicarEvaluacion extends Conexion{
   public function fTraeInfoEva($IdPersona, $ficha , $annio, $trimestre, $instructor, $control){
     // Resultante las fichas
     if ($ficha == 0 && $annio == 0 && $trimestre == 0 && $instructor==0 && $control == 0) {
-      // $sql="SELECT DISTINCT id_ficha FROM public.curso WHERE id_rol = 1 and id_persona = ".$IdPersona;
       $sql="SELECT DISTINCT id_ficha FROM evaluacion_detalle WHERE id_aprendiz =".$IdPersona;
-      print_r($sql);
+      // print_r($sql);
       $sentencia=$this->conexionBD->prepare($sql);
       $sentencia->execute();
       $resultado=$sentencia->fetchall();
@@ -513,9 +541,8 @@ class ConsultaAplicarEvaluacion extends Conexion{
     }
     // Resultante los años
     if ($ficha !== 0 && $annio == 0 && $trimestre == 0 && $instructor==0 && $control == 1) {
-      // $sql="SELECT DISTINCT c.id_annio, p.detalle  FROM curso c INNER JOIN parametro p ON(p.id_parametro = c.id_annio) WHERE c.id_rol = 1 AND c.id_persona = ".$IdPersona." AND c.id_ficha =".$ficha;
       $sql="SELECT DISTINCT ed.id_annio, p.detalle  FROM evaluacion_detalle ed INNER JOIN parametro p ON(p.id_parametro = ed.id_annio) WHERE ed.id_aprendiz = ".$IdPersona." AND ed.id_ficha =".$ficha;
-      print_r($sql);
+      // print_r($sql);
       $sentencia=$this->conexionBD->prepare($sql);
       $sentencia->execute();
       $resultado=$sentencia->fetchall();
@@ -525,9 +552,8 @@ class ConsultaAplicarEvaluacion extends Conexion{
     }
     // Resultante trimestre
     if ($ficha !== 0 && $annio !== 0 && $trimestre == 0 && $instructor==0  && $control == 3) {
-      // $sql="SELECT DISTINCT c.id_trimestre, p.detalle FROM curso c INNER JOIN  parametro p ON(p.id_parametro = c.id_trimestre) WHERE id_rol = 1 and id_persona = ".$IdPersona." and id_ficha =".$ficha." and id_annio = ".$annio;
       $sql="SELECT DISTINCT ed.id_trimestre, p.detalle FROM evaluacion_detalle ed INNER JOIN  parametro p ON(p.id_parametro = ed.id_trimestre) WHERE ed.id_aprendiz = ".$IdPersona." and ed.id_ficha =".$ficha." and ed.id_annio = ".$annio;
-      print_r($sql);
+      // print_r($sql);
       $sentencia=$this->conexionBD->prepare($sql);
       $sentencia->execute();
       $resultado=$sentencia->fetchall();
@@ -540,7 +566,7 @@ class ConsultaAplicarEvaluacion extends Conexion{
     if ($ficha !== 0 && $annio !== 0 && $trimestre !== 0 && $instructor==0  && $control == 4) {
       // $sql="SELECT DISTINCT c.id_trimestre, p.detalle FROM curso c INNER JOIN  parametro p ON(p.id_parametro = c.id_trimestre) WHERE id_rol = 1 and id_persona = ".$IdPersona." and id_ficha =".$ficha." and id_annio = ".$annio;
       $sql="SELECT DISTINCT ed.id_instructor FROM evaluacion_detalle ed WHERE ed.id_aprendiz = ".$IdPersona." and ed.id_ficha =".$ficha." and ed.id_annio = ".$annio." and ed.id_trimestre = ".$trimestre;
-      print_r($sql);
+      // print_r($sql);
       $sentencia=$this->conexionBD->prepare($sql);
       $sentencia->execute();
       $resultado=$sentencia->fetchall();
@@ -551,9 +577,8 @@ class ConsultaAplicarEvaluacion extends Conexion{
 
     // Evaluacion
     if ($ficha !== 0 && $annio !== 0 && $trimestre !== 0  && $instructor !==0 && $control == 5) {
-      // $sql="SELECT DISTINCT c.id_trimestre, p.detalle FROM curso c INNER JOIN  parametro p ON(p.id_parametro = c.id_trimestre) WHERE id_rol = 1 and id_persona = ".$IdPersona." and id_ficha =".$ficha." and id_annio = ".$annio;
       $sql="SELECT DISTINCT id_evaluacion FROM evaluacion_detalle ed WHERE ed.id_aprendiz = ".$IdPersona." and ed.id_ficha =".$ficha." and ed.id_annio = ".$annio." and ed.id_trimestre = ".$trimestre;
-      print_r($sql);
+      // print_r($sql);
       $sentencia=$this->conexionBD->prepare($sql);
       $sentencia->execute();
       $resultado=$sentencia->fetchall();
@@ -562,5 +587,47 @@ class ConsultaAplicarEvaluacion extends Conexion{
       $this->conexionBD=null;
     }
 }
+public function fTraePreguntaEva($IdPersona, $ficha , $annio, $trimestre, $instructor, $evaluacion, $control2){
+// trae cantidad de preguntas por
+
+if ($IdPersona !== 0 && $ficha !== 0  && $annio !== 0 && $trimestre !== 0 && $instructor !== 0 && $evaluacion !== 0 && $control2 == 0) {
+  $sql="SELECT COUNT(*) FROM evaluacion_detalle ed WHERE ed.id_aprendiz = ".$IdPersona." and ed.id_ficha =".$ficha." AND ed.id_annio = ".$annio." AND ed.id_trimestre = ".$trimestre." AND ed.id_instructor = ".$instructor." AND id_evaluacion = ".$evaluacion." AND respuesta IS NULL";
+  // print_r($sql);
+  $sentencia=$this->conexionBD->prepare($sql);
+  $sentencia->execute();
+  $resultado=$sentencia->fetch();
+  $sentencia->closeCursor();
+  return $resultado;
+  $this->conexionBD=null;
 }
- ?>
+if ($IdPersona !== 0 && $ficha !== 0  && $annio !== 0 && $trimestre !== 0 && $instructor !== 0 && $evaluacion !== 0 && $control2 == 1) {
+  $sql="SELECT ede.id_pregunta, bp.descripcion, bp.id_respuesta FROM evaluacion_detalle ede INNER JOIN banco_pregunta bp ON (bp.id_pregunta = ede.id_pregunta) WHERE ede.id_evaluacion_detalle = (SELECT MIN(id_evaluacion_detalle) FROM evaluacion_detalle ed WHERE ed.id_aprendiz = ".$IdPersona." and ed.id_ficha =".$ficha." AND ed.id_annio = ".$annio." AND ed.id_trimestre = ".$trimestre." AND ed.id_instructor = ".$instructor." AND id_evaluacion = ".$evaluacion." AND respuesta IS NULL)";
+   // print_r($sql);
+  $sentencia=$this->conexionBD->prepare($sql);
+  $sentencia->execute();
+  $resultado=$sentencia->fetch();
+  $sentencia->closeCursor();
+  return $resultado;
+  $this->conexionBD=null;
+}
+
+}
+}
+class ConsultaRespuesta extends Conexion{
+  public function ConsultaRespuesta(){
+    parent::conectar();
+  }
+  // esta es la informacion de la evaluacion se filtra para saber los años trimestres y fihcas que el aprendiz esta ligdo
+  // para ficha $control es igual a 0
+  // para año  $control es igual a 1
+  public function fTraeRespuesta($respuesta){
+    $sql="SELECT ir.id_item_respuesta, ir.descripcion, ir.id_tipo_respuesta FROM banco_respuesta br INNER JOIN item_respuesta ir ON(ir.id_respuesta = br.id_respuesta) WHERE br.id_respuesta =".$respuesta;
+     // print_r($sql);
+    $sentencia=$this->conexionBD->prepare($sql);
+    $sentencia->execute();
+    $resultado=$sentencia->fetchAll();
+    $sentencia->closeCursor();
+    return $resultado;
+    $this->conexionBD=null;
+  }
+}
