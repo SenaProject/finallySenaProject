@@ -14,7 +14,7 @@ $ver4=$consultar4->TraeAllRoles();
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <html >
- <link rel="stylesheet" href="css/Personascss.css">
+ <link rel="stylesheet" href="css/frm_persona_individual_add.css">
 <head>
 <div id="DivLogoInst">
 
@@ -26,8 +26,10 @@ $ver4=$consultar4->TraeAllRoles();
 </div>
 </head>
 <body id="Byfrm1Ppl" style="background-color:WHITE">
+  <form action="frm_persona_individual_pl.php" method="post">
+    <button type="submit" class="submit_booton" name="Adicions"><- Volver atras</button>
+  </form>
 
-<a href ="frm_persona_individual_pl.php">Volver a tras</a>
 <?php
 echo "<form id='frm1' action='../Controllers/valida_persona_ind.php?valor=CrearPersona' method='post'>";
 echo "<fieldset>";
@@ -113,8 +115,8 @@ echo "    </div><br>";
 echo "</fieldset>";
 echo "<br>";
 echo "    <div id='BtnFrm1Ppl' class='button'>";
-echo "        <button Id='btnG' type='submit'>Guardar</button>";
-echo "        <button Id='btnC' type='reset'>Cancelar</button>";
+echo "        <button class='submit_form submit_booton' Id='btnG' type='submit'>Guardar</button>";
+echo "        <button Id='btnC' class='cancelar_booton submit_booton' type='reset'>Cancelar</button>";
 echo "    </div>";
 echo "</Div>";
 echo "</form>";
