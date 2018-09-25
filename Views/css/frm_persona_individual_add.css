@@ -1,3 +1,32 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700');
+
+body{
+  font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.content_main{
+  width: 80%;
+  margin: auto;
+}
+
+.contenedor_campos{
+  width: 100%;
+  height: 7%;
+}
+
+.input_contenedor{
+  width: 70%;
+  height: 100%;
+  float: right;
+  margin-right: 3%;
+}
+
+.contenedor_labelfield{
+  width: 50%;
+  float: left;
+  height: 100%;
+}
+
 .submit_booton {
     background-color: #68b12f;
     background: -webkit-gradient(linear, left top, left bottom, from(#68b12f), to(#50911e));
