@@ -9,8 +9,8 @@
     require_once "../Models/leer.php";
     // print_r($UsuarioApp);
     // $IdPersona = USUARIO;
-    $UserApp = $_POST['usuario'];
-    $vFicha =  $_POST['SelectFicha'];
+    $UserApp = $_GET['vusuario'];
+    $vFicha =  $_GET['vficha'];
 
     $cAnnio= new ConsultaAplicarEvaluacion();
     $vAnnio=$cAnnio->fTraeInfoEva($UserApp, $vFicha, 0, 0, 0, 1);
@@ -19,7 +19,7 @@
   <body>
 
       <h1>Aplicar Evaluacion [Año]</h1>
-          <form class="" action="frm_aplicar_eva_trimestre.php" method="POST">
+          <form class="" action="../Controllers/validar_evaluacion.php?valor=evaluacionannio" method="POST">
            <br>
              Usuario: <input type="text" name="usuario" value=<?php echo $UserApp; ?> readonly>
              <br>

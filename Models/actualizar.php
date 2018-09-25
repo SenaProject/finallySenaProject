@@ -71,5 +71,12 @@ class ModificarFormulario extends Conexion{
     $this->conexionBD=null;
   }
 }
+class CrearPregunta extends Conexion{
+  public function CrearPregunta(){
+    parent::conectar();
+  }
 
+  public function fCrearPregunta($IdGrupo, $IdRespuesta,$Descripcion){
+
+  }
 ?>

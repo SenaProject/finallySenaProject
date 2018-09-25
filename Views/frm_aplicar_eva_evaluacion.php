@@ -21,7 +21,7 @@
   <body>
 
       <h1>Aplicar Evaluacion [Evaluacion]</h1>
-          <form class="" action="frm_evaluar_pregunta.php" method="POST">
+          <form class="" action="frm_evaluar_pregunta.php" method="GET">
            <br>
             Usuario:
             <input type="text" name="usuario" value=<?php echo $UserApp; ?> readonly>

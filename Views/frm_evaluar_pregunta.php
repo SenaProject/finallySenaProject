@@ -9,17 +9,17 @@
         require_once "../Models/leer.php";
         // print_r($UsuarioApp);
         // $IdPersona = USUARIO;
-        $UserApp = $_POST['usuario'];
-        $vFicha = $_POST['tFicha'];
-        $vAnnio = $_POST['tAnnio'];
-        $vTrimestre = $_POST['tTrimestre'];
-        $vInstructor = $_POST['tInstructor'];
-        $vEvaluacion= $_POST['SelectEvaluacion'];
+        $UserApp = $_GET['usuario'];
+        $vFicha = $_GET['tFicha'];
+        $vAnnio = $_GET['tAnnio'];
+        $vTrimestre = $_GET['tTrimestre'];
+        $vInstructor = $_GET['tInstructor'];
+        $vEvaluacion= $_GET['SelectEvaluacion'];
         ?>
 
   </head>
   <body>
-    <form class="" action="index.html" method="post">
+    <form class="" action=<?php echo "../Controllers/validar_evaluacion.php?valor=sigpregunta&usuario=".$UserApp."&tFicha=".$vFicha."&tAnnio=".$vAnnio."&tTrimestre=".$vTrimestre."&tInstructor=".$vInstructor."&SelectEvaluacion=".$vEvaluacion ?> method="GET">
       <div class="">
           Cantidad de Pregunta por responder :
           <?php
@@ -81,16 +81,19 @@
             <div class="">
 
             <fieldset>
-              <legend><b>Respuesta</b></legend>
+              <legend><b>Respuesta
+              </b></legend>
               <?php
               // print_r($viRespuestaActiva[1] [2]);
               if ($viRespuestaActiva[1] [2] == 15) {
-
+                echo  "<select class='' name='respuesta'>";
                 foreach ($viRespuestaActiva as $viRespuestaActivaInt) {
+                    echo "<option value='".$viRespuestaActivaInt[0]."'>$viRespuestaActivaInt[1]</option>";
                   // debo hacer una lista desplegable
                   // echo "<input type='radio' name='respuesta' value=".$viRespuestaActivaInt[0].">".$viRespuestaActivaInt[1];
                   // echo $viRespuestaActivaInt[1]."<br>";
                 }
+                echo "</select>";
                 }
               if ($viRespuestaActiva[1] [2] == 16){
                 foreach ($viRespuestaActiva as $viRespuestaActivaInt) {
@@ -103,7 +106,7 @@
             </fieldset>
             </div>
       </div>
-
+      <input type="submit" name="btnSiguiente" value="Siguiente ...">
     </form>
   </body>
 </html>

@@ -17,7 +17,7 @@
   <body>
       <h1>Aplicar Evaluacion [Ficha]</h1>
       <br>
-        <form class="" action="frm_aplicar_eva_annio.php" method="POST">
+        <form class="" action="../Controllers/validar_evaluacion.php?valor=evaluarficha" method="POST">
            Usuario:
            <input type="text" name="usuario" value=<?php echo $UserApp; ?> readonly>
            <br>

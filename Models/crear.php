@@ -249,4 +249,5 @@ class CrearPregunta extends Conexion{
     $sentencia->closeCursor();
   }
 }
+
  ?>

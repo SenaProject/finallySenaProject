@@ -9,9 +9,9 @@
     require_once "../Models/leer.php";
     // print_r($UsuarioApp);
     // $IdPersona = USUARIO;
-    $UserApp = $_POST['usuario'];
-    $vFicha = $_POST['tFicha'];
-    $vAnnio = $_POST['Selectannio'];
+    $UserApp = $_GET['usuario'];
+    $vFicha = $_GET['tFicha'];
+    $vAnnio = $_GET['Selectannio'];
     $cTrimestre= new ConsultaAplicarEvaluacion();
     $vTrimestre=$cTrimestre->fTraeInfoEva($UserApp, $vFicha, $vAnnio, 0, 0, 3);
     ?>
