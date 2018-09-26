@@ -113,14 +113,14 @@ $linea=explode(chr(13).chr(10),$allfile);
 for ($i=0; $i < count($linea); $i++) {
   echo "<tr>";
   $campo=explode(chr(59),$linea[$i]);
-  print_r($campo[0]);
+  // print_r($campo[0]);
   for ($x=0; $x < count($campo); $x++) {
     echo "<td>";
     if ($x==0) {
-      $ver= 0;
-      print_r($campo[$x]);
+      // $ver= 0;
+      // print_r($campo[$x]);
       $ver=$consultar->ExistePersona($campo[$x]);
-      print_r($ver);
+      print_r($ver[0]);
         if ($ver[0] == 0) {
           echo $campo[$x];
           $bandera=$bandera+0;

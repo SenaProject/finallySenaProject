@@ -12,7 +12,7 @@ $ver2=$consultar2->TraeBanRespuesta();
     <head>
         <meta charset="utf-8">
         <title>Evaluacion de Instructores</title>
-        <link href="css/frm_banco_preguntas_add.css" rel="stylesheet" type="text/css"/>
+        <!-- <link href="css/frm_banco_preguntas_add.css" rel="stylesheet" type="text/css"/> -->
         <style type="text/css">
 h2 { color: red; font-family: Arial; font-size: large; }
 /*{ color: gray; font-family: Verdana; font-size: medium; }*/

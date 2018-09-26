@@ -71,12 +71,21 @@ class ModificarFormulario extends Conexion{
     $this->conexionBD=null;
   }
 }
-class CrearPregunta extends Conexion{
-  public function CrearPregunta(){
+class ActualizarEvaluacion extends Conexion{
+  public function ActualizarEvaluacion(){
     parent::conectar();
   }
 
-  public function fCrearPregunta($IdGrupo, $IdRespuesta,$Descripcion){
+  public function fGuardarRespuesta($UserApp,$vFicha,$vAnnio,$vTrimestre,$vInstructor,$vEvaluacion,$vPregunta,$vRespuesta){
+    $sql="UPDATE evaluacion_detalle SET respuesta = ".$vRespuesta." WHERE id_evaluacion = ".$vEvaluacion." AND id_pregunta = ".$vPregunta." AND id_aprendiz = ".$UserApp." AND id_instructor = ".$vInstructor." AND id_annio = ".$vAnnio." AND id_ficha = ".$vFicha." AND id_trimestre = ".$vTrimestre;
+    // print_r($sql);
+    $sentencia=$this->conexionBD->prepare($sql);
+    $sentencia->execute();
+    $resultado=$sentencia->fetch();
+    $sentencia->closeCursor();
+    return $resultado;
+    $this->conexionBD=null;
 
   }
+}
 ?>

@@ -37,7 +37,7 @@ foreach ($ver as $value) {
 echo        "<td><a>".$value[0]."</a></td>";
 echo        "<td><a>".$value[1]."</a></td>";
 echo        "<td><a>".$value[2]."</a></td>";
-echo        "<td><a href='#'>Editar</a></td>";
+echo        "<td><a href='frm_banco_preguntas_edi.php?valor=".$value[0]."'>Editar</a></td>";
 echo        "<td><a href='#'>Eliminar</a></td>";
 echo "</tr>";
 }

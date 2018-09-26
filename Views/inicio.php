@@ -38,6 +38,7 @@
 						</button>
 					</div>
 				</form>
+				<a href="frm_terminos_condiciones.php">Ver Terminos y Condiciones</a>
 			</div>
 		</div>
 	</div>

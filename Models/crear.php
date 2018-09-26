@@ -70,12 +70,20 @@ class CrearNuevoPwd extends Conexion{
 
   public function fCrearNuevoPwd($IdPersona,$NewPwd){
     // Cambia la contraseña anterior a inactiva
-    $sql="UPDATE credencial SET estado_credencial = 'I' WHERE id_persona = ".$IdPersona;
+    $sql="SELECT count(*) FROM credencial  WHERE id_persona = ".$IdPersona;
+    print_r($sql);
     $sentencia=$this->conexionBD->prepare($sql);
     $sentencia->execute();
     $resultado=$sentencia->fetch();
     $sentencia->closeCursor();
 
+    if ($resultado[0] > 0) {
+      $sql="UPDATE credencial SET estado_credencial = 'I' WHERE id_persona = ".$IdPersona;
+      $sentencia=$this->conexionBD->prepare($sql);
+      $sentencia->execute();
+      $resultado=$sentencia->fetch();
+      $sentencia->closeCursor();
+    }
 
 // inserta la nueva contraseña
     $sql="INSERT INTO credencial (id_credencial, estado_credencial, credencial, fecha_aviso, fecha_caducidad, id_persona)
@@ -175,8 +183,8 @@ class CrearEvaluacionDetalle extends Conexion{
   public function CrearEvaluacionDetalle(){
         parent::conectar();
   }
-  public function fCrearEvaDetAll($IdEvaluacion, $IdFormulario, $IdPregunta, $IdInstructor, $IdAprendiz, $Estado){
-    $sql="INSERT INTO evaluacion_detalle(id_evaluacion_detalle, id_evaluacion, id_formulario, id_pregunta, id_instructor, id_aprendiz, estado) VALUES (fn_id_tabla('evaluacion_detalle','id_evaluacion_detalle'), ".$IdEvaluacion.", ".$IdFormulario.", ".$IdPregunta.", ".$IdInstructor.", ".$IdAprendiz.", ".$Estado.")";
+  public function fCrearEvaDetAll($IdEvaluacion, $IdFormulario, $IdPregunta, $IdInstructor, $IdAprendiz, $Annio, $Trimestre, $Ficha, $Estado){
+    $sql="INSERT INTO evaluacion_detalle(id_evaluacion_detalle, id_evaluacion, id_formulario, id_pregunta, id_instructor, id_aprendiz, id_annio, id_trimestre, id_ficha, estado) VALUES (fn_id_tabla('evaluacion_detalle','id_evaluacion_detalle'), ".$IdEvaluacion.", ".$IdFormulario.", ".$IdPregunta.", ".$IdInstructor.", ".$IdAprendiz.", ".$Annio.",  ".$Trimestre.", ".$Ficha.", ".$Estado.")";
     $sentencia=$this->conexionBD->prepare($sql);
     $sentencia->execute();
     $resultado=$sentencia->fetch();
@@ -249,5 +257,4 @@ class CrearPregunta extends Conexion{
     $sentencia->closeCursor();
   }
 }
-
  ?>

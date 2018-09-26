@@ -114,7 +114,7 @@
             <li><a>Administracion</a>
               <ul>
                 <li><a href='frm_cambio_contrasenna.php' target='iframe_a'>Cambio de contraseña</a></li>
-                <li><a>Rol</a></li>
+                <li><a href='frm_cambio_contrasenna_otros.php' target='iframe_a'>Cambiar contraseña otro usuario</a></li>
               </ul>
             </li>
           </ul>

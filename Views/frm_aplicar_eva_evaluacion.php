@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+
     <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../Views/css/frm_aplicar_eva_evaluacion.css">
     <title></title>
 
     <?php
@@ -16,12 +18,14 @@
     $vInstructor = $_POST['SelectInstructor'];
     $cEvaluacion= new ConsultaAplicarEvaluacion();
     $vEvaluacion=$cEvaluacion->fTraeInfoEva($UserApp, $vFicha, $vAnnio, $vTrimestre, $vInstructor, 5);
+    $cCantPreguntasXRes= new ConsultaAplicarEvaluacion();
+    $viCantPreguntasXRes=$cCantPreguntasXRes->fTraePreguntaEva($UserApp, $vFicha , $vAnnio, $vTrimestre, $vInstructor, 0, 2);
     ?>
   </head>
   <body>
 
       <h1>Aplicar Evaluacion [Evaluacion]</h1>
-          <form class="" action="frm_evaluar_pregunta.php" method="GET">
+          <form class="" action="frm_evaluar_pregunta.php" method="post">
            <br>
             Usuario:
             <input type="text" name="usuario" value=<?php echo $UserApp; ?> readonly>
@@ -38,6 +42,9 @@
             Instructor:
             <input type="text" name="tInstructor" value=<?php echo $vInstructor; ?> readonly>
             <br>
+            <?php
+              if ($viCantPreguntasXRes[0]>0) {
+             ?>
             Evaluacion:
             <select id="SelectEvaluacion" name ="SelectEvaluacion">
              <option value='0'></option>
@@ -47,8 +54,13 @@
                }
               ?>
             </select>
-            <br>
-            <input type="submit" name="btnSig" value="Siguiente ...">
+            <?php
+            echo "<input type='submit' name='btnSig' value='Siguiente ...'>";
+          } else {
+            echo "<h1><b>No hay evaluacion pendiente</b></h1>";
+          }
+             ?>
+
     </form>
   </body>
 </html>

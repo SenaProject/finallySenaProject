@@ -39,7 +39,7 @@
                <option value='0'></option>
                <?php
                  foreach ($vInstructor as $vInstructorInt) {
-                     echo "<option value='".$vInstructorInt[0]."'>".$vInstructorInt[0]."</option>";
+                     echo "<option value='".$vInstructorInt[0]."'>".$vInstructorInt[1]."</option>";
                  }
                 ?>
              </select>

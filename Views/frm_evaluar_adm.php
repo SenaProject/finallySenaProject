@@ -3,6 +3,8 @@ require_once "../Models/leer.php";
 
 $consultar= new ConsultaEvaluacion();
 $ver=$consultar->TraeMaestroEvaluacionAll();
+$consultar1= new ConsultaAplicarEvaluacion();
+
 // var_dump ($ver);
 ?>
 
@@ -37,8 +39,18 @@ $ver=$consultar->TraeMaestroEvaluacionAll();
           echo        "<td><a>".$value[0]."</a></td>";
           echo        "<td><a>".$value[2]."</a></td>";
           echo        "<td><a>".$value[3]."</a></td>";
-          echo        "<td><a href='frm_evaluacion_detalle.php?valor=".$value[0]."'>Asignar:</a></td>";
-          echo        "<td><a href='../Controllers/valida_formulario.php?valor=BorrarMaestro&IdFormulario=".$value[0]."'>Eliminar</a></td>";  // AQUI VOY
+          $ver1=$consultar1->fTraeCantPreguntaResuEva($value[0]);
+          // echo $ver1;
+          if ($ver1[0]==0) {
+            echo        "<td><a href='frm_evaluacion_detalle.php?valor=".$value[0]."'>Asignar:</a></td>";
+          }else{
+            echo        "<td><a>En ejecucion</a></td>";
+          }
+          if ($ver1[0]==0) {
+          echo        "<td><a href='../Controllers/valida_eva_det_quitar.php?IdFormulario=".$value[0]."'>Quitar detalle</a></td>";  // AQUI VOY
+            }else{
+              echo        "<td><a>En ejecucion</a></td>";
+            }
           echo "</tr>";
 }
          ?>

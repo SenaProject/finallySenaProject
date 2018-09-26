@@ -51,5 +51,19 @@ class BorrarPersona extends Conexion{
   }
 }
 
+class QuitarDetalleEvaluacion extends Conexion{
+  public function QuitarDetalleEvaluacion(){
+    parent::conectar();
+  }
+  public function fQuitarDetalleEvaluacion($IdEvaluacion){
+    $sql="DELETE FROM evaluacion_detalle WHERE Id_evaluacion = ".$IdEvaluacion;
+    $sentencia=$this->conexionBD->prepare($sql);
+    $sentencia->execute();
+    $resultado=$sentencia->fetch();
+    $sentencia->closeCursor();
+    return $resultado;
+    $this->conexionBD=null;
 
+  }
+}
  ?>

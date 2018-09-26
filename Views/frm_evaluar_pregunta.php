@@ -2,6 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/frm_evaluar_pregunta.css">
     <title></title>
 
         <?php
@@ -9,23 +10,45 @@
         require_once "../Models/leer.php";
         // print_r($UsuarioApp);
         // $IdPersona = USUARIO;
-        $UserApp = $_GET['usuario'];
-        $vFicha = $_GET['tFicha'];
-        $vAnnio = $_GET['tAnnio'];
-        $vTrimestre = $_GET['tTrimestre'];
-        $vInstructor = $_GET['tInstructor'];
-        $vEvaluacion= $_GET['SelectEvaluacion'];
+        $UserApp = $_POST['usuario'];
+        $vFicha = $_POST['tFicha'];
+        $vAnnio = $_POST['tAnnio'];
+        $vTrimestre = $_POST['tTrimestre'];
+        $vInstructor = $_POST['tInstructor'];
+        $vEvaluacion= $_POST['SelectEvaluacion'];
+        $cPreguntaActiva = new ConsultaAplicarEvaluacion();
+        $viPreguntaActiva=$cPreguntaActiva->fTraePreguntaEva($UserApp, $vFicha , $vAnnio, $vTrimestre, $vInstructor, $vEvaluacion, 1);
+        $vNumPre = $viPreguntaActiva[0];
         ?>
 
   </head>
   <body>
-    <form class="" action=<?php echo "../Controllers/validar_evaluacion.php?valor=sigpregunta&usuario=".$UserApp."&tFicha=".$vFicha."&tAnnio=".$vAnnio."&tTrimestre=".$vTrimestre."&tInstructor=".$vInstructor."&SelectEvaluacion=".$vEvaluacion ?> method="GET">
+    <?php
+       // $vRuta = '"../Controllers/validar_evaluacion.php?valor=sigpregunta&usuario='.$UserApp.'&tFicha='.$vFicha.'&tAnnio='.$vAnnio.'&tTrimestre='.$vTrimestre.'&tInstructor='.$vInstructor.'&SelectEvaluacion='.$vEvaluacion.'&nPregunta='.$vNumPre.'"';
+      $vRuta = '../Controllers/validar_evaluacion.php?valor=sigpregunta';
+      // print_r($vRuta);
+      echo "<form class='' action='".$vRuta."' method='post'>";
+      ?>
+      <div class="">
+
+          <?php
+            echo "<input  class='ocultarinput' type='text' name ='usuario' value='".$UserApp."' readonly>";
+            echo "<input  class='ocultarinput' type='text' name ='tFicha' value='".$vFicha."' readonly>";
+            echo "<input  class='ocultarinput' type='text' name ='tAnnio' value='".$vAnnio."' readonly>";
+            echo "<input  class='ocultarinput' type='text' name ='tTrimestre' value='".$vTrimestre."' readonly>";
+            echo "<input  class='ocultarinput' type='text' name ='tInstructor' value='".$vInstructor."' readonly>";
+            echo "<input  class='ocultarinput' type='text' name ='SelectEvaluacion' value='".$vEvaluacion."' readonly>";
+            echo "<input  class='ocultarinput' type='text' name ='nPregunta' value='".$vNumPre."' readonly>";
+           ?>
+      </div>
       <div class="">
           Cantidad de Pregunta por responder :
           <?php
           $cCantPreguntasXRes= new ConsultaAplicarEvaluacion();
           $viCantPreguntasXRes=$cCantPreguntasXRes->fTraePreguntaEva($UserApp, $vFicha , $vAnnio, $vTrimestre, $vInstructor, $vEvaluacion, 0);
           echo $viCantPreguntasXRes[0];
+          if ($viCantPreguntasXRes[0]>0) {
+
           ?>
       </div>
       <div class="">
@@ -65,8 +88,7 @@
 
 
             <?php
-              $cPreguntaActiva = new ConsultaAplicarEvaluacion();
-              $viPreguntaActiva=$cPreguntaActiva->fTraePreguntaEva($UserApp, $vFicha , $vAnnio, $vTrimestre, $vInstructor, $vEvaluacion, 1);
+
               $cRespuestaActiva= new ConsultaRespuesta();
               $viRespuestaActiva=$cRespuestaActiva->fTraeRespuesta($viPreguntaActiva[2]);
               ?>
@@ -75,6 +97,7 @@
               <br>
               <?php
               echo $viPreguntaActiva[1];
+
               ?>
               </fieldset>
             </div>
@@ -87,6 +110,7 @@
               // print_r($viRespuestaActiva[1] [2]);
               if ($viRespuestaActiva[1] [2] == 15) {
                 echo  "<select class='' name='respuesta'>";
+                    echo "<option value='0'>Selecciones repuesta</option>";
                 foreach ($viRespuestaActiva as $viRespuestaActivaInt) {
                     echo "<option value='".$viRespuestaActivaInt[0]."'>$viRespuestaActivaInt[1]</option>";
                   // debo hacer una lista desplegable
@@ -106,7 +130,12 @@
             </fieldset>
             </div>
       </div>
-      <input type="submit" name="btnSiguiente" value="Siguiente ...">
+      <input type="submit" name="btnGuardar" value="Guardar ...">
     </form>
+<?php           } else {
+      header("location:frm_aplicar_eva_ficha.php?valor=".$UserApp);
+}
+ ?>
+
   </body>
 </html>
