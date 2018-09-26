@@ -4,9 +4,23 @@
 	<title>Ingresa de Persona</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="css/inicio.css" rel="stylesheet" type="text/css"/>
+  <link href="css/inicio.css" rel="stylesheet" type="text/css"/>
 
 </head>
+<header>
+	<script>
+	function printTime(){
+		var d = new Date();
+		var hours = d.getHour();
+		var minutes = d.getMinutes();
+		var secund = d.getSeconds();
+		document.body.innerHTML = hours+':'+minutes+':'+secund;
+
+	}
+	setInterval(printTime, 1000);
+	</script>
+
+</header>
 
 <body>
 	<div class="limiter">
@@ -18,10 +32,7 @@
 					</span>
 					<span class="login100-form-title p-b-50">
                                             <h3>Bienvenido</h3>
-					</span>
-					<span class="login100-form-avatar">
-						<!-- <img src="image/79569257.jpg" alt="AVATAR"> -->
-					</span>
+																										</span>
 
 					<div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate = "Enter username">
               <input class="input100" type="tUsua" name="Usuario1" value="" required="">
@@ -46,3 +57,5 @@
 	<div id="dropDownSelect1"></div>
 
 </body>
+<footer>
+</footer>
