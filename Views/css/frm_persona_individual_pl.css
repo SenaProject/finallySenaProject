@@ -53,3 +53,9 @@ tr:nth-child(even) {
     -o-box-shadow: 0 0 10px 5px #356b0b inset;
 
 }
+
+
+.person_booton {
+  margin-bottom: 5%;
+  margin-top: 5%;
+}

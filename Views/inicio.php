@@ -14,12 +14,17 @@
 		var hours = d.getHour();
 		var minutes = d.getMinutes();
 		var secund = d.getSeconds();
-		document.body.innerHTML = hours+':'+minutes+':'+secund;
+		var resultado = hours+':'+minutes+':'+secund;
+		document.getElementById('resultado').innerHTML = resultado;
+		//document.header.innerHTML = resultado;
+
 
 	}
 	setInterval(printTime, 1000);
-	</script>
 
+
+	</script>
+<div id="resultado"></div>
 </header>
 
 <body>
@@ -36,7 +41,7 @@
 
 					<div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate = "Enter username">
               <input class="input100" type="tUsua" name="Usuario1" value="" required="">
-						<span class="focus-input100" data-placeholder=""></span>
+						<span class="focus-input100" data-placeholder="Ingresar identificación"></span>
 					</div>
 					<div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
               <input class="input100" type="password" name="Pwd1" required="">
