@@ -216,7 +216,7 @@ for ($i=0; $i < count($linea); $i++) {
     // echo $campo[$x];
 
 }
-    // echo "NumDoc ".$IdPersona." Nom1 ".$Nombre1." Nom2 ".$Nombre2." Ape1 ".$Apellido1." Ape2 ".$Apellido2." fn ".$fnacimiento." tel ".$Tel." email ".$email." dir ".$Dir." tipodoc ".$tipo_documento." adm ".$Administrador." rol ".$Rol." ficha ".$ficha;
+     echo "NumDoc ".$IdPersona." Nom1 ".$Nombre1." Nom2 ".$Nombre2." Ape1 ".$Apellido1." Ape2 ".$Apellido2." fn ".$fnacimiento." tel ".$Tel." email ".$email." dir ".$Dir." tipodoc ".$tipo_documento." adm ".$Administrador." rol ".$Rol." ficha ".$ficha;
 $ver=$consultar->fCrearPersona($IdPersona,$Nombre1,$Nombre2,$Apellido1,$Apellido2,$fnacimiento,$Tel,$email,$Dir,$tipo_documento,$Administrador,$Rol,$ficha);
 }
 

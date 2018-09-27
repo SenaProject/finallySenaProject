@@ -56,7 +56,7 @@ $ver5=$consultar5->TraeAllInstructor();
       <select name="sAnnio">
 
 <?php
-echo        "<option class='' value='Nulo'></option>";
+echo        "<option  value='Nulo'></option>";
 foreach ($ver1 as $valor1) {
 echo        "<option value='".$valor1[0]."'>".$valor1[1]."</option>";
 }

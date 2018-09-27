@@ -257,4 +257,18 @@ class CrearPregunta extends Conexion{
     $sentencia->closeCursor();
   }
 }
+class CrearGrupoPregunta extends Conexion{
+  public function CrearGrupoPregunta(){
+    parent::conectar();
+  }
+  public function fCrearGrupoPregunta($Descripcion){
+    if ($Descripcion !== '') {
+    $sql="INSERT INTO grupo_pregunta(id_grupo, descripcion, estado) VALUES (fn_id_tabla('grupo_pregunta','id_grupo'), '".$Descripcion."', True)";
+    $sentencia=$this->conexionBD->prepare($sql);
+    $sentencia->execute();
+    $resultado=$sentencia->fetch();
+    $sentencia->closeCursor();
+    }
+  }
+}
  ?>

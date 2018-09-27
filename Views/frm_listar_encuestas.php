@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+ ﻿<!DOCTYPE html>
  <!Autor: Maycol Andrei Nuñez>
 <!Fecha: 28/07/2018>
 <!Version:1>
@@ -49,11 +49,11 @@
 </div>
 
  <h1><center><label for="">EVALUACIONES</label></center></h1>
- 
+
 <table style="width:40%">
   <tr>
     <th>ID Evaluacion</th>
-    <th>Fecha Creacion</th> 
+    <th>Fecha Creacion</th>
     <th>Fecha Cierre</th>
 	<th>Ficha</th>
 	<th>Estado</th>
@@ -62,7 +62,7 @@
   </tr>
   <tr>
     <td>000-01</td>
-    <td>10/08/2018</td> 
+    <td>10/08/2018</td>
     <td>25/09/2018</td>
 	<td>1298372</td>
 	<td><input type="radio" name="estado1" value="male"></td>
@@ -71,13 +71,13 @@
   </tr>
   <tr>
     <td>000-02</td>
-    <td>10/09/2017</td> 
+    <td>10/09/2017</td>
     <td>10/09/2018</td>
 	<td>1258749</td>
 	<td><input type="radio" name="estado2" value="male"></td>
   </tr>
 </table>
-	
+
 
  <div>&nbsp;</div>
 

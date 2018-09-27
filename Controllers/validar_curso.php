@@ -44,6 +44,9 @@ $ver3=$consultar3->ConsultarCursoATF($annio, $trimestre, $ficha);
 
 echo "<table border=3>";
 echo "  <tr>";
+echo "    <th colspan = '2'><p>Aprendices</p></th>";
+echo "  </tr>";
+echo "  <tr>";
 echo "    <th>Nombre</th>";
 echo "    <th>Rol</th>";
 echo "  </tr>";
@@ -52,8 +55,8 @@ foreach ($ver3 as $valor) {
 echo "  <tr>";
 
 if ($valor[1]=='Instructor') {
-    echo "    <td><font color='blue'><b>".$valor[0]."</font></b></td>";
-    echo "    <td><font color='blue'><b>".$valor[1]."</font></b></td>";
+    // echo "    <td><font color='blue'><b>".$valor[0]."</font></b></td>";
+    // echo "    <td><font color='blue'><b>".$valor[1]."</font></b></td>";
 } else {
     echo "    <td>".$valor[0]."</td>";
     echo "    <td>".$valor[1]."</td>";
@@ -62,8 +65,31 @@ echo "  </tr>";
 }
 echo "</table>";
 
+echo "<table border=3>";
+echo "  <tr>";
+echo "    <th colspan = '2'><b>Instructores</b></th>";
+echo "  </tr>";
+echo "  <tr>";
+echo "    <th>Nombre</th>";
+echo "    <th>Rol</th>";
+echo "  </tr>";
+
+foreach ($ver3 as $valor) {
+echo "  <tr>";
+
+if ($valor[1]=='Instructor') {
+    echo "    <td><font color='red'><b>".$valor[0]."</font></b></td>";
+    echo "    <td><font color='red'><b>".$valor[1]."</font></b></td>";
+} else {
+    // echo "    <td>".$valor[0]."</td>";
+    // echo "    <td>".$valor[1]."</td>";
+}
+echo "  </tr>";
+}
+echo "</table>";
 
 }
+
 else {
   echo "<b>Por favor ingrese la informacion completa</b>";
 }
