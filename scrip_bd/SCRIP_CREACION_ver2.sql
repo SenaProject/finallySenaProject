@@ -1,3 +1,25 @@
+CREATE SEQUENCE public.credencial_id_credencial_seq
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+ALTER TABLE public.credencial_id_credencial_seq
+  OWNER TO evaplus;
+
+  -- Sequence: public.rol_id_rol_seq
+
+  -- DROP SEQUENCE public.rol_id_rol_seq;
+
+  CREATE SEQUENCE public.rol_id_rol_seq
+    INCREMENT 1
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
+    START 1
+    CACHE 1;
+  ALTER TABLE public.rol_id_rol_seq
+    OWNER TO evaplus;
+
 -- Role: evaplus
 
 -- DROP ROLE evaplus;
@@ -13,7 +35,7 @@ CREATE ROLE evaplus LOGIN
 CREATE TABLESPACE tb_evaplus
   OWNER evaplus
   LOCATION 'D:\\AppServ\\www\\Proyecto\\Db';
- 
+
  -- Database: evaplus
 
 -- DROP DATABASE evaplus;
@@ -61,29 +83,29 @@ begin
 		if i > 1 then
 			vContrasennia := vContrasennia || '-' || vCaracterT ;
 		end if;
-		
+
 	end loop;
 	return vContrasennia;
  end if;
- 
+
  if actividad = 'D' then
-	vNumero := '';  
+	vNumero := '';
 	vContrasennia := '';
 	credencial := credencial || '-';
 	vLongitud := character_length(credencial);
 	for i in 1 .. vLongitud
-	loop	
+	loop
 	vCaracter := substr(credencial, i, 1);
 		if (vCaracter != '-') then
 			vNumero := vNumero || vCaracter ;
-		end if;	
+		end if;
 		if vCaracter = '-' then
 			vNum :=cast(vNumero as int);
 		vNum := vNum-365;
 			vCaracterRec := CHR(vNum);
 			vContrasennia := vContrasennia || vCaracterRec;
 			vNumero := '';
-		end if; 
+		end if;
 	end loop;
 	return vContrasennia;
  end if;
@@ -96,7 +118,7 @@ ALTER FUNCTION public.fn_credencial(text, text)
   OWNER TO evaplus;
 GRANT EXECUTE ON FUNCTION public.fn_credencial(text, text) TO evaplus;
 REVOKE ALL ON FUNCTION public.fn_credencial(text, text) FROM public;
-	   
+
 -- Function: public.fn_fecha_credencial(text)
 
 -- DROP FUNCTION public.fn_fecha_credencial(text);
@@ -124,7 +146,7 @@ vDiaAviso := '80 days';
  if tipo_fecha = 'C' then
 	vFcaducidad :='SELECT CAST(CAST(now() AS DATE) + CAST('||chr(39)||vDiaCaduca||chr(39)||' AS INTERVAL)as date)';
 	execute vFcaducidad into vFcaducidad2;
-	return cast(vFcaducidad2 as date); 
+	return cast(vFcaducidad2 as date);
  end if;
 
  end;
@@ -176,9 +198,9 @@ begin
 	update credencial
 	   set estado_credencial = 'I'
 	 where id_persona = vId_persona;
-	   
-	INSERT INTO public.credencial(aud_ffecha, aud_cestado, aud_nidusuario, id_credencial, estado_credencial, credencial, fecha_aviso, fecha_caducidad, id_persona) 
-	                      VALUES (now(), 'A', vId_persona, fn_id_tabla('credencial','id_credencial'), 'A', fn_credencial( vContrasennia, 'E'), fn_fecha_credencial('A'), fn_fecha_credencial('C'), vId_persona);   
+
+	INSERT INTO public.credencial(aud_ffecha, aud_cestado, aud_nidusuario, id_credencial, estado_credencial, credencial, fecha_aviso, fecha_caducidad, id_persona)
+	                      VALUES (now(), 'A', vId_persona, fn_id_tabla('credencial','id_credencial'), 'A', fn_credencial( vContrasennia, 'E'), fn_fecha_credencial('A'), fn_fecha_credencial('C'), vId_persona);
 	return true;
  end;
 $BODY$
@@ -198,11 +220,11 @@ $BODY$
 declare Total BIGINT;
 begin
   Total:=(select distinct id_grupo from public.parametro where grupo = nom_grupo);
-  if Total is null then 
+  if Total is null then
    Total:=(select  max (id_grupo) +1 from public.parametro );
-   if Total is null then 
+   if Total is null then
     Total:= 1;
-   end if;  
+   end if;
   end if;
  return Total;
 end;
@@ -254,7 +276,7 @@ $BODY$
   COST 100;
 ALTER FUNCTION public.fn_persona_nom_com(bigint)
   OWNER TO evaplus;
- 
+
  -- Table: public.aud_datos
 
 -- DROP TABLE public.aud_datos;
@@ -331,7 +353,7 @@ WITH (
 );
 ALTER TABLE public.aud_estructura
   OWNER TO evaplus;
-  
+
 -- Table: public.banco_pregunta
 
 -- DROP TABLE public.banco_pregunta;
@@ -599,7 +621,7 @@ WITH (
 );
 ALTER TABLE public.grupo_pregunta
   OWNER TO evaplus;
-  
+
  -- Table: public.his_curso
 
 -- DROP TABLE public.his_curso;
@@ -640,8 +662,8 @@ WITH (
 );
 ALTER TABLE public.his_evaluacion_detalle
   OWNER TO evaplus;
-  
-  
+
+
 -- Table: public.his_persona
 
 -- DROP TABLE public.his_persona;
@@ -739,7 +761,7 @@ WITH (
 );
 ALTER TABLE public.persona
   OWNER TO evaplus;
-  
+
 
 -- Table: public.persona_rol
 
@@ -762,7 +784,7 @@ WITH (
 );
 ALTER TABLE public.persona_rol
   OWNER TO evaplus;
-  
+
  -- Table: public.programa
 
 -- DROP TABLE public.programa;
@@ -799,5 +821,3 @@ WITH (
 );
 ALTER TABLE public.rol
   OWNER TO evaplus;
-
-  
