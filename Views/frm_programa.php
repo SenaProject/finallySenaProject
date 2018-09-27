@@ -14,13 +14,9 @@ $ver=$consultar->TraeAllPrograma();
     <title>Programas</title>
 <body>
         <h2>Programa</h2>
-        <br>
-        <br>
-        <br>
-        <h3><a href="frm_programa_add.php">Adicionar nuevo registro</a></h3>
-        <br>
-        <br>
-        <br>
+        <form action="frm_programa_add.php" method="post">
+          <button type="submit" class="submit_booton person_booton" name="Adicions">Adicionar nuevo registro</button>
+        </form>
     <table >
       <tr>
         <th><a>Id Programa</a></th>

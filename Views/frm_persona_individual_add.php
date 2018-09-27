@@ -121,4 +121,6 @@ $ver4=$consultar4->TraeAllRoles();
     ?>
   </div>
 </body>
+</body>
+<footer></footer>
 </html>

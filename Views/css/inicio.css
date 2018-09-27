@@ -155,11 +155,12 @@ iframe {
 .limiter {
   width: 100%;
   margin: 0 auto;
+  margin-bottom: 3%;
 }
 
 .container-login100 {
   width: 100%;
-  min-height: 100vh;
+  min-height: 74vh;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -740,7 +741,7 @@ iframe {
 .p-t-82 {padding-top: 82px;}
 .p-t-83 {padding-top: 83px;}
 .p-t-84 {padding-top: 84px;}
-.p-t-85 {padding-top: 85px;}
+.p-t-85 {padding-top: 22px;}
 .p-t-86 {padding-top: 86px;}
 .p-t-87 {padding-top: 87px;}
 .p-t-88 {padding-top: 88px;}
@@ -956,7 +957,7 @@ iframe {
 .p-b-47 {padding-bottom: 47px;}
 .p-b-48 {padding-bottom: 48px;}
 .p-b-49 {padding-bottom: 49px;}
-.p-b-50 {padding-bottom: 50px;}
+.p-b-50 {padding-bottom: 15px;}
 .p-b-51 {padding-bottom: 51px;}
 .p-b-52 {padding-bottom: 52px;}
 .p-b-53 {padding-bottom: 53px;}
@@ -1748,7 +1749,7 @@ iframe {
 .m-t-82 {margin-top: 82px;}
 .m-t-83 {margin-top: 83px;}
 .m-t-84 {margin-top: 84px;}
-.m-t-85 {margin-top: 85px;}
+.m-t-85 {margin-top: 0px;}
 .m-t-86 {margin-top: 86px;}
 .m-t-87 {margin-top: 87px;}
 .m-t-88 {margin-top: 88px;}
@@ -3431,4 +3432,15 @@ iframe {
 	position: absolute;
 	right: 0px;
 	bottom: 0px;
+}
+header{
+  width: 100%;
+  height: 10%;
+  background-color: #57b846;
+}
+
+footer{
+  width: 100%;
+  height: 10%;
+  background-color: #57b846;
 }

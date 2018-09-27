@@ -128,4 +128,5 @@
 	</div>
    <!--<iframe height="300px" width="100%" name= "iframe_b" src="Frm_Ban_Respuestas.html" style="border:none;"></iframe>-->
   </body>
+<footer></footer>  
 </html>
