@@ -42,9 +42,9 @@ $consultar1= new ConsultaAplicarEvaluacion();
           $ver1=$consultar1->fTraeCantPreguntaResuEva($value[0]);
           // echo $ver1;
           if ($ver1[0]==0) {
-            echo        "<td><a href='frm_evaluacion_detalle.php?valor=".$value[0]."'>Asignar:</a></td>";
+            echo        "<td><a href='frm_evaluacion_detalle_ver.php?valor=".$value[0]."'>[Ver] - </a><a href='frm_evaluacion_detalle.php?valor=".$value[0]."'>Asignar:</a></td>";
           }else{
-            echo        "<td><a>En ejecucion</a></td>";
+            echo        "<td><a href='frm_evaluacion_detalle_ver.php?valor=".$value[0]."'>[Ver] - </a><a>En ejecucion</a></td>";
           }
           if ($ver1[0]==0) {
           echo        "<td><a href='../Controllers/valida_eva_det_quitar.php?IdFormulario=".$value[0]."'>Quitar detalle</a></td>";  // AQUI VOY
