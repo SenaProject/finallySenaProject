@@ -15,8 +15,8 @@
     ?>
   </head>
   <body>
-      <h1>Aplicar Evaluacion [Ficha]</h1>
-      <br>
+      <div class="title_ficha"><h1>Aplicar Evaluacion [Ficha]</h1></div>
+      <div class="content_app_ficha">
         <form class="" action="../Controllers/validar_evaluacion.php?valor=evaluarficha" method="POST">
            Usuario:
            <input type="text" name="usuario" value=<?php echo $UserApp; ?> readonly>
@@ -32,6 +32,8 @@
              </select>
              <br>
            <input type="submit" name="btnSig" value="Siguiente ...">
-    </form>
+      </form>
+      </div>
+
   </body>
 </html>

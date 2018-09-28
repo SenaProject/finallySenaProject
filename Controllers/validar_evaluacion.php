@@ -78,8 +78,7 @@ if ($vRespuesta==0 or $vRespuesta=='' ) {
   // header("location:../Views/frm_evaluar_pregunta.php?usuario=".$UserApp."&tFicha=".$vFicha."&tAnnio=".$vAnnio."&tTrimestre=".$vTrimestre."&tInstructor=".$vInstructor."&SelectEvaluacion=".$vEvaluacion);
 
   ?>
-  <form  action= "../Views/frm_evaluar_pregunta.php" method="post">
-    <div class="">
+  <form  class="form_validar_eva" action= "../Views/frm_evaluar_pregunta.php" method="post">
 
         <?php
           echo "<input class='ocultarinput' type='text' name ='usuario' value='".$UserApp."' readonly>";
@@ -91,10 +90,14 @@ if ($vRespuesta==0 or $vRespuesta=='' ) {
           echo "<input class='ocultarinput' type='text' name ='nPregunta' value='0'>";
              ?>
         <b>
-        <h1>Atencion !!!</h1>
+          <div class="content_confirm">
+            <div class="subcontent_confirm">
+        <div class="title_confirm"><h1>Atencion !!!</h1></div>
           <p>Señor Aprendiz usted ha guardado con exito la anterior pregunta para continuar oprima el boton siguiente</p>
         </b>
-         <input type="submit" name="btnNewPre" value="Siguiente ...">
+         <div class="button_confirm"><input class="con_evaluacion" type="submit" name="btnNewPre" value="Siguiente ..."></div>
+      </div>
+
     </div>
   </form>
 

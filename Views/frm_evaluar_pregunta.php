@@ -41,97 +41,108 @@
             echo "<input  class='ocultarinput' type='text' name ='nPregunta' value='".$vNumPre."' readonly>";
            ?>
       </div>
-      <div class="">
-          Cantidad de Pregunta por responder :
+
+    <div class="content_pregunta">
+      <div class="box_pregunta">
+          <h6 class="title_pregunta">Cantidad de Pregunta por responder :</h6>
           <?php
           $cCantPreguntasXRes= new ConsultaAplicarEvaluacion();
           $viCantPreguntasXRes=$cCantPreguntasXRes->fTraePreguntaEva($UserApp, $vFicha , $vAnnio, $vTrimestre, $vInstructor, $vEvaluacion, 0);
-          echo $viCantPreguntasXRes[0];
+          echo '<div class="subtitle_respuesta">'.$viCantPreguntasXRes[0].'</div>';
           if ($viCantPreguntasXRes[0]>0) {
 
           ?>
       </div>
-      <div class="">
-          Evaluacion No. : <?php echo $vEvaluacion; ?>
+      <div class="box_pregunta">
+        <h6 class="title_pregunta">  Evaluacion No. : </h6><?php echo '<div class="subtitle_respuesta">'.$vEvaluacion.'</div>'; ?>
       </div>
-      <div class="">
-          Ficha No. : <?php echo $vFicha; ?>
+      <div class="box_pregunta">
+        <h6 class="title_pregunta">  Ficha No. :</h6> <?php echo '<div class="subtitle_respuesta">'.$vFicha.'</div>'; ?>
       </div>
-      <div class="">
-          Año :
+      <div class="box_pregunta">
+        <h6 class="title_pregunta">  Año :</h6>
           <?php
           $cAnnio= new ConsultaAnnio();
           $viAnnio=$cAnnio->TraeAnnio($vAnnio);
 
-            echo $viAnnio[1] ;
+            echo '<div class="subtitle_respuesta">'.$viAnnio[1].'</div>' ;
           ?>
       </div>
-      <div class="">
-          Trimestre :
+      <div class="box_pregunta">
+        <h6 class="title_pregunta">  Trimestre :</h6>
             <?php
               $cTrimestre = new ConsultaTrimestre();
               $viTrimestre=$cTrimestre->TraeTrimestre($vTrimestre);
-              echo $viTrimestre[1];
+              echo '<div class="subtitle_respuesta">'.$viTrimestre[1].'</div>';
 
              ?>
       </div>
-      <div class="">
-          Instructor :
+      <div class="box_pregunta">
+          <h6 class="title_pregunta"> Instructor :</h6>
             <?php
               $cInstructor = new ConsultaPersona();
               $viInstructor=$cInstructor->TraeInstructor($vInstructor);
-              echo $viInstructor[1];
+              echo '<div class="subtitle_respuesta">'.$viInstructor[1].'</div>';
             ?>
       </div>
-      <div class="">
-            <div class="">
-
-
-            <?php
-
-              $cRespuestaActiva= new ConsultaRespuesta();
-              $viRespuestaActiva=$cRespuestaActiva->fTraeRespuesta($viPreguntaActiva[2]);
-              ?>
-              <fieldset>
-              <legend><b>Enunciado de la pregunta</b></legend>
-              <br>
-              <?php
-              echo $viPreguntaActiva[1];
-
-              ?>
-              </fieldset>
-            </div>
-            <div class="">
-
-            <fieldset>
-              <legend><b>Respuesta
-              </b></legend>
-              <?php
-              // print_r($viRespuestaActiva[1] [2]);
-              if ($viRespuestaActiva[1] [2] == 15) {
-                echo  "<select class='' name='respuesta'>";
-                    echo "<option value='0'>Selecciones repuesta</option>";
-                foreach ($viRespuestaActiva as $viRespuestaActivaInt) {
-                    echo "<option value='".$viRespuestaActivaInt[0]."'>$viRespuestaActivaInt[1]</option>";
-                  // debo hacer una lista desplegable
-                  // echo "<input type='radio' name='respuesta' value=".$viRespuestaActivaInt[0].">".$viRespuestaActivaInt[1];
-                  // echo $viRespuestaActivaInt[1]."<br>";
-                }
-                echo "</select>";
-                }
-              if ($viRespuestaActiva[1] [2] == 16){
-                foreach ($viRespuestaActiva as $viRespuestaActivaInt) {
-                  echo "<input type='radio' name='respuesta' value=".$viRespuestaActivaInt[0].">".$viRespuestaActivaInt[1];
-                  // echo $viRespuestaActivaInt[1]."<br>";
-                }
-              }
-
-              ?>
-            </fieldset>
-            </div>
       </div>
-      <input type="submit" name="btnGuardar" value="Guardar ...">
-    </form>
+      <div class="main_content_eva">
+        <div class="content_evaluacion">
+
+                <?php
+
+                  $cRespuestaActiva= new ConsultaRespuesta();
+                  $viRespuestaActiva=$cRespuestaActiva->fTraeRespuesta($viPreguntaActiva[2]);
+                  ?>
+                  <div class="title_enunciado">
+
+                    <h4>Enunciado de la pregunta</h4>
+                    </div>
+                    <?php
+                    echo '<div class="body_enunciado">'.$viPreguntaActiva[1].'</div>';
+
+                    ?>
+
+
+
+      </div>
+      <div class="content_respuesta">
+                <div class="title_enunciado_res">
+                    <h4>Respuesta</h4>
+                  </div>
+                    <?php
+                    // print_r($viRespuestaActiva[1] [2]);
+                    if ($viRespuestaActiva[1] [2] == 15) {
+                      echo  "<div class='body_enunciado_res'><select class='respuesta' name='respuesta'>";
+                          echo "<option value='0'>Selecciones repuesta</option>";
+                      foreach ($viRespuestaActiva as $viRespuestaActivaInt) {
+                          echo "<option value='".$viRespuestaActivaInt[0]."'>$viRespuestaActivaInt[1]</option>";
+                        // debo hacer una lista desplegable
+                        // echo "<input type='radio' name='respuesta' value=".$viRespuestaActivaInt[0].">".$viRespuestaActivaInt[1];
+                        // echo $viRespuestaActivaInt[1]."<br>";
+                      }
+                      echo "</select></div>";
+                      }
+                    if ($viRespuestaActiva[1] [2] == 16){
+                      foreach ($viRespuestaActiva as $viRespuestaActivaInt) {
+                        echo "<div class='body_enunciado_button'><input type='radio' name='respuesta' value=".$viRespuestaActivaInt[0].">".$viRespuestaActivaInt[1]."</div>";
+                        // echo $viRespuestaActivaInt[1]."<br>";
+                      }
+                    }
+
+                    ?>
+                  </fieldset>
+                </div>
+
+                </div>
+          </div>
+          <div class="input_content_eva">
+            <input class="input_evaluacion" type="submit" name="btnGuardar" value="Guardar ...">
+          </div>
+
+        </form>
+      </div>
+
 <?php           } else {
       header("location:frm_aplicar_eva_ficha.php?valor=".$UserApp);
 }
