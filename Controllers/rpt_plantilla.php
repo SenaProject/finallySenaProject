@@ -7,10 +7,13 @@
       $this->image('image/ima_evaplus.jpg', 5,5,30);
       $this->SetFont('Arial','B',15);
       $this->Cell(30);
-      $this->Cell(120,10,'Reporte de Evalucion',0,0,'C');
+      $this->Cell(120,10,'Reporte de Evalucion',0,1,'C');
+      $this->SetFont('Arial','B',10);
+      $this->Cell(180,10,'Reporte General',0,0,'C');
+
 
       $this->ln(20);
-      
+
     }
     function Footer(){
       $this->SetY(-15);

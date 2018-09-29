@@ -27,11 +27,12 @@ class ReporteEvaluacion extends Conexion{
         $sql="SELECT id_evaluacion, fecha_inicio, fecha_final FROM evaluacion" ;
         $sentencia=$this->conexionBD->prepare($sql);
         $sentencia->execute();
-        $resultado=$sentencia->fetch();
+        $resultado=$sentencia->fetchall();
         $sentencia->closeCursor();
         return $resultado;
         $this->conexionBD=null;
   }
+
   function fReporteEvaM($IdEvaluacion){
 
         $sql="SELECT id_evaluacion, fecha_inicio, fecha_final FROM evaluacion WHERE  id_evaluacion =".$IdEvaluacion ;
