@@ -1,0 +1,31 @@
+html,body{
+  width: 100%;
+  height: 100%;
+}
+
+.content_program{
+  width: 50%;
+  height: 50%;
+  margin: auto;
+  background-color: gray;
+}
+
+.subcontent_program{
+  width: 70%;
+  height: 70%;
+  margin: auto;
+}
+
+.field_program{
+  width: 100%;
+}
+.field_program input{
+  width: 100%;
+}
+.button_reset{
+  width: 100%;
+}
+
+.button_guardar{
+  width: 100%;
+}
