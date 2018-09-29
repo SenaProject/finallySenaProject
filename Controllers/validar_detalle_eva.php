@@ -27,7 +27,7 @@
   $vPreXFor=$cPreXFor->TraeFormularioDall($IdFormulario);
   foreach ($vPreXFor as $vPreXForInt) {
     // para las Instructores, Aprendices y Fichas
-      $vConIyACur=$cConIyACur->fTraeCursoInsXAprXFichaAll($Annio, $Trimestre,0,'');
+      $vConIyACur=$cConIyACur->fTraeCursoInsXAprAll($Annio, $Trimestre,0,'');
       foreach ($vConIyACur as $vConIyACurInt) {
         $cant = $cant + 1;
         // $IdEvaluacion, $IdFormulario, $IdPregunta, $IdInstructor, $IdAprendiz, $Annio, $Trimestre, $Estado
@@ -179,6 +179,72 @@ echo "ficha";
  }
 
 if ($ListaHumano == 24 ) {
+  if ($_GET['control']=='ok') {
+    // Ejecucion de insercion por programa
+    // Programa por un rango de tiempo
+    // ejecutar funcion para insertar datos a evaluacion detalle
+    // para las preguntas
+  require_once "../Models/crear.php";
+  require_once "../Models/leer.php";
+  $cPreXFor1 = new ConsultarFormularioD();
+  $IdFormulario = $_POST['ListaForm'];
+  $Annio = $_POST['lannio'];
+  $Trimestre = $_POST['ltrimestre'];
+  $Instructor = $_POST['linstructor'];
+  $vPreXFor1=$cPreXFor1->TraeFormularioDall($IdFormulario);
+  foreach ($vPreXFor1 as $vPreXFor1Int) {
+    // para las Instructores, Aprendices y Fichas por programa
+
+      $vConIyACur=$cConIyACur->fTraeCursoInsXAprAll($Annio, $Trimestre,3,$Instructor);
+      foreach ($vConIyACur as $vConIyACurInt) {
+        $cant = $cant + 1;
+        // $IdEvaluacion, $IdFormulario, $IdPregunta, $IdInstructor, $IdAprendiz, $Annio, $Trimestre, $Estado
+        // este es el inser pero luego de pintar
+        $cCreaEvaDet= new CrearEvaluacionDetalle();
+        echo "No.".$cant." | Evaluacion No. ".$IdEvaluacion."| Formulario No.".$IdFormulario."| Pregunta".$vPreXFor1Int[4]."| Instructor: ".$vConIyACurInt[1]."| Aprendiz ".$vConIyACurInt[0]."| Año ".$Annio."| Trimestre ".$Trimestre."| Ficha ".$vConIyACurInt[2]."<br>";
+        $CrEvDe=$cCreaEvaDet->fCrearEvaDetAll($IdEvaluacion, $IdFormulario, $vPreXFor1Int[4], $vConIyACurInt[1], $vConIyACurInt[0], $Annio, $Trimestre, $vConIyACurInt[2], 'True');
+        echo "Registro insertado";
+      }
+    }
+    echo "<br><b>Son ".$cant." Registros procesados ... </b><h1><b>FIN DEL PROCESO</b></h1>";
+
+
+  } else {
+
+  echo "<form class='' action='validar_detalle_eva.php?valor=".$IdEvaluacion."&control=ok' method='post'>";
+  ?>
+    <div style="color: rgb(255,255,255)">
+
+
+    <?php
+
+    echo "<input class='ocultarinput' type='text' name='ListaForm' value='".$IdFormulario."' readonly >";
+    echo "<input class='ocultarinput' type='text' name='lannio' value='".$Annio."' readonly '>";
+    echo "<input class='ocultarinput' type='text' name='ltrimestre' value='".$Trimestre."' readonly'>";
+    echo "<input class='ocultarinput' type='text' name='ListaHumano' value='".$ListaHumano."' readonly'>";
+
+
+     ?>
+    </div>
+  <h1>Instructor</h1>
+  <p>Seleccione El instructor al cual se le cagara la evaluacion en el rango de tiempo previamente seleccionado.</p>
+
+    <select required class='' name='linstructor'>
+    <option value='' >Seleccione ...</option>
+  <?php
+  $cConCurXIns= new ConsultaPersonaCurso();
+  $vConCurXIns=$cConCurXIns->fTraeCursoInstructorAll($Annio, $Trimestre);
+    foreach ($vConCurXIns as $vConCurXInsInt) {
+      echo "<option value='".$vConCurXInsInt[0]."' >".$vConCurXInsInt[1]."</option>";
+            }
+  ?>
+    </select>
+    <input type="submit" name="btnProcesar" value="Procesar ...">
+  </form>
+  <?php
+  }
+
+
 echo "instructor";
 }
 

@@ -537,6 +537,16 @@ class ConsultaEvaluacion extends Conexion{
     return $resultado;
     $this->conexionBD=null;
   }
+
+  public function TraeDetalleEvaluacion($IdEvaluacion){
+    $sql="SELECT  ed.id_pregunta, bp.descripcion, ed.id_instructor, fn_persona_nom_com(ed.id_instructor), ed.id_aprendiz, fn_persona_nom_com(ed.id_aprendiz), ed.id_ficha FROM public.evaluacion_detalle ed INNER JOIN banco_pregunta bp ON (bp.id_pregunta = ed.id_pregunta) WHERE id_evaluacion = ".$IdEvaluacion." ORDER BY 3,5";
+    $sentencia=$this->conexionBD->prepare($sql);
+    $sentencia->execute();
+    $resultado=$sentencia->fetchall();
+    $sentencia->closeCursor();
+    return $resultado;
+    $this->conexionBD=null;
+    }
 }
 class ConsultaAplicarEvaluacion extends Conexion{
   public function ConsultaAplicarEvaluacion(){
@@ -686,7 +696,7 @@ class ConsultaPersonaCurso extends Conexion{
     $this->conexionBD=null;
   }
   public function fTraeCursoInstructorAll($Annio, $Trimestre){
-    $sql="SELECT id_persona FROM curso WHERE id_rol = 2 AND id_annio = ".$Annio." AND id_trimestre = ".$Trimestre;
+    $sql="SELECT cur.id_persona, fn_persona_nom_com(cur.id_persona) FROM curso cur  WHERE id_rol = 2 AND id_annio = ".$Annio." AND id_trimestre = ".$Trimestre;
     $sentencia=$this->conexionBD->prepare($sql);
     $sentencia->execute();
     $resultado=$sentencia->fetchAll();
@@ -695,21 +705,32 @@ class ConsultaPersonaCurso extends Conexion{
     $this->conexionBD=null;
   }
   public function fTraeCursoInsXAprAll($Annio, $Trimestre,$valor,$Dato){
+    // Todos
     if ($valor==0 && $Dato =='') {
       // code...
 
     $sql="SELECT aprendiz.id_persona, instructor.id_persona, aprendiz.id_ficha FROM (SELECT id_persona, id_rol, id_ficha, id_annio, id_trimestre FROM curso WHERE id_rol = 2) instructor INNER JOIN (SELECT id_persona, id_rol, id_ficha, id_annio, id_trimestre FROM curso WHERE id_rol = 1) aprendiz ON ( aprendiz.id_ficha = instructor.id_ficha) WHERE aprendiz.id_annio = ".$Annio." AND instructor.id_annio = ".$Annio." AND aprendiz.id_trimestre = ".$Trimestre." AND instructor.id_trimestre = ".$Trimestre;
     }
+    // Programa
     if ($valor==1 && $Dato !=='') {
       // code...
 
     $sql="SELECT aprendiz.id_persona, instructor.id_persona, aprendiz.id_ficha FROM (SELECT id_persona, id_rol, id_ficha, id_annio, id_trimestre FROM curso WHERE id_rol = 2) instructor INNER JOIN (SELECT id_persona, id_rol, id_ficha, id_annio, id_trimestre FROM curso WHERE id_rol = 1) aprendiz ON ( aprendiz.id_ficha = instructor.id_ficha) INNER JOIN ficha fic ON (fic.id_ficha = aprendiz.id_ficha) INNER JOIN programa pro ON (pro.id_programa = fic.id_programa)  WHERE aprendiz.id_annio = ".$Annio." AND instructor.id_annio = ".$Annio." AND aprendiz.id_trimestre = ".$Trimestre." AND instructor.id_trimestre = ".$Trimestre." AND pro.id_programa = ".$Dato;
     // print_r($sql);
     }
+    // Ficha
     if ($valor==2 && $Dato !=='') {
       // code...
 
     $sql="SELECT aprendiz.id_persona, instructor.id_persona, aprendiz.id_ficha FROM (SELECT id_persona, id_rol, id_ficha, id_annio, id_trimestre FROM curso WHERE id_rol = 2) instructor INNER JOIN (SELECT id_persona, id_rol, id_ficha, id_annio, id_trimestre FROM curso WHERE id_rol = 1) aprendiz ON ( aprendiz.id_ficha = instructor.id_ficha) INNER JOIN ficha fic ON (fic.id_ficha = aprendiz.id_ficha) INNER JOIN programa pro ON (pro.id_programa = fic.id_programa)  WHERE aprendiz.id_annio = ".$Annio." AND instructor.id_annio = ".$Annio." AND aprendiz.id_trimestre = ".$Trimestre." AND instructor.id_trimestre = ".$Trimestre." AND aprendiz.id_ficha = ".$Dato." AND instructor.id_ficha = ".$Dato;
+    // print_r($sql);
+    }
+
+    // Instructor
+    if ($valor==3 && $Dato !=='') {
+      // code...
+
+    $sql="SELECT aprendiz.id_persona, instructor.id_persona, aprendiz.id_ficha FROM (SELECT id_persona, id_rol, id_ficha, id_annio, id_trimestre FROM curso WHERE id_rol = 2) instructor INNER JOIN (SELECT id_persona, id_rol, id_ficha, id_annio, id_trimestre FROM curso WHERE id_rol = 1) aprendiz ON ( aprendiz.id_ficha = instructor.id_ficha) INNER JOIN ficha fic ON (fic.id_ficha = aprendiz.id_ficha) INNER JOIN programa pro ON (pro.id_programa = fic.id_programa)  WHERE aprendiz.id_annio = ".$Annio." AND instructor.id_annio = ".$Annio." AND aprendiz.id_trimestre = ".$Trimestre." AND instructor.id_trimestre = ".$Trimestre." AND instructor.id_persona = ".$Dato;
     // print_r($sql);
     }
 
