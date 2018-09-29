@@ -107,8 +107,7 @@
             </li>
             <li><a>Reportes</a>
               <ul>
-                <li><a target='iframe_a'>uno</a></li>
-                <li><a target='iframe_a'>dos</a></li>
+                <li><a href='frm_rte_evaluacion.php' target='iframe_a'>Reporte por evaluacion</a></li>
               </ul>
             </li>
             <li><a>Administracion</a>
@@ -128,5 +127,5 @@
 	</div>
    <!--<iframe height="300px" width="100%" name= "iframe_b" src="Frm_Ban_Respuestas.html" style="border:none;"></iframe>-->
   </body>
-<footer></footer>  
+<footer></footer>
 </html>
