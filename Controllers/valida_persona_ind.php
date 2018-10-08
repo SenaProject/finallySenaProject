@@ -120,7 +120,7 @@ for ($i=0; $i < count($linea); $i++) {
       // $ver= 0;
       // print_r($campo[$x]);
       $ver=$consultar->ExistePersona($campo[$x]);
-      print_r($ver[0]);
+      // print_r($ver[0]);
         if ($ver[0] == 0) {
           echo $campo[$x];
           $bandera=$bandera+0;
@@ -201,7 +201,8 @@ $linea=explode(chr(13).chr(10),$allfile);
 for ($i=0; $i < count($linea); $i++) {
   $campo=explode(chr(59),$linea[$i]);
   for ($x=0; $x < count($campo); $x++) {
-    if ($x==0) { $IdPersona=$campo[$x];}
+    // echo preg_replace("/\xEF\xBB\xBF/", "", $string);
+    if ($x==0) { $IdPersona=preg_replace("/\xEF\xBB\xBF/", "",$campo[$x]);}
     if ($x==1) { $tipo_documento=$campo[$x];}
     if ($x==2) { $Nombre1=$campo[$x];}
     if ($x==3) { $Nombre2=$campo[$x];}

@@ -41,6 +41,12 @@ class BorrarPersona extends Conexion{
     $resultado=$sentencia->fetch();
     $sentencia->closeCursor();
 
+    $sql="DELETE FROM credencial WHERE Id_Persona = ".$IdPersona;
+    $sentencia=$this->conexionBD->prepare($sql);
+    $sentencia->execute();
+    $resultado=$sentencia->fetch();
+    $sentencia->closeCursor();
+
     $sql="DELETE FROM persona WHERE Id_Persona = ".$IdPersona;
     $sentencia=$this->conexionBD->prepare($sql);
     $sentencia->execute();

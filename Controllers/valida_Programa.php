@@ -36,14 +36,12 @@ echo "</html>";
 if ($seguro =="'crear'") {
 
 $NombrePrograma = $_POST['nombre_programa'];
-$estado = $_POST['estado_programa'];
-// print_r('por aqui');
 
 
 require "../Models/crear.php";
 
 $consultar= new CrearPrograma();
-$ver=$consultar->CreaPrograma($NombrePrograma, $estado);
+$ver=$consultar->CreaPrograma($NombrePrograma);
 
 echo "<!DOCTYPE html>";
 echo "<html lang='en' dir='ltr'>";

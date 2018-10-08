@@ -28,16 +28,22 @@ $ver4=$consultar4->TraeAllRoles();
       <button type="submit" class="submit_booton" name="Adicions"><- Volver atras</button>
     </form>
 
-    <?php
-    echo "<form id='frm1' action='../Controllers/valida_persona_ind.php?valor=CrearPersona' method='post'>";
-    echo "<fieldset>";
-    echo "    <legend>Nombre de la persona:</legend>";
-    echo "<Div id='DivGranDatosBusqueda'>";
-    echo "    <div class='contenedor_campos' id='DivDatosBusq'>";
-    echo "       <div class='contenedor_labelfield'><label for='NumDoc'>Documento No.:</label>";
-    echo "        <input class='input_contenedor' type='number' id='NumDoc' name='NumDoc' maxlength='20' Value='' required = 'required' placeholder = 'Numero de identificacion'/></div>";
-    echo "       <div class='contenedor_labelfield'> <label for='TipDoc'>Tipo de Documento:</label>";
-    echo "				<select class='input_contenedor' name='tipodocumento' required = 'required'>";
+
+<form id='frm1' action='../Controllers/valida_persona_ind.php?valor=CrearPersona' method='post'>
+<fieldset>
+  <legend>Nombre de la persona:</legend>
+    <Div id='DivGranDatosBusqueda'>
+        <div class='contenedor_campos' id='DivDatosBusq'>
+           <div class='contenedor_labelfield'><label for='NumDoc'>Documento No.:</label>
+             <!-- <div class="">
+               <img style="with= 50%" src="image/79569257.jpg" alt="">
+             </div> -->
+            <input class='input_contenedor' type='number' id='NumDoc' name='NumDoc' maxlength='20' Value='' required = 'required' placeholder = 'Numero de identificacion'/></div>
+           <div class='contenedor_labelfield'> <label for='TipDoc'>Tipo de Documento:</label>
+    				<select class='input_contenedor' name='tipodocumento' required = 'required'>
+
+              <?php
+
                          echo "<option value='Nulo'></option>";
                   foreach ($ver2 as $valor) {
                          echo "<option value='".$valor[0]."' ".$selec.">".$valor[1]."</option>";

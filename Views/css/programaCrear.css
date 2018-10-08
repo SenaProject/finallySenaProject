@@ -7,7 +7,7 @@ html,body{
   width: 50%;
   height: 50%;
   margin: auto;
-  background-color: gray;
+  background-color: white;
 }
 
 .subcontent_program{
@@ -23,9 +23,13 @@ html,body{
   width: 100%;
 }
 .button_reset{
-  width: 100%;
+  width: 30%;
 }
 
 .button_guardar{
-  width: 100%;
+  width: 30%;
+}
+.div_botones{
+  width: 70%;
+  top: auto;
 }

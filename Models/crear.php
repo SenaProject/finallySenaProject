@@ -15,8 +15,8 @@ class CrearPrograma extends Conexion{
     parent::conectar();
   }
 
-  public function CreaPrograma($nombre_programa, $estado_programa){
-    $sql="INSERT INTO programa(id_programa, nombre_programa, estado_programa) VALUES (fn_id_tabla('programa','id_programa'),'".$nombre_programa."', ".$estado_programa.")";
+  public function CreaPrograma($nombre_programa){
+    $sql="INSERT INTO programa(id_programa, nombre_programa, estado_programa) VALUES (fn_id_tabla('programa','id_programa'),'".$nombre_programa."', True)";
     $sentencia=$this->conexionBD->prepare($sql);
     // $nombre_programa
     $sentencia->execute();
@@ -118,14 +118,24 @@ class CrearCurso extends Conexion{
         parent::conectar();
   }
   public function fCrearCurso($annio, $trimestre, $Rol, $IdPersona, $ficha){
+    $sql="SELECT count(*) FROM curso WHERE id_annio = ".$annio." AND id_trimestre = ".$trimestre." AND id_persona = ".$IdPersona." AND id_ficha = ".$ficha;
+    $sentencia=$this->conexionBD->prepare($sql);
+    $sentencia->execute();
+    $resultado=$sentencia->fetch();
+    $sentencia->closeCursor();
+    $this->conexionBD=null;
+
+    if ($sentencia <= 0) {
     $sql="INSERT INTO curso(id_curso, id_annio, id_trimestre, id_rol, id_persona, id_ficha) VALUES (fn_id_tabla('curso','id_curso'), ".$annio.", ".$trimestre.", ".$Rol.", ".$IdPersona.", ".$ficha.")";
     $sentencia=$this->conexionBD->prepare($sql);
     $sentencia->execute();
     $resultado=$sentencia->fetch();
     $sentencia->closeCursor();
-
     return $resultado;
     $this->conexionBD=null;
+  } else{
+    return 0;
+  }
   }
 }
 

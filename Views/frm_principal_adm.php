@@ -107,7 +107,25 @@
             </li>
             <li><a>Reportes</a>
               <ul>
-                <li><a href='frm_rte_evaluacion.php' target='iframe_a'>Reporte por evaluacion</a></li>
+                <li><a>Personas</a>
+                  <ul>
+                      <li><a href='frm_rte_persona.php' target='iframe_a'>Todas</a></li>
+                      <li><a >Prueba</a></li>
+                  </ul>
+                </li>
+                <li><a>Curso</a>
+                  <ul>
+                    <li>
+                      <a href='frm_rte_curso_all.php' target='iframe_a'>Todos</a>
+                    </li>
+                  </ul>
+                </li>
+                <li><a>Evaluacion</a>
+                  <ul>
+                      <li><a href='frm_rte_evaluacion.php' target='iframe_a'>Reporte por evaluacion</a></li>
+                  </ul>
+                </li>
+
               </ul>
             </li>
             <li><a>Administracion</a>

@@ -710,6 +710,7 @@ class ConsultaPersonaCurso extends Conexion{
       // code...
 
     $sql="SELECT aprendiz.id_persona, instructor.id_persona, aprendiz.id_ficha FROM (SELECT id_persona, id_rol, id_ficha, id_annio, id_trimestre FROM curso WHERE id_rol = 2) instructor INNER JOIN (SELECT id_persona, id_rol, id_ficha, id_annio, id_trimestre FROM curso WHERE id_rol = 1) aprendiz ON ( aprendiz.id_ficha = instructor.id_ficha) WHERE aprendiz.id_annio = ".$Annio." AND instructor.id_annio = ".$Annio." AND aprendiz.id_trimestre = ".$Trimestre." AND instructor.id_trimestre = ".$Trimestre." AND aprendiz.id_persona != instructor.id_persona";
+    print_r($sql);
     }
     // Programa
     if ($valor==1 && $Dato !=='') {
